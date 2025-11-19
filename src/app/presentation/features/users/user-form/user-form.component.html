@@ -1,0 +1,189 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <!-- Header -->
+      <div class="d-flex align-items-center mb-4">
+        <button
+          type="button"
+          class="btn btn-outline-secondary me-3"
+          (click)="onCancel()"
+        >
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <div>
+          <h1 class="h3 mb-0">{{ vm.output.formTitle() | translate }}</h1>
+          <p class="text-muted mb-0">
+            @if (vm.output.isEditMode()) {
+              {{ 'user.form.edit.subtitle' | translate }}
+            } @else {
+              {{ 'user.form.create.subtitle' | translate }}
+            }
+          </p>
+        </div>
+      </div>
+
+      <!-- Error Alert -->
+      @if (errorMessage) {
+        <ngb-alert type="danger" [dismissible]="true" (closed)="errorMessage = null">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          {{ errorMessage | translate }}
+        </ngb-alert>
+      }
+
+      <!-- Loading State -->
+      @if (vm.output.isLoading()) {
+        <app-loading-spinner [message]="'user.form.loading' | translate"></app-loading-spinner>
+      }
+
+      <!-- Form -->
+      @else {
+        <div class="card">
+          <div class="card-body p-4">
+            <form (ngSubmit)="vm.input.submit()">
+              <!-- First Name -->
+              <div class="mb-3">
+                <label for="firstName" class="form-label">
+                  {{ 'user.form.field.first.name' | translate }} <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [class.is-invalid]="vm.output.firstNameError()"
+                  id="firstName"
+                  [value]="vm.output.firstName()"
+                  (input)="vm.input.updateFirstName($any($event.target).value)"
+                  [placeholder]="'user.form.placeholder.first.name' | translate"
+                  required
+                />
+                @if (vm.output.firstNameError()) {
+                  <div class="invalid-feedback d-block">
+                    {{ (vm.output.firstNameError() ?? '') | translate }}
+                  </div>
+                }
+              </div>
+
+              <!-- Last Name -->
+              <div class="mb-3">
+                <label for="lastName" class="form-label">
+                  {{ 'user.form.field.last.name' | translate }} <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [class.is-invalid]="vm.output.lastNameError()"
+                  id="lastName"
+                  [value]="vm.output.lastName()"
+                  (input)="vm.input.updateLastName($any($event.target).value)"
+                  [placeholder]="'user.form.placeholder.last.name' | translate"
+                  required
+                />
+                @if (vm.output.lastNameError()) {
+                  <div class="invalid-feedback d-block">
+                    {{ (vm.output.lastNameError() ?? '') | translate }}
+                  </div>
+                }
+              </div>
+
+              <!-- Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label">
+                  {{ 'user.form.field.email' | translate }} <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="email"
+                  class="form-control"
+                  [class.is-invalid]="vm.output.emailError()"
+                  id="email"
+                  [value]="vm.output.email()"
+                  (input)="vm.input.updateEmail($any($event.target).value)"
+                  [placeholder]="'user.form.placeholder.email' | translate"
+                  required
+                />
+                @if (vm.output.emailError()) {
+                  <div class="invalid-feedback d-block">
+                    {{ (vm.output.emailError() ?? '') | translate }}
+                  </div>
+                }
+              </div>
+
+              <!-- Avatar URL -->
+              <div class="mb-4">
+                <label for="avatar" class="form-label">
+                  {{ 'user.form.field.avatar' | translate }}
+                  <span class="text-muted small">({{ 'user.form.optional' | translate }})</span>
+                </label>
+                <input
+                  type="url"
+                  class="form-control"
+                  [class.is-invalid]="vm.output.avatarError()"
+                  id="avatar"
+                  [value]="vm.output.avatar()"
+                  (input)="vm.input.updateAvatar($any($event.target).value)"
+                  [placeholder]="'user.form.placeholder.avatar' | translate"
+                />
+                @if (vm.output.avatarError()) {
+                  <div class="invalid-feedback d-block">
+                    {{ (vm.output.avatarError() ?? '') | translate }}
+                  </div>
+                }
+                @if (vm.output.avatar() && !vm.output.avatarError()) {
+                  <div class="mt-2">
+                    <img
+                      [src]="vm.output.avatar()"
+                      alt="Avatar preview"
+                      class="rounded-circle"
+                      width="60"
+                      height="60"
+                      style="object-fit: cover;"
+                    />
+                  </div>
+                }
+              </div>
+
+              <!-- Form Actions -->
+              <div class="d-flex justify-content-end gap-2">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  (click)="onCancel()"
+                  [disabled]="vm.output.isSaving()"
+                >
+                  {{ 'user.form.button.cancel' | translate }}
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="!vm.output.canSubmit()"
+                >
+                  @if (vm.output.isSaving()) {
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    {{ 'user.form.button.saving' | translate }}
+                  } @else {
+                    <i class="bi bi-check-circle me-2"></i>
+                    {{ vm.output.submitButtonText() | translate }}
+                  }
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Help Text -->
+        <div class="card mt-3 bg-light">
+          <div class="card-body">
+            <h6 class="card-title">
+              <i class="bi bi-info-circle me-2"></i>
+              {{ 'user.form.help.title' | translate }}
+            </h6>
+            <ul class="mb-0 small">
+              <li>{{ 'user.form.help.name.length' | translate }}</li>
+              <li>{{ 'user.form.help.name.characters' | translate }}</li>
+              <li>{{ 'user.form.help.email.format' | translate }}</li>
+              <li>{{ 'user.form.help.avatar.optional' | translate }}</li>
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

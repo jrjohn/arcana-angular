@@ -1,0 +1,133 @@
+<header class="app-header">
+  <div class="header-container">
+    <!-- Left Section: Menu Toggle & Brand -->
+    <div class="header-left">
+      <button
+        type="button"
+        class="btn btn-link sidebar-toggle"
+        (click)="onSidebarToggle()"
+        aria-label="Toggle sidebar"
+      >
+        <i class="bi bi-list"></i>
+      </button>
+      <a routerLink="/" class="brand">
+        <i class="bi bi-hexagon-fill text-primary me-2"></i>
+        <span class="brand-text">Arcana</span>
+      </a>
+    </div>
+
+    <!-- Center Section: Search -->
+    <div class="header-center d-none d-md-flex">
+      <div class="search-box">
+        <i class="bi bi-search search-icon"></i>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search..."
+        />
+        <kbd class="search-shortcut">Ctrl+K</kbd>
+      </div>
+    </div>
+
+    <!-- Right Section: Actions -->
+    <div class="header-right">
+      <!-- Language Selector -->
+      <div ngbDropdown class="d-inline-block" placement="bottom-end" container="body">
+        <button
+          type="button"
+          class="btn btn-link header-action language-selector"
+          ngbDropdownToggle
+          aria-label="Select language"
+        >
+          <span class="language-flag">{{ currentLanguage().flag }}</span>
+          <span class="language-name d-none d-sm-inline ms-1">{{ currentLanguage().name }}</span>
+        </button>
+        <div ngbDropdownMenu class="language-dropdown">
+          <h6 class="dropdown-header">Select Language</h6>
+          @for (lang of languages; track lang.code) {
+            <button
+              type="button"
+              ngbDropdownItem
+              [class.active]="lang.code === currentLanguage().code"
+              (click)="changeLanguage(lang)"
+            >
+              <span class="me-2">{{ lang.flag }}</span>
+              {{ lang.name }}
+              @if (lang.code === currentLanguage().code) {
+                <i class="bi bi-check float-end text-primary"></i>
+              }
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <button
+        type="button"
+        class="btn btn-link header-action position-relative"
+        aria-label="Notifications"
+      >
+        <i class="bi bi-bell"></i>
+        <span class="badge badge-notification">3</span>
+      </button>
+
+      <!-- Right Panel Toggle -->
+      <button
+        type="button"
+        class="btn btn-link header-action d-none d-lg-inline-block"
+        (click)="onRightPanelToggle()"
+        aria-label="Toggle right panel"
+      >
+        <i class="bi bi-layout-sidebar-inset-reverse"></i>
+      </button>
+
+      <!-- User Menu -->
+      <div ngbDropdown class="d-inline-block" placement="bottom-end" container="body">
+        <button
+          type="button"
+          class="btn btn-link header-action user-menu-toggle"
+          ngbDropdownToggle
+        >
+          <img
+            [src]="currentUser.avatar"
+            alt="{{ currentUser.name }}"
+            class="user-avatar"
+          />
+          <span class="d-none d-md-inline ms-2">{{ currentUser.name }}</span>
+          <i class="bi bi-chevron-down ms-1 d-none d-md-inline"></i>
+        </button>
+        <div ngbDropdownMenu class="user-dropdown">
+          <!-- User Info -->
+          <div class="user-info">
+            <img
+              [src]="currentUser.avatar"
+              alt="{{ currentUser.name }}"
+              class="user-avatar-large"
+            />
+            <div class="user-details">
+              <div class="user-name">{{ currentUser.name }}</div>
+              <div class="user-email">{{ currentUser.email }}</div>
+              <span class="badge bg-primary user-role">{{ currentUser.role }}</span>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <!-- Menu Actions -->
+          @for (item of userMenuActions; track item.action) {
+            @if (item.divider) {
+              <div class="dropdown-divider"></div>
+            }
+            <button
+              type="button"
+              ngbDropdownItem
+              (click)="onUserMenuAction(item.action)"
+              [class.text-danger]="item.action === 'logout'"
+            >
+              <i [class]="item.icon + ' me-2'"></i>
+              {{ item.label }}
+            </button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,226 @@
+<aside class="right-panel" [class.open]="isOpen">
+  <!-- Panel Header -->
+  <div class="panel-header">
+    <h5 class="panel-title">Activity Center</h5>
+    <button
+      type="button"
+      class="btn btn-link close-btn"
+      (click)="onClose()"
+      aria-label="Close panel"
+    >
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <!-- Tabs Navigation -->
+  <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <button ngbNavLink>
+        <i class="bi bi-activity me-2"></i>
+        Activity
+      </button>
+      <ng-template ngbNavContent>
+        <div class="tab-content-wrapper">
+          <!-- Activity Header -->
+          <div class="content-header">
+            <h6>Recent Activity</h6>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary"
+              (click)="clearActivities()"
+            >
+              Clear All
+            </button>
+          </div>
+
+          <!-- Activity List -->
+          <div class="activity-list">
+            @if (activities().length === 0) {
+              <div class="empty-state">
+                <i class="bi bi-inbox display-4 text-muted"></i>
+                <p class="text-muted mt-2">No activities yet</p>
+              </div>
+            } @else {
+              @for (activity of activities(); track activity.id) {
+                <div class="activity-item">
+                  <div class="activity-icon" [class]="getActivityTypeClass(activity.type)">
+                    <i [class]="activity.icon"></i>
+                  </div>
+                  <div class="activity-content">
+                    <div class="activity-title">{{ activity.title }}</div>
+                    <div class="activity-description">{{ activity.description }}</div>
+                    <div class="activity-time">{{ activity.time }}</div>
+                  </div>
+                </div>
+              }
+            }
+          </div>
+        </div>
+      </ng-template>
+    </li>
+
+    <li [ngbNavItem]="2">
+      <button ngbNavLink>
+        <i class="bi bi-bell me-2"></i>
+        Notifications
+        @if (getUnreadCount() > 0) {
+          <span class="badge bg-danger ms-1">{{ getUnreadCount() }}</span>
+        }
+      </button>
+      <ng-template ngbNavContent>
+        <div class="tab-content-wrapper">
+          <!-- Notifications Header -->
+          <div class="content-header">
+            <h6>Notifications</h6>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary"
+              (click)="markAllAsRead()"
+            >
+              Mark All Read
+            </button>
+          </div>
+
+          <!-- Notifications List -->
+          <div class="notifications-list">
+            @if (notifications().length === 0) {
+              <div class="empty-state">
+                <i class="bi bi-bell-slash display-4 text-muted"></i>
+                <p class="text-muted mt-2">No notifications</p>
+              </div>
+            } @else {
+              @for (notification of notifications(); track notification.id) {
+                <div
+                  class="notification-item"
+                  [class.unread]="!notification.read"
+                  (click)="markAsRead(notification)"
+                >
+                  <div class="notification-avatar">
+                    @if (notification.avatar) {
+                      <img [src]="notification.avatar" [alt]="notification.title" />
+                    } @else {
+                      <i [class]="notification.icon"></i>
+                    }
+                  </div>
+                  <div class="notification-content">
+                    <div class="notification-title">{{ notification.title }}</div>
+                    <div class="notification-message">{{ notification.message }}</div>
+                    <div class="notification-time">{{ notification.time }}</div>
+                  </div>
+                  @if (!notification.read) {
+                    <div class="unread-indicator"></div>
+                  }
+                </div>
+              }
+            }
+          </div>
+        </div>
+      </ng-template>
+    </li>
+
+    <li [ngbNavItem]="3">
+      <button ngbNavLink>
+        <i class="bi bi-sliders me-2"></i>
+        Settings
+      </button>
+      <ng-template ngbNavContent>
+        <div class="tab-content-wrapper">
+          <div class="content-header">
+            <h6>Quick Settings</h6>
+          </div>
+
+          <!-- Settings Options -->
+          <div class="settings-list">
+            <div class="setting-item">
+              <div class="setting-info">
+                <i class="bi bi-bell text-primary"></i>
+                <div class="setting-details">
+                  <div class="setting-label">Push Notifications</div>
+                  <div class="setting-description">Receive push notifications</div>
+                </div>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="pushNotif" checked />
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <i class="bi bi-envelope text-success"></i>
+                <div class="setting-details">
+                  <div class="setting-label">Email Notifications</div>
+                  <div class="setting-description">Receive email updates</div>
+                </div>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="emailNotif" checked />
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <i class="bi bi-moon-stars text-warning"></i>
+                <div class="setting-details">
+                  <div class="setting-label">Dark Mode</div>
+                  <div class="setting-description">Enable dark theme</div>
+                </div>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="darkMode" />
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <i class="bi bi-shield-check text-danger"></i>
+                <div class="setting-details">
+                  <div class="setting-label">Two-Factor Auth</div>
+                  <div class="setting-description">Extra security layer</div>
+                </div>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="twoFactor" />
+              </div>
+            </div>
+
+            <div class="setting-item">
+              <div class="setting-info">
+                <i class="bi bi-eye-slash text-info"></i>
+                <div class="setting-details">
+                  <div class="setting-label">Privacy Mode</div>
+                  <div class="setting-description">Hide online status</div>
+                </div>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="privacy" />
+              </div>
+            </div>
+          </div>
+
+          <!-- System Info -->
+          <div class="system-info mt-4">
+            <div class="info-card">
+              <div class="info-item">
+                <span class="info-label">Version</span>
+                <span class="info-value">v2.0.1</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Build</span>
+                <span class="info-value">2024.11.18</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Environment</span>
+                <span class="badge bg-success">Production</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="panel-body">
+    <div [ngbNavOutlet]="nav"></div>
+  </div>
+</aside>

@@ -1,0 +1,185 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <!-- Header -->
+      <div class="d-flex align-items-center mb-4">
+        <button
+          type="button"
+          class="btn btn-outline-secondary me-3"
+          (click)="onBack()"
+        >
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <div>
+          <h1 class="h3 mb-0">{{ 'user.detail.title' | translate }}</h1>
+          <p class="text-muted mb-0">{{ 'user.detail.subtitle' | translate }}</p>
+        </div>
+      </div>
+
+      <!-- Error Alert -->
+      @if (hasError()) {
+        <ngb-alert type="danger" [dismissible]="true" (closed)="onBack()">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          {{ errorMessage() | translate }}
+        </ngb-alert>
+      }
+
+      <!-- Loading State -->
+      @if (isLoading()) {
+        <app-loading-spinner [message]="'user.detail.loading' | translate"></app-loading-spinner>
+      }
+
+      <!-- User Details -->
+      @else if (user()) {
+        <div class="card">
+          <div class="card-body p-4">
+            <!-- Avatar and Basic Info -->
+            <div class="text-center mb-4">
+              @if (user()!.avatar) {
+                <img
+                  [src]="user()!.avatar"
+                  [alt]="user()!.firstName + ' ' + user()!.lastName"
+                  class="rounded-circle mb-3"
+                  width="120"
+                  height="120"
+                  style="object-fit: cover;"
+                />
+              } @else {
+                <div
+                  class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3"
+                  style="width: 120px; height: 120px; font-size: 3rem;"
+                >
+                  {{ user()!.firstName.charAt(0) }}{{ user()!.lastName.charAt(0) }}
+                </div>
+              }
+              <h2 class="h4 mb-1">
+                {{ user()!.firstName }} {{ user()!.lastName }}
+              </h2>
+              <p class="text-muted mb-0">
+                <i class="bi bi-envelope me-2"></i>
+                {{ user()!.email }}
+              </p>
+            </div>
+
+            <hr />
+
+            <!-- Detailed Information -->
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="d-flex align-items-start">
+                  <i class="bi bi-person-badge text-primary me-3 fs-5"></i>
+                  <div>
+                    <div class="text-muted small">{{ 'user.detail.user.id' | translate }}</div>
+                    <div class="fw-semibold">{{ user()!.id }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="d-flex align-items-start">
+                  <i class="bi bi-person text-primary me-3 fs-5"></i>
+                  <div>
+                    <div class="text-muted small">{{ 'user.detail.first.name' | translate }}</div>
+                    <div class="fw-semibold">{{ user()!.firstName }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="d-flex align-items-start">
+                  <i class="bi bi-person-fill text-primary me-3 fs-5"></i>
+                  <div>
+                    <div class="text-muted small">{{ 'user.detail.last.name' | translate }}</div>
+                    <div class="fw-semibold">{{ user()!.lastName }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="d-flex align-items-start">
+                  <i class="bi bi-envelope text-primary me-3 fs-5"></i>
+                  <div>
+                    <div class="text-muted small">{{ 'user.detail.email.address' | translate }}</div>
+                    <div class="fw-semibold">{{ user()!.email }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="d-flex align-items-start">
+                  <i class="bi bi-calendar-plus text-primary me-3 fs-5"></i>
+                  <div>
+                    <div class="text-muted small">{{ 'user.detail.created.at' | translate }}</div>
+                    <div class="fw-semibold">{{ user()!.createdAt | date: 'medium' }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="d-flex align-items-start">
+                  <i class="bi bi-calendar-check text-primary me-3 fs-5"></i>
+                  <div>
+                    <div class="text-muted small">{{ 'user.detail.updated.at' | translate }}</div>
+                    <div class="fw-semibold">{{ user()!.updatedAt | date: 'medium' }}</div>
+                  </div>
+                </div>
+              </div>
+
+              @if (user()!.avatar) {
+                <div class="col-12">
+                  <div class="d-flex align-items-start">
+                    <i class="bi bi-image text-primary me-3 fs-5"></i>
+                    <div class="flex-grow-1">
+                      <div class="text-muted small">{{ 'user.detail.avatar.url' | translate }}</div>
+                      <div class="fw-semibold text-break">
+                        <a [href]="user()!.avatar" target="_blank" rel="noopener">
+                          {{ user()!.avatar }}
+                          <i class="bi bi-box-arrow-up-right ms-1 small"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Card Footer with Actions -->
+          <div class="card-footer bg-light">
+            <div class="d-flex justify-content-end gap-2">
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="onBack()"
+              >
+                <i class="bi bi-arrow-left me-2"></i>
+                {{ 'user.detail.back.to.list' | translate }}
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="onEdit()"
+              >
+                <i class="bi bi-pencil me-2"></i>
+                {{ 'user.detail.edit.user' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Info Card -->
+        <div class="card mt-3 bg-light">
+          <div class="card-body">
+            <h6 class="card-title">
+              <i class="bi bi-info-circle me-2"></i>
+              {{ 'user.detail.information' | translate }}
+            </h6>
+            <p class="card-text small text-muted mb-0">
+              {{ 'user.detail.information.description' | translate }}
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

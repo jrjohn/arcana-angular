@@ -1,0 +1,14 @@
+{
+  "/api": {
+    "target": "https://reqres.in/api",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "headers": {
+      "x-api-key": "reqres-free-v1"
+    },
+    "logLevel": "debug"
+  }
+}

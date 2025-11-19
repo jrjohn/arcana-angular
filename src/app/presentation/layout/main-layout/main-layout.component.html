@@ -1,0 +1,26 @@
+<div class="app-wrapper" [class.sidebar-collapsed]="sidebarCollapsed()">
+  <!-- Header -->
+  <app-header
+    (sidebarToggle)="toggleSidebar()"
+    (rightPanelToggle)="toggleRightPanel()"
+  ></app-header>
+
+  <!-- Sidebar -->
+  <app-sidebar [collapsed]="sidebarCollapsed()"></app-sidebar>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <router-outlet />
+  </main>
+
+  <!-- Right Panel -->
+  <app-right-panel
+    [isOpen]="rightPanelOpen()"
+    (close)="closeRightPanel()"
+  ></app-right-panel>
+
+  <!-- Overlay for mobile -->
+  @if (rightPanelOpen()) {
+    <div class="overlay" (click)="closeRightPanel()"></div>
+  }
+</div>

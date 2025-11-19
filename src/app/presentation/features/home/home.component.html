@@ -1,0 +1,198 @@
+<div class="home-page">
+  <!-- Page Header -->
+  <div class="page-header mb-4">
+    <div>
+      <h1 class="page-title">Dashboard</h1>
+      <p class="page-description">Welcome back! Here's what's happening today.</p>
+    </div>
+    <div class="header-actions">
+      <button type="button" class="btn btn-outline-primary">
+        <i class="bi bi-download me-2"></i>
+        Export Report
+      </button>
+      <button type="button" class="btn btn-primary">
+        <i class="bi bi-plus-circle me-2"></i>
+        New Item
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="row g-3 mb-4">
+    @for (stat of stats(); track stat.title) {
+      <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+          <div class="stat-icon" [class]="stat.iconClass">
+            <i [class]="stat.icon"></i>
+          </div>
+          <div class="stat-content">
+            <div class="stat-title">{{ stat.title }}</div>
+            <div class="stat-value">{{ stat.value }}</div>
+            <div class="stat-change" [class.positive]="stat.changeType === 'increase'" [class.negative]="stat.changeType === 'decrease'">
+              <i [class]="stat.changeType === 'increase' ? 'bi-arrow-up' : 'bi-arrow-down'"></i>
+              {{ stat.change }} from last month
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="card mb-4">
+    <div class="card-header bg-white">
+      <h5 class="card-title mb-0">
+        <i class="bi bi-lightning me-2"></i>
+        Quick Actions
+      </h5>
+    </div>
+    <div class="card-body">
+      <div class="row g-3">
+        @for (action of quickActions(); track action.title) {
+          <div class="col-xl-3 col-md-6">
+            <a [routerLink]="action.route" class="quick-action-card">
+              <div class="action-icon" [class]="'text-' + action.color">
+                <i [class]="action.icon"></i>
+              </div>
+              <div class="action-content">
+                <div class="action-title">{{ action.title }}</div>
+                <div class="action-description">{{ action.description }}</div>
+              </div>
+              <i class="bi bi-arrow-right action-arrow"></i>
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Recent Activity -->
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-clock-history me-2"></i>
+            Recent Activity
+          </h5>
+          <a routerLink="/activity" class="btn btn-sm btn-outline-primary">View All</a>
+        </div>
+        <div class="card-body p-0">
+          <div class="activity-list">
+            @for (activity of recentActivities(); track activity.id) {
+              <div class="activity-item">
+                <img [src]="activity.avatar" [alt]="activity.user" class="activity-avatar" />
+                <div class="activity-content">
+                  <div class="activity-text">
+                    <strong>{{ activity.user }}</strong>
+                    {{ activity.action }}
+                    <span class="text-primary">{{ activity.target }}</span>
+                  </div>
+                  <div class="activity-time">{{ activity.time }}</div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- System Stats -->
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header bg-white">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-bar-chart me-2"></i>
+            System Stats
+          </h5>
+        </div>
+        <div class="card-body">
+          <!-- CPU Usage -->
+          <div class="stat-progress mb-4">
+            <div class="stat-progress-header">
+              <span class="stat-progress-label">CPU Usage</span>
+              <span class="stat-progress-value">64%</span>
+            </div>
+            <ngb-progressbar
+              type="primary"
+              [value]="64"
+              [striped]="true"
+              [animated]="true"
+            ></ngb-progressbar>
+          </div>
+
+          <!-- Memory Usage -->
+          <div class="stat-progress mb-4">
+            <div class="stat-progress-header">
+              <span class="stat-progress-label">Memory</span>
+              <span class="stat-progress-value">72%</span>
+            </div>
+            <ngb-progressbar
+              type="success"
+              [value]="72"
+              [striped]="true"
+              [animated]="true"
+            ></ngb-progressbar>
+          </div>
+
+          <!-- Storage -->
+          <div class="stat-progress mb-4">
+            <div class="stat-progress-header">
+              <span class="stat-progress-label">Storage</span>
+              <span class="stat-progress-value">42%</span>
+            </div>
+            <ngb-progressbar
+              type="info"
+              [value]="42"
+              [striped]="true"
+              [animated]="true"
+            ></ngb-progressbar>
+          </div>
+
+          <!-- Bandwidth -->
+          <div class="stat-progress">
+            <div class="stat-progress-header">
+              <span class="stat-progress-label">Bandwidth</span>
+              <span class="stat-progress-value">89%</span>
+            </div>
+            <ngb-progressbar
+              type="warning"
+              [value]="89"
+              [striped]="true"
+              [animated]="true"
+            ></ngb-progressbar>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="card mt-4">
+        <div class="card-header bg-white">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-link-45deg me-2"></i>
+            Quick Links
+          </h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="quick-links-list">
+            <a routerLink="/users" class="quick-link-item">
+              <i class="bi bi-people text-primary"></i>
+              <span>User Management</span>
+              <i class="bi bi-chevron-right ms-auto"></i>
+            </a>
+            <a routerLink="/settings" class="quick-link-item">
+              <i class="bi bi-gear text-secondary"></i>
+              <span>Settings</span>
+              <i class="bi bi-chevron-right ms-auto"></i>
+            </a>
+            <a routerLink="/help" class="quick-link-item">
+              <i class="bi bi-question-circle text-info"></i>
+              <span>Help & Support</span>
+              <i class="bi bi-chevron-right ms-auto"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
