@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, signal, inject, computed } from '@angular/core';
+import { Component, Output, EventEmitter, signal, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
@@ -33,6 +33,7 @@ interface UserMenuAction {
   imports: [CommonModule, RouterLink, NgbDropdownModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   @Output() sidebarToggle = new EventEmitter<void>();
