@@ -7,7 +7,7 @@
 
 ## Summary
 
-All 6 architecture diagrams have been successfully generated from Mermaid source files and are now displayed in the README.md.
+All 7 architecture diagrams have been successfully generated from Mermaid source files and are now displayed in the README.md.
 
 ### Generated Diagrams
 
@@ -19,8 +19,9 @@ All 6 architecture diagrams have been successfully generated from Mermaid source
 | 4 | Data Flow & State Management | `docs/mermaid/04-data-flow.mmd` | `docs/diagrams/04-data-flow.png` | 43 KB | ✅ |
 | 5 | Security Architecture | `docs/mermaid/05-security-architecture.mmd` | `docs/diagrams/05-security-architecture.png` | 17 KB | ✅ |
 | 6 | Input/Output/Effect Pattern | `docs/mermaid/06-input-output-effect-pattern.mmd` | `docs/diagrams/06-input-output-effect-pattern.png` | 13 KB | ✅ |
+| 7 | Navigation Flow (NavGraph) | `docs/mermaid/07-navigation-flow.mmd` | `docs/diagrams/07-navigation-flow.png` | 13 KB | ✅ |
 
-**Total Size**: 221 KB (6 diagrams)
+**Total Size**: 234 KB (7 diagrams)
 
 ---
 

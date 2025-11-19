@@ -258,6 +258,25 @@ Security is implemented through multiple layers:
 - **Defense in Depth**: Multiple validation checkpoints
 - **CSP Headers**: Browser-level protection against XSS
 
+### Navigation Flow (NavGraph Pattern)
+
+![Navigation Flow](docs/diagrams/07-navigation-flow.png)
+
+The application uses a centralized NavGraphService for type-safe navigation:
+- **Users Module**: List, Detail, Create, Edit flows with proper navigation paths
+- **Projects Module**: List, Create, and Archived views
+- **Tasks Module**: My Tasks, Recent, and Important task filters
+- **Analytics Module**: Overview, Reports, and Performance dashboards
+- **Other Routes**: Calendar, Messages, Documents, Profile, Settings, Notifications, Help
+- **Utility Methods**: Back navigation, current URL checking, dynamic routing
+
+**Benefits:**
+- 🔒 Type-safe navigation with compile-time checks
+- 📍 Single source of truth for all routes
+- 🧪 Easy to test navigation logic
+- 📊 Consistent navigation behavior
+- 🔍 Built-in analytics/logging capabilities
+
 For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ---

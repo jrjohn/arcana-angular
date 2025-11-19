@@ -1,0 +1,84 @@
+graph TD
+    Start([Application Start]) --> NavGraph[NavGraphService]
+
+    NavGraph --> Home[/home]
+    NavGraph --> Users[Users Navigation]
+    NavGraph --> Projects[Projects Navigation]
+    NavGraph --> Tasks[Tasks Navigation]
+    NavGraph --> Analytics[Analytics Navigation]
+    NavGraph --> Other[Other Routes]
+
+    %% Users Navigation Flow
+    Users --> UserList[/users<br/>User List]
+    Users --> UserDetail[/users/:id<br/>User Detail]
+    Users --> UserCreate[/users/new<br/>Create User]
+    Users --> UserEdit[/users/:id/edit<br/>Edit User]
+
+    UserList -->|Click User| UserDetail
+    UserList -->|New Button| UserCreate
+    UserDetail -->|Edit Button| UserEdit
+    UserCreate -->|Save| UserList
+    UserEdit -->|Save| UserDetail
+
+    %% Projects Navigation Flow
+    Projects --> ProjectList[/projects<br/>Project List]
+    Projects --> ProjectCreate[/projects/new<br/>Create Project]
+    Projects --> ProjectArchived[/projects/archived<br/>Archived Projects]
+
+    ProjectList -->|New Button| ProjectCreate
+    ProjectList -->|Archive Filter| ProjectArchived
+    ProjectCreate -->|Save| ProjectList
+
+    %% Tasks Navigation Flow
+    Tasks --> TaskMy[/tasks/my<br/>My Tasks]
+    Tasks --> TaskRecent[/tasks/recent<br/>Recent Tasks]
+    Tasks --> TaskImportant[/tasks/important<br/>Important Tasks]
+
+    TaskMy -.->|Filter| TaskRecent
+    TaskRecent -.->|Filter| TaskImportant
+    TaskImportant -.->|Filter| TaskMy
+
+    %% Analytics Navigation Flow
+    Analytics --> AnalyticsOverview[/analytics/overview<br/>Overview Dashboard]
+    Analytics --> AnalyticsReports[/analytics/reports<br/>Reports]
+    Analytics --> AnalyticsPerf[/analytics/performance<br/>Performance Metrics]
+
+    AnalyticsOverview -->|Drill Down| AnalyticsReports
+    AnalyticsReports -->|View Details| AnalyticsPerf
+
+    %% Other Routes
+    Other --> Calendar[/calendar]
+    Other --> Messages[/messages]
+    Other --> Documents[/documents]
+    Other --> Profile[/profile]
+    Other --> Settings[/settings]
+    Other --> Notifications[/notifications]
+    Other --> Help[/help]
+
+    %% Navigation Actions
+    Home -.->|back| NavBack[window.history.back]
+    UserDetail -.->|back| NavBack
+    UserEdit -.->|back| NavBack
+
+    %% Utility Methods
+    NavGraph -.-> Utils[Utility Methods]
+    Utils --> GetUrl[getCurrentUrl]
+    Utils --> IsActive[isActiveRoute]
+    Utils --> ToPath[toPath - Dynamic Routes]
+
+    %% Styling
+    classDef mainRoute fill:#667eea,stroke:#5568d3,stroke-width:2px,color:#fff
+    classDef userRoute fill:#48bb78,stroke:#38a169,stroke-width:2px,color:#fff
+    classDef projectRoute fill:#ed8936,stroke:#dd6b20,stroke-width:2px,color:#fff
+    classDef taskRoute fill:#38b2ac,stroke:#319795,stroke-width:2px,color:#fff
+    classDef analyticsRoute fill:#9f7aea,stroke:#805ad5,stroke-width:2px,color:#fff
+    classDef otherRoute fill:#718096,stroke:#4a5568,stroke-width:2px,color:#fff
+    classDef utilRoute fill:#f6ad55,stroke:#ed8936,stroke-width:2px,color:#000
+
+    class Home,NavGraph mainRoute
+    class UserList,UserDetail,UserCreate,UserEdit userRoute
+    class ProjectList,ProjectCreate,ProjectArchived projectRoute
+    class TaskMy,TaskRecent,TaskImportant taskRoute
+    class AnalyticsOverview,AnalyticsReports,AnalyticsPerf analyticsRoute
+    class Calendar,Messages,Documents,Profile,Settings,Notifications,Help otherRoute
+    class GetUrl,IsActive,ToPath,NavBack utilRoute
