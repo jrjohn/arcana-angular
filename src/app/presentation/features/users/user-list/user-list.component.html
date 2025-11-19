@@ -129,16 +129,19 @@
         <table class="table table-hover align-middle mb-0">
           <thead class="table-light">
             <tr>
+              <th>ID</th>
               <th>Avatar</th>
               <th>Name</th>
               <th>Email</th>
-              <th>ID</th>
               <th class="text-end">Actions</th>
             </tr>
           </thead>
           <tbody>
             @for (user of vm.output.users(); track user.id) {
               <tr class="cursor-pointer" (click)="vm.input.selectUser(user)">
+                <td>
+                  <span class="badge bg-secondary">{{ user.id }}</span>
+                </td>
                 <td>
                   @if (user.avatar) {
                     <img
@@ -158,9 +161,6 @@
                   <div class="fw-semibold">{{ user.firstName }} {{ user.lastName }}</div>
                 </td>
                 <td>{{ user.email }}</td>
-                <td>
-                  <span class="badge bg-secondary">{{ user.id }}</span>
-                </td>
                 <td class="text-end">
                   <div class="btn-group" role="group">
                     <button
@@ -205,7 +205,7 @@
               of {{ vm.output.totalItems() }} users
             </div>
             <ngb-pagination
-              [(page)]="currentPage"
+              [page]="vm.output.currentPage()"
               [pageSize]="vm.output.pageSize()"
               [collectionSize]="vm.output.totalItems()"
               [maxSize]="5"

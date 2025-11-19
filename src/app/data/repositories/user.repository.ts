@@ -60,39 +60,30 @@ export class UserRepository {
       return of(lruCached);
     }
 
-    // Layer 3: Check IndexedDB (persistent, offline)
-    return from(this.indexedDb.getAllUsers()).pipe(
-      switchMap(dbUsers => {
-        if (dbUsers.length > 0) {
-          console.log('[Repository] ✓ IndexedDB HIT:', dbUsers.length, 'users');
+    // Layer 3: Check IndexedDB (persistent, offline ONLY)
+    // Only use IndexedDB when offline, as it can't reliably store pagination metadata
+    if (this.networkStatus.isOffline) {
+      return from(this.indexedDb.getAllUsers()).pipe(
+        switchMap(dbUsers => {
+          if (dbUsers.length > 0) {
+            console.log('[Repository] ✓ IndexedDB HIT (OFFLINE):', dbUsers.length, 'users');
 
-          // Create paginated response from IndexedDB
-          const startIndex = (params.page - 1) * params.pageSize;
-          const endIndex = startIndex + params.pageSize;
-          const paginatedData = dbUsers.slice(startIndex, endIndex);
+            // Create paginated response from IndexedDB
+            const startIndex = (params.page - 1) * params.pageSize;
+            const endIndex = startIndex + params.pageSize;
+            const paginatedData = dbUsers.slice(startIndex, endIndex);
 
-          const result: PaginatedResponse<User> = {
-            data: paginatedData,
-            page: params.page,
-            pageSize: params.pageSize,
-            total: dbUsers.length,
-            totalPages: Math.ceil(dbUsers.length / params.pageSize),
-          };
+            const result: PaginatedResponse<User> = {
+              data: paginatedData,
+              page: params.page,
+              pageSize: params.pageSize,
+              total: dbUsers.length,
+              totalPages: Math.ceil(dbUsers.length / params.pageSize),
+            };
 
-          // Promote to upper cache layers
-          this.lruCache.set(cacheKey, result);
-          this.memoryCache.set(cacheKey, result);
-
-          // If online, fetch fresh data in background
-          if (this.networkStatus.isOnlineNow) {
-            this.fetchAndUpdateUsers(params, cacheKey);
+            return of(result);
           }
 
-          return of(result);
-        }
-
-        // Layer 4: Fetch from API (online only)
-        if (this.networkStatus.isOffline) {
           console.log('[Repository] ✗ OFFLINE - No cached data available');
           return throwError(() =>
             createAppError(
@@ -101,12 +92,13 @@ export class UserRepository {
               'error.network'
             )
           );
-        }
+        })
+      );
+    }
 
-        console.log('[Repository] → Fetching from API');
-        return this.fetchAndUpdateUsers(params, cacheKey);
-      })
-    );
+    // Layer 4: Fetch from API (online)
+    console.log('[Repository] → Fetching from API');
+    return this.fetchAndUpdateUsers(params, cacheKey);
   }
 
   /**

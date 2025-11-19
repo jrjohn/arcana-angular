@@ -80,27 +80,27 @@
   > thead > tr > th,
   > tbody > tr > td {
     &:nth-child(1) {
+      // ID column
+      width: 120px !important;
+      min-width: 120px !important;
+      max-width: 120px !important;
+    }
+
+    &:nth-child(2) {
       // Avatar column
       width: 80px !important;
       min-width: 80px !important;
       max-width: 80px !important;
     }
 
-    &:nth-child(2) {
+    &:nth-child(3) {
       // Name column
       width: 25% !important;
     }
 
-    &:nth-child(3) {
+    &:nth-child(4) {
       // Email column
       width: auto !important;
-    }
-
-    &:nth-child(4) {
-      // ID column
-      width: 120px !important;
-      min-width: 120px !important;
-      max-width: 120px !important;
     }
 
     &:nth-child(5) {
@@ -109,6 +109,86 @@
       min-width: 150px !important;
       max-width: 150px !important;
       text-align: right !important;
+    }
+  }
+
+  // Mobile responsive: Stack name and email vertically
+  @media (max-width: 768px) {
+    table-layout: auto !important;
+
+    > thead {
+      display: none;
+    }
+
+    > tbody > tr {
+      display: block;
+      margin-bottom: 1rem;
+      border: 1px solid #dee2e6;
+      border-radius: 0.5rem;
+      padding: 1rem;
+
+      > td {
+        display: block;
+        width: 100% !important;
+        min-width: unset !important;
+        max-width: unset !important;
+        text-align: left !important;
+        padding: 0.5rem 0 !important;
+        border: none !important;
+
+        &:nth-child(1) {
+          // ID - inline badge at top
+          padding-bottom: 0.75rem !important;
+
+          &::before {
+            content: 'ID: ';
+            font-weight: 600;
+            margin-right: 0.5rem;
+          }
+        }
+
+        &:nth-child(2) {
+          // Avatar - center it
+          text-align: center;
+          padding-bottom: 1rem !important;
+        }
+
+        &:nth-child(3) {
+          // Name - larger and bold
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: #2c3e50;
+          padding-bottom: 0.25rem !important;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        &:nth-child(4) {
+          // Email - smaller, below name
+          font-size: 0.9rem;
+          color: #6c757d;
+          padding-bottom: 0.75rem !important;
+          word-break: break-word;
+        }
+
+        &:nth-child(5) {
+          // Actions - full width buttons
+          text-align: center !important;
+          padding-top: 0.75rem !important;
+
+          .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+
+            .btn {
+              flex: 1;
+              max-width: 120px;
+            }
+          }
+        }
+      }
     }
   }
 }

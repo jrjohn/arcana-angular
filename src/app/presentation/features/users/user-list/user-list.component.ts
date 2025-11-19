@@ -41,7 +41,6 @@ export class UserListComponent implements OnInit, OnDestroy {
   searchQuery = '';
   showSuccessAlert = false;
   successMessage = '';
-  currentPage = 1;
 
   // Expose Math to template
   Math = Math;
