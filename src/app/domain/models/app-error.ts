@@ -26,14 +26,25 @@ export enum ErrorType {
  * Standardized error structure across the application
  */
 export class AppError extends Error {
+  public readonly type: ErrorType;
+  public override readonly message: string;
+  public readonly userMessage?: string;
+  public readonly originalError?: unknown;
+  public readonly statusCode?: number;
+
   constructor(
-    public readonly type: ErrorType,
-    public readonly message: string,
-    public readonly userMessage?: string,
-    public readonly originalError?: unknown,
-    public readonly statusCode?: number
+    type: ErrorType,
+    message: string,
+    userMessage?: string,
+    originalError?: unknown,
+    statusCode?: number
   ) {
     super(message);
+    this.type = type;
+    this.message = message;
+    this.userMessage = userMessage;
+    this.originalError = originalError;
+    this.statusCode = statusCode;
     this.name = 'AppError';
     Object.setPrototypeOf(this, AppError.prototype);
   }
