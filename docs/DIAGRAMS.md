@@ -4,7 +4,7 @@ This directory contains Mermaid diagram source files for the project's architect
 
 ## ✅ Generated Diagrams
 
-All 7 architecture diagrams have been generated as PNG images and are available in `docs/diagrams/`:
+All 12 architecture diagrams have been generated as PNG images and are available in `docs/diagrams/`:
 
 | Diagram | Source | Image | Size |
 |---------|--------|-------|------|
@@ -14,7 +14,15 @@ All 7 architecture diagrams have been generated as PNG images and are available 
 | Data Flow | [04-data-flow.mmd](mermaid/04-data-flow.mmd) | [PNG](diagrams/04-data-flow.png) | 43 KB |
 | Security Architecture | [05-security-architecture.mmd](mermaid/05-security-architecture.mmd) | [PNG](diagrams/05-security-architecture.png) | 17 KB |
 | Input/Output/Effect Pattern | [06-input-output-effect-pattern.mmd](mermaid/06-input-output-effect-pattern.mmd) | [PNG](diagrams/06-input-output-effect-pattern.png) | 13 KB |
-| Navigation Flow (NavGraph) | [07-navigation-flow.mmd](mermaid/07-navigation-flow.mmd) | [PNG](diagrams/07-navigation-flow.png) | 110 KB |
+| **Navigation Flow (Split by Module)** | | | **207 KB** |
+| ├─ Overview | [07a-navigation-overview.mmd](mermaid/07a-navigation-overview.mmd) | [PNG](diagrams/07a-navigation-overview.png) | 31 KB |
+| ├─ Home & Core | [07b-navigation-home-core.mmd](mermaid/07b-navigation-home-core.mmd) | [PNG](diagrams/07b-navigation-home-core.png) | 32 KB |
+| ├─ Users Module | [07c-navigation-users.mmd](mermaid/07c-navigation-users.mmd) | [PNG](diagrams/07c-navigation-users.png) | 36 KB |
+| ├─ Projects Module | [07d-navigation-projects.mmd](mermaid/07d-navigation-projects.mmd) | [PNG](diagrams/07d-navigation-projects.png) | 36 KB |
+| ├─ Tasks Module | [07e-navigation-tasks.mmd](mermaid/07e-navigation-tasks.mmd) | [PNG](diagrams/07e-navigation-tasks.png) | 33 KB |
+| └─ Analytics Module | [07f-navigation-analytics.mmd](mermaid/07f-navigation-analytics.mmd) | [PNG](diagrams/07f-navigation-analytics.png) | 39 KB |
+
+**Total Size**: 428 KB (12 diagrams)
 
 All diagrams are displayed in the main [README.md](../README.md) Architecture Overview section.
 
@@ -73,18 +81,41 @@ ViewModel architecture pattern:
 - **OUTPUTS**: Signals and computed values
 - **EFFECTS**: One-time side effects (navigation, toasts)
 
-### 07. Navigation Flow (NavGraph Pattern)
-**File**: `mermaid/07-navigation-flow.mmd`
+### 07. Navigation Flow (NavGraph Pattern) - Split by Module
+**Files**: `mermaid/07a-07f-navigation-*.mmd` (6 diagrams)
 
-Centralized navigation architecture using NavGraphService:
-- **User Actions**: Single entry point for all navigation
-- **Core Pages**: Home, Calendar, Messages, Documents, Profile, Settings, Notifications, Help
-- **Users Module**: List, View Detail, Create, Edit workflows
-- **Projects Module**: List, Create, Archived views
-- **Tasks Module**: My Tasks, Recent, Important filters
-- **Analytics Module**: Overview, Reports, Performance dashboards
-- **Type-safe Navigation**: Compile-time route checking
-- **Consistent Behavior**: Single source of truth for routing
+Centralized navigation architecture using NavGraphService, split into readable module-specific diagrams:
+
+**07a. Navigation Overview**
+- High-level view of all navigation modules
+- Entry point and module selection
+- Complete navigation flow
+
+**07b. Home & Core Pages** (8 routes)
+- `/home`, `/calendar`, `/messages`, `/documents`
+- `/profile`, `/settings`, `/notifications`, `/help`
+
+**07c. Users Module** (4 routes)
+- User List → Select Action → View Details / Create / Edit
+- Routes: `/users`, `/users/:id`, `/users/new`, `/users/:id/edit`
+
+**07d. Projects Module** (3 routes)
+- Select View → List / Create / Archived
+- Routes: `/projects`, `/projects/new`, `/projects/archived`
+
+**07e. Tasks Module** (3 routes)
+- Select Filter → My / Recent / Important
+- Routes: `/tasks/my`, `/tasks/recent`, `/tasks/important`
+
+**07f. Analytics Module** (3 routes)
+- Select Report → Overview / Reports / Performance
+- Routes: `/analytics/overview`, `/analytics/reports`, `/analytics/performance`
+
+**Benefits**:
+- Each diagram is highly readable with large text
+- Focused, module-specific views
+- Easy to understand individual flows
+- Color-coded by module for consistency
 
 ---
 

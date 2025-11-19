@@ -260,63 +260,59 @@ Security is implemented through multiple layers:
 
 ### Navigation Flow (NavGraph Pattern)
 
-**Route Collection**:
-- **Home & Core**: `/home`, `/calendar`, `/messages`, `/documents`, `/profile`, `/settings`, `/notifications`, `/help`
-- **Users Module**: `/users`, `/users/:id`, `/users/new`, `/users/:id/edit`
-- **Projects Module**: `/projects`, `/projects/new`, `/projects/archived`
-- **Tasks Module**: `/tasks/my`, `/tasks/recent`, `/tasks/important`
-- **Analytics Module**: `/analytics/overview`, `/analytics/reports`, `/analytics/performance`
+**Route Collection**: 21 routes organized across 5 modules
+- **Home & Core** (8 routes): `/home`, `/calendar`, `/messages`, `/documents`, `/profile`, `/settings`, `/notifications`, `/help`
+- **Users Module** (4 routes): `/users`, `/users/:id`, `/users/new`, `/users/:id/edit`
+- **Projects Module** (3 routes): `/projects`, `/projects/new`, `/projects/archived`
+- **Tasks Module** (3 routes): `/tasks/my`, `/tasks/recent`, `/tasks/important`
+- **Analytics Module** (3 routes): `/analytics/overview`, `/analytics/reports`, `/analytics/performance`
 
-![Navigation Flow](docs/diagrams/07-navigation-flow.png)
+The application uses a centralized **NavGraphService** for type-safe navigation. Below are detailed flow diagrams for each module:
 
-The application uses a centralized **NavGraphService** for type-safe navigation with the following flow:
+#### Navigation Overview
 
-**Navigation Flow by Module**:
+![Navigation Overview](docs/diagrams/07a-navigation-overview.png)
 
-1. **Entry Point** → User initiates navigation request
-2. **Home & Core Pages**:
-   - `/home` → Dashboard
-   - `/calendar` → Calendar View
-   - `/messages` → Messages
-   - `/documents` → Documents
-   - `/profile` → User Profile
-   - `/settings` → Settings
-   - `/notifications` → Notifications
-   - `/help` → Help Center
+High-level view showing the entry point and five main navigation modules.
 
-3. **Users Module Flow**:
-   - `/users` → User List → Select Action:
-     - View Details → `/users/:id`
-     - Create New → `/users/new`
-     - Edit User → `/users/:id/edit`
+#### Home & Core Pages (8 routes)
 
-4. **Projects Module Flow**:
-   - Select View:
-     - View List → `/projects`
-     - Create New → `/projects/new`
-     - View Archived → `/projects/archived`
+![Home & Core Navigation](docs/diagrams/07b-navigation-home-core.png)
 
-5. **Tasks Module Flow**:
-   - Select Filter:
-     - My Tasks → `/tasks/my`
-     - Recent → `/tasks/recent`
-     - Important → `/tasks/important`
+Core application pages accessible from the main navigation.
 
-6. **Analytics Module Flow**:
-   - Select Report:
-     - Overview → `/analytics/overview`
-     - Reports → `/analytics/reports`
-     - Performance → `/analytics/performance`
+#### Users Module (4 routes)
 
-7. **Navigation Complete** → Router Updates URL → Component Loaded → Page Displayed
+![Users Module Navigation](docs/diagrams/07c-navigation-users.png)
 
-**Benefits**:
-- Type-safe navigation with compile-time checks
-- Single source of truth for all routes
-- Easy to test navigation logic
-- Consistent navigation behavior across modules
-- Built-in analytics/logging support
-- Clear route path organization
+User management workflows: List → View Details / Create / Edit
+
+#### Projects Module (3 routes)
+
+![Projects Module Navigation](docs/diagrams/07d-navigation-projects.png)
+
+Project views: Active List / Create New / Archived Projects
+
+#### Tasks Module (3 routes)
+
+![Tasks Module Navigation](docs/diagrams/07e-navigation-tasks.png)
+
+Task filtering options: My Tasks / Recent / Important
+
+#### Analytics Module (3 routes)
+
+![Analytics Module Navigation](docs/diagrams/07f-navigation-analytics.png)
+
+Analytics dashboards: Overview / Reports / Performance Metrics
+
+**NavGraph Benefits**:
+- ✅ Type-safe navigation with compile-time checks
+- ✅ Single source of truth for all routes
+- ✅ Easy to test navigation logic
+- ✅ Consistent navigation behavior across modules
+- ✅ Built-in analytics/logging support
+- ✅ Clear route path organization
+- ✅ Centralized route management
 
 For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 

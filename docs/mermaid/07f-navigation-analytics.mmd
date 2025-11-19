@@ -1,0 +1,20 @@
+graph TB
+    START([User Request]) --> DECIDE{Select Report}
+
+    DECIDE -->|Overview| OVERVIEW["/analytics/overview<br/><b>Overview Dashboard</b>"]
+    DECIDE -->|Reports| REPORTS["/analytics/reports<br/><b>Reports</b>"]
+    DECIDE -->|Performance| PERF["/analytics/performance<br/><b>Performance Metrics</b>"]
+
+    OVERVIEW --> COMPLETE([Navigation Complete])
+    REPORTS --> COMPLETE
+    PERF --> COMPLETE
+
+    classDef entry fill:#e1f5ff,stroke:#01579b,stroke-width:3px,font-size:18px
+    classDef decision fill:#ffebee,stroke:#c62828,stroke-width:3px,font-size:18px
+    classDef page fill:#e0f2f1,stroke:#00897b,stroke-width:2px,font-size:16px
+    classDef result fill:#fff9c4,stroke:#f57f17,stroke-width:3px,font-size:18px
+
+    class START entry
+    class DECIDE decision
+    class OVERVIEW,REPORTS,PERF page
+    class COMPLETE result

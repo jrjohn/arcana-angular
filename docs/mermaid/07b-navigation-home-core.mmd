@@ -1,0 +1,30 @@
+graph TB
+    START([User Request]) --> HOME_CORE{Home & Core Pages}
+
+    HOME_CORE --> HOME["/home<br/><b>Dashboard</b>"]
+    HOME_CORE --> CALENDAR["/calendar<br/><b>Calendar View</b>"]
+    HOME_CORE --> MESSAGES["/messages<br/><b>Messages</b>"]
+    HOME_CORE --> DOCUMENTS["/documents<br/><b>Documents</b>"]
+    HOME_CORE --> PROFILE["/profile<br/><b>User Profile</b>"]
+    HOME_CORE --> SETTINGS["/settings<br/><b>Settings</b>"]
+    HOME_CORE --> NOTIFICATIONS["/notifications<br/><b>Notifications</b>"]
+    HOME_CORE --> HELP["/help<br/><b>Help Center</b>"]
+
+    HOME --> COMPLETE([Navigation Complete])
+    CALENDAR --> COMPLETE
+    MESSAGES --> COMPLETE
+    DOCUMENTS --> COMPLETE
+    PROFILE --> COMPLETE
+    SETTINGS --> COMPLETE
+    NOTIFICATIONS --> COMPLETE
+    HELP --> COMPLETE
+
+    classDef entry fill:#e1f5ff,stroke:#01579b,stroke-width:3px,font-size:18px
+    classDef decision fill:#ffebee,stroke:#c62828,stroke-width:3px,font-size:18px
+    classDef page fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,font-size:16px
+    classDef result fill:#fff9c4,stroke:#f57f17,stroke-width:3px,font-size:18px
+
+    class START entry
+    class HOME_CORE decision
+    class HOME,CALENDAR,MESSAGES,DOCUMENTS,PROFILE,SETTINGS,NOTIFICATIONS,HELP page
+    class COMPLETE result

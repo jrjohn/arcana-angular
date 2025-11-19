@@ -1,0 +1,41 @@
+graph LR
+    subgraph "Navigation Entry Point"
+        START([User Navigation Request])
+    end
+
+    subgraph "Module Selection"
+        HOME_CORE[Home & Core Pages<br/>8 routes]
+        USERS[Users Module<br/>4 routes]
+        PROJECTS[Projects Module<br/>3 routes]
+        TASKS[Tasks Module<br/>3 routes]
+        ANALYTICS[Analytics Module<br/>3 routes]
+    end
+
+    subgraph "Navigation Complete"
+        ROUTE[Router Updates URL]
+        COMPONENT[Component Loaded]
+        PAGE[Page Displayed]
+    end
+
+    START --> HOME_CORE
+    START --> USERS
+    START --> PROJECTS
+    START --> TASKS
+    START --> ANALYTICS
+
+    HOME_CORE --> ROUTE
+    USERS --> ROUTE
+    PROJECTS --> ROUTE
+    TASKS --> ROUTE
+    ANALYTICS --> ROUTE
+
+    ROUTE --> COMPONENT
+    COMPONENT --> PAGE
+
+    classDef entry fill:#e1f5ff,stroke:#01579b,stroke-width:3px,font-size:16px
+    classDef module fill:#fff3e0,stroke:#ef6c00,stroke-width:3px,font-size:16px
+    classDef result fill:#fff9c4,stroke:#f57f17,stroke-width:2px,font-size:16px
+
+    class START entry
+    class HOME_CORE,USERS,PROJECTS,TASKS,ANALYTICS module
+    class ROUTE,COMPONENT,PAGE result

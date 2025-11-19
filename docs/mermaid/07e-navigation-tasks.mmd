@@ -1,0 +1,20 @@
+graph TB
+    START([User Request]) --> DECIDE{Select Filter}
+
+    DECIDE -->|My Tasks| MY["/tasks/my<br/><b>My Tasks</b>"]
+    DECIDE -->|Recent| RECENT["/tasks/recent<br/><b>Recent Tasks</b>"]
+    DECIDE -->|Important| IMPORTANT["/tasks/important<br/><b>Important Tasks</b>"]
+
+    MY --> COMPLETE([Navigation Complete])
+    RECENT --> COMPLETE
+    IMPORTANT --> COMPLETE
+
+    classDef entry fill:#e1f5ff,stroke:#01579b,stroke-width:3px,font-size:18px
+    classDef decision fill:#ffebee,stroke:#c62828,stroke-width:3px,font-size:18px
+    classDef page fill:#fce4ec,stroke:#c2185b,stroke-width:2px,font-size:16px
+    classDef result fill:#fff9c4,stroke:#f57f17,stroke-width:3px,font-size:18px
+
+    class START entry
+    class DECIDE decision
+    class MY,RECENT,IMPORTANT page
+    class COMPLETE result

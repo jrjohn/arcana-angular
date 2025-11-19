@@ -1,0 +1,24 @@
+graph TB
+    START([User Request]) --> USERS_LIST["/users<br/><b>User List</b>"]
+
+    USERS_LIST --> DECIDE{Select Action}
+
+    DECIDE -->|View Details| DETAIL["/users/:id<br/><b>User Detail</b>"]
+    DECIDE -->|Create New| NEW["/users/new<br/><b>Create User</b>"]
+    DECIDE -->|Edit User| EDIT["/users/:id/edit<br/><b>Edit User</b>"]
+
+    DETAIL --> COMPLETE([Navigation Complete])
+    NEW --> COMPLETE
+    EDIT --> COMPLETE
+
+    classDef entry fill:#e1f5ff,stroke:#01579b,stroke-width:3px,font-size:18px
+    classDef list fill:#fff3e0,stroke:#ef6c00,stroke-width:2px,font-size:16px
+    classDef decision fill:#ffebee,stroke:#c62828,stroke-width:3px,font-size:18px
+    classDef page fill:#fff3e0,stroke:#ef6c00,stroke-width:2px,font-size:16px
+    classDef result fill:#fff9c4,stroke:#f57f17,stroke-width:3px,font-size:18px
+
+    class START entry
+    class USERS_LIST list
+    class DECIDE decision
+    class DETAIL,NEW,EDIT page
+    class COMPLETE result
