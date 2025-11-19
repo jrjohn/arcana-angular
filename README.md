@@ -203,6 +203,8 @@ This Angular application demonstrates exceptional architecture with enterprise-g
 
 ## Architecture Overview
 
+> **Note**: All architecture diagrams are generated at high resolution (2400px width, 3x scale) for maximum clarity. Images automatically resize to fit the screen while maintaining quality. Click any diagram to view full size.
+
 ### Clean Architecture Diagram
 
 ![Overall Architecture](docs/diagrams/01-overall-architecture.png)

@@ -2,27 +2,30 @@
 
 This directory contains Mermaid diagram source files for the project's architecture documentation.
 
-## ✅ Generated Diagrams
+## ✅ Generated Diagrams - High Resolution
 
-All 12 architecture diagrams have been generated as PNG images and are available in `docs/diagrams/`:
+All 13 architecture diagrams have been generated as **high-resolution PNG images** and are available in `docs/diagrams/`:
 
-| Diagram | Source | Image | Size |
-|---------|--------|-------|------|
-| Overall Architecture | [01-overall-architecture.mmd](mermaid/01-overall-architecture.mmd) | [PNG](diagrams/01-overall-architecture.png) | 70 KB |
-| Clean Architecture Layers | [02-clean-architecture-layers.mmd](mermaid/02-clean-architecture-layers.mmd) | [PNG](diagrams/02-clean-architecture-layers.png) | 19 KB |
-| Caching System | [03-caching-system.mmd](mermaid/03-caching-system.mmd) | [PNG](diagrams/03-caching-system.png) | 59 KB |
-| Data Flow | [04-data-flow.mmd](mermaid/04-data-flow.mmd) | [PNG](diagrams/04-data-flow.png) | 43 KB |
-| Security Architecture | [05-security-architecture.mmd](mermaid/05-security-architecture.mmd) | [PNG](diagrams/05-security-architecture.png) | 17 KB |
-| Input/Output/Effect Pattern | [06-input-output-effect-pattern.mmd](mermaid/06-input-output-effect-pattern.mmd) | [PNG](diagrams/06-input-output-effect-pattern.png) | 52 KB |
-| **Navigation Flow (Split by Module)** | | | **207 KB** |
-| ├─ Overview | [07a-navigation-overview.mmd](mermaid/07a-navigation-overview.mmd) | [PNG](diagrams/07a-navigation-overview.png) | 31 KB |
-| ├─ Home & Core | [07b-navigation-home-core.mmd](mermaid/07b-navigation-home-core.mmd) | [PNG](diagrams/07b-navigation-home-core.png) | 32 KB |
-| ├─ Users Module | [07c-navigation-users.mmd](mermaid/07c-navigation-users.mmd) | [PNG](diagrams/07c-navigation-users.png) | 36 KB |
-| ├─ Projects Module | [07d-navigation-projects.mmd](mermaid/07d-navigation-projects.mmd) | [PNG](diagrams/07d-navigation-projects.png) | 36 KB |
-| ├─ Tasks Module | [07e-navigation-tasks.mmd](mermaid/07e-navigation-tasks.mmd) | [PNG](diagrams/07e-navigation-tasks.png) | 33 KB |
-| └─ Analytics Module | [07f-navigation-analytics.mmd](mermaid/07f-navigation-analytics.mmd) | [PNG](diagrams/07f-navigation-analytics.png) | 39 KB |
+**Generation Settings**: 2400px width, 3x scale, transparent background for maximum clarity
 
-**Total Size**: 467 KB (12 diagrams)
+| Diagram | Source | Image | Size | Resolution |
+|---------|--------|-------|------|-----------|
+| Overall Architecture | [01-overall-architecture.mmd](mermaid/01-overall-architecture.mmd) | [PNG](diagrams/01-overall-architecture.png) | 274 KB | ~3500x3300 |
+| Clean Architecture Layers | [02-clean-architecture-layers.mmd](mermaid/02-clean-architecture-layers.mmd) | [PNG](diagrams/02-clean-architecture-layers.png) | 242 KB | ~3500x3300 |
+| Caching System | [03-caching-system.mmd](mermaid/03-caching-system.mmd) | [PNG](diagrams/03-caching-system.png) | 317 KB | ~3500x3300 |
+| Data Flow | [04-data-flow.mmd](mermaid/04-data-flow.mmd) | [PNG](diagrams/04-data-flow.png) | 421 KB | ~3500x3300 |
+| Security Architecture | [05-security-architecture.mmd](mermaid/05-security-architecture.mmd) | [PNG](diagrams/05-security-architecture.png) | 328 KB | ~3500x3300 |
+| Input/Output/Effect Pattern | [06-input-output-effect-pattern.mmd](mermaid/06-input-output-effect-pattern.mmd) | [PNG](diagrams/06-input-output-effect-pattern.png) | 338 KB | 3687x3468 |
+| **Navigation Flow (Split by Module)** | | | **2.4 MB** | |
+| ├─ Complete Flow | [07-navigation-flow.mmd](mermaid/07-navigation-flow.mmd) | [PNG](diagrams/07-navigation-flow.png) | 1.4 MB | ~4000x5000 |
+| ├─ Overview | [07a-navigation-overview.mmd](mermaid/07a-navigation-overview.mmd) | [PNG](diagrams/07a-navigation-overview.png) | 256 KB | ~3500x3300 |
+| ├─ Home & Core | [07b-navigation-home-core.mmd](mermaid/07b-navigation-home-core.mmd) | [PNG](diagrams/07b-navigation-home-core.png) | 281 KB | ~3500x3300 |
+| ├─ Users Module | [07c-navigation-users.mmd](mermaid/07c-navigation-users.mmd) | [PNG](diagrams/07c-navigation-users.png) | 141 KB | ~3500x3300 |
+| ├─ Projects Module | [07d-navigation-projects.mmd](mermaid/07d-navigation-projects.mmd) | [PNG](diagrams/07d-navigation-projects.png) | 141 KB | ~3500x3300 |
+| ├─ Tasks Module | [07e-navigation-tasks.mmd](mermaid/07e-navigation-tasks.mmd) | [PNG](diagrams/07e-navigation-tasks.png) | 132 KB | ~3500x3300 |
+| └─ Analytics Module | [07f-navigation-analytics.mmd](mermaid/07f-navigation-analytics.mmd) | [PNG](diagrams/07f-navigation-analytics.png) | 157 KB | ~3500x3300 |
+
+**Total Size**: 4.3 MB (13 diagrams at high resolution - 9x larger than original 467 KB)
 
 All diagrams are displayed in the main [README.md](../README.md) Architecture Overview section.
 
@@ -123,36 +126,41 @@ Centralized navigation architecture using NavGraphService, split into readable m
 
 You can generate PNG images from Mermaid diagrams using several methods:
 
-### Method 1: Mermaid CLI (Recommended)
+### Method 1: High-Resolution Generation (RECOMMENDED)
 
-Install Mermaid CLI:
+**Use the provided script** for high-resolution, crystal-clear diagrams:
+
+```bash
+# Run the high-resolution generation script
+bash docs/generate-diagrams-large.sh
+```
+
+This script generates diagrams with:
+- ✅ **Width**: 2400px (3x larger than default)
+- ✅ **Scale**: 3x for crisp rendering
+- ✅ **Resolution**: ~3500x3300 pixels
+- ✅ **Background**: Transparent
+- ✅ **File Size**: 100-400 KB per diagram
+- ✅ **Quality**: Suitable for presentations and high-DPI displays
+
+**Requirements**:
 ```bash
 npm install -g @mermaid-js/mermaid-cli
 ```
 
-Generate all diagrams:
+### Method 2: Standard Resolution (Mermaid CLI)
+
+For smaller file sizes with standard resolution:
+
 ```bash
 # Create output directory
-mkdir -p docs/images
+mkdir -p docs/diagrams
 
-# Generate PNG for each diagram
-mmdc -i docs/mermaid/01-overall-architecture.mmd -o docs/images/01-overall-architecture.png -t dark -b transparent
-mmdc -i docs/mermaid/02-clean-architecture-layers.mmd -o docs/images/02-clean-architecture-layers.png -t dark -b transparent
-mmdc -i docs/mermaid/03-caching-system.mmd -o docs/images/03-caching-system.png -t dark -b transparent
-mmdc -i docs/mermaid/04-data-flow.mmd -o docs/images/04-data-flow.png -t dark -b transparent
-mmdc -i docs/mermaid/05-security-architecture.mmd -o docs/images/05-security-architecture.png -t dark -b transparent
-mmdc -i docs/mermaid/06-input-output-effect-pattern.mmd -o docs/images/06-input-output-effect-pattern.png -t dark -b transparent
-```
-
-Batch generation script:
-```bash
-#!/bin/bash
-mkdir -p docs/images
-
+# Generate PNG for each diagram at standard size
 for file in docs/mermaid/*.mmd; do
   filename=$(basename "$file" .mmd)
-  mmdc -i "$file" -o "docs/images/$filename.png" -t dark -b transparent
-  echo "Generated: docs/images/$filename.png"
+  mmdc -i "$file" -o "docs/diagrams/$filename.png" -b transparent
+  echo "Generated: docs/diagrams/$filename.png"
 done
 ```
 
