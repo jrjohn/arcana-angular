@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserFormViewModel } from './user-form.view-model';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
+import { NavGraphService } from '../../../../domain/services/nav-graph.service';
 
 /**
  * User Form Component
@@ -24,12 +25,16 @@ export class UserFormComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
 
   vm = inject(UserFormViewModel);
-  private router = inject(Router);
+  private navGraph = inject(NavGraphService);
   private route = inject(ActivatedRoute);
 
   errorMessage: string | null = null;
   showSuccessAlert = false;
   successMessage = '';
+
+  constructor() {
+    this.setupEffects();
+  }
 
   ngOnInit(): void {
     // Get userId from route params (if editing)
@@ -39,20 +44,41 @@ export class UserFormComponent implements OnInit, OnDestroy {
     } else {
       this.vm.input.initialize();
     }
+  }
 
-    // Subscribe to effects
-    this.vm.effect$.navigateBack$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      this.router.navigate(['/users']);
-    });
+  /**
+   * Setup effect subscriptions
+   */
+  private setupEffects(): void {
+    // Navigate back to user list
+    this.vm.effect$.navigateBack$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.navGraph.users.toList();
+      });
 
-    this.vm.effect$.showError$.pipe(takeUntil(this.destroy$)).subscribe(error => {
-      this.errorMessage = error.userMessage;
-    });
+    // Show error messages
+    this.vm.effect$.showError$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(error => {
+        this.errorMessage = error.userMessage;
+        console.error('[UserForm] Error:', error);
+      });
 
-    this.vm.effect$.showSuccess$.pipe(takeUntil(this.destroy$)).subscribe(message => {
-      this.successMessage = message;
-      this.showSuccessAlert = true;
-    });
+    // Show success messages
+    this.vm.effect$.showSuccess$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(message => {
+        this.successMessage = message;
+        this.showSuccessAlert = true;
+      });
+
+    // Log when user is saved
+    this.vm.effect$.userSaved$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(user => {
+        console.log('[UserForm] User saved:', user);
+      });
   }
 
   ngOnDestroy(): void {

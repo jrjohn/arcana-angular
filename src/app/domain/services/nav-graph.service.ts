@@ -96,10 +96,31 @@ export class NavGraphService {
   }
 
   /**
+   * Profile navigation
+   */
+  toProfile(extras?: NavigationExtras): Promise<boolean> {
+    return this.router.navigate(['/profile'], extras);
+  }
+
+  /**
    * Settings navigation
    */
   toSettings(extras?: NavigationExtras): Promise<boolean> {
     return this.router.navigate(['/settings'], extras);
+  }
+
+  /**
+   * Notifications navigation
+   */
+  toNotifications(extras?: NavigationExtras): Promise<boolean> {
+    return this.router.navigate(['/notifications'], extras);
+  }
+
+  /**
+   * Help navigation
+   */
+  toHelp(extras?: NavigationExtras): Promise<boolean> {
+    return this.router.navigate(['/help'], extras);
   }
 
   /**

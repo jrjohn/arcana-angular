@@ -45,6 +45,10 @@ export class UserListComponent implements OnInit, OnDestroy {
   // Expose Math to template
   Math = Math;
 
+  constructor() {
+    this.setupEffects();
+  }
+
   ngOnInit(): void {
     // Load initial data
     this.vm.input.loadInitial();
@@ -55,15 +59,33 @@ export class UserListComponent implements OnInit, OnDestroy {
       .subscribe(query => {
         this.vm.input.search(query);
       });
+  }
 
-    // Subscribe to effects (navigation now handled by ViewModel via NavGraph)
-    this.vm.effect$.confirmDelete$.pipe(takeUntil(this.destroy$)).subscribe(user => {
-      this.openDeleteConfirmation(user);
-    });
+  /**
+   * Setup effect subscriptions
+   */
+  private setupEffects(): void {
+    // Handle delete confirmation (navigation handled by ViewModel via NavGraph)
+    this.vm.effect$.confirmDelete$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(user => {
+        this.openDeleteConfirmation(user);
+      });
 
-    this.vm.effect$.showSuccess$.pipe(takeUntil(this.destroy$)).subscribe(message => {
-      this.showSuccessMessage(message);
-    });
+    // Show success messages
+    this.vm.effect$.showSuccess$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(message => {
+        this.showSuccessMessage(message);
+      });
+
+    // Handle errors (could show toast notification)
+    this.vm.effect$.showError$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(error => {
+        console.error('[UserList] Error:', error);
+        // Could show toast notification here
+      });
   }
 
   ngOnDestroy(): void {
@@ -103,7 +125,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     modalRef.result.then(
       (confirmed) => {
         if (confirmed) {
-          this.vm.deleteUserConfirmed(user);
+          this.vm.input.deleteUserConfirmed(user);
         }
       },
       () => {

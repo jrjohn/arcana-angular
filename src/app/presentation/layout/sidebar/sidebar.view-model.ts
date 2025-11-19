@@ -1,36 +1,79 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed, effect } from '@angular/core';
+import { Subject } from 'rxjs';
 import { UserService } from '../../../domain/services/user.service';
 
 /**
  * Sidebar ViewModel
- * Handles business logic for sidebar component
+ * Follows Input/Output/Effect pattern for reactive state management
  */
 @Injectable()
 export class SidebarViewModel {
-  // Track total user count
-  userCount = signal<number>(0);
+  // ========== PRIVATE STATE ==========
+  private userCountSignal = signal<number>(0);
+  private isLoadingSignal = signal<boolean>(false);
 
-  constructor(private userService: UserService) {}
+  // ========== INPUT (Actions) ==========
+  readonly input = {
+    /**
+     * Reload user count from service
+     */
+    refresh: () => this.loadUserCount(),
+  };
 
+  // ========== OUTPUT (State) ==========
+  readonly output = {
+    /**
+     * User count as computed value
+     */
+    userCount: computed(() => this.userCountSignal()),
+
+    /**
+     * Loading state
+     */
+    isLoading: computed(() => this.isLoadingSignal()),
+
+    /**
+     * Badge text for user menu item
+     */
+    userBadge: computed(() => {
+      const count = this.userCountSignal();
+      return count > 0 ? count.toString() : undefined;
+    }),
+  };
+
+  // ========== EFFECTS (Side Effects) ==========
+  readonly effect$ = {
+    /**
+     * Emits when user count fails to load
+     */
+    loadError$: new Subject<Error>(),
+  };
+
+  constructor(private userService: UserService) {
+    // Auto-load user count on initialization
+    effect(() => {
+      this.loadUserCount();
+    }, { allowSignalWrites: true });
+  }
+
+  // ========== PRIVATE METHODS ==========
   /**
    * Load user count from service
    */
-  loadUserCount(): void {
+  private loadUserCount(): void {
+    this.isLoadingSignal.set(true);
+
     this.userService.getUsers({ page: 1, pageSize: 1 }).subscribe({
       next: response => {
-        this.userCount.set(response.total);
+        this.userCountSignal.set(response.total);
+        this.isLoadingSignal.set(false);
       },
-      error: () => {
+      error: (error: Error) => {
         // Silently fail - user count is not critical
-        this.userCount.set(0);
+        this.userCountSignal.set(0);
+        this.isLoadingSignal.set(false);
+        this.effect$.loadError$.next(error);
       },
     });
-  }
-
-  /**
-   * Get user count value
-   */
-  getUserCount(): number {
-    return this.userCount();
   }
 }

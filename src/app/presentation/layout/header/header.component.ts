@@ -1,8 +1,9 @@
 import { Component, Output, EventEmitter, signal, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { I18nService, type Language as I18nLanguage } from '../../../domain/services/i18n.service';
+import { NavGraphService } from '../../../domain/services/nav-graph.service';
 
 /**
  * Language option interface
@@ -39,7 +40,7 @@ export class HeaderComponent {
   @Output() sidebarToggle = new EventEmitter<void>();
   @Output() rightPanelToggle = new EventEmitter<void>();
 
-  private router = inject(Router);
+  private navGraph = inject(NavGraphService);
   private i18nService = inject(I18nService);
 
   // Get current language from I18nService
@@ -92,16 +93,16 @@ export class HeaderComponent {
   onUserMenuAction(action: string): void {
     switch (action) {
       case 'profile':
-        this.router.navigate(['/profile']);
+        this.navGraph.toProfile();
         break;
       case 'settings':
-        this.router.navigate(['/settings']);
+        this.navGraph.toSettings();
         break;
       case 'notifications':
-        this.router.navigate(['/notifications']);
+        this.navGraph.toNotifications();
         break;
       case 'help':
-        this.router.navigate(['/help']);
+        this.navGraph.toHelp();
         break;
       case 'logout':
         this.handleLogout();
@@ -113,6 +114,6 @@ export class HeaderComponent {
     console.log('Logging out...');
     // Here you would integrate with auth service
     // For now, just navigate to login or home
-    this.router.navigate(['/']);
+    this.navGraph.toHome();
   }
 }

@@ -36,6 +36,7 @@ export class UserListViewModel {
     editUser: (user: User) => this.navGraph.users.toUserEdit(user),
     loadMore: () => this.loadMore(),
     deleteUser: (user: User) => this.confirmDelete(user),
+    deleteUserConfirmed: (user: User) => this.performDelete(user),
     goToPage: (page: number) => this.loadUsers(page),
     createUser: () => this.navGraph.users.toCreate(),
   };
@@ -170,7 +171,7 @@ export class UserListViewModel {
   /**
    * Deletes user after confirmation
    */
-  deleteUserConfirmed(user: User): void {
+  private performDelete(user: User): void {
     this.userService.deleteUser(user.id).subscribe({
       next: () => {
         this.usersSignal.update(users => users.filter(u => u.id !== user.id));

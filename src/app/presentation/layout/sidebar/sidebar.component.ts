@@ -128,14 +128,13 @@ export class SidebarComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    // Fetch initial user count via ViewModel
-    this.viewModel.loadUserCount();
+    // User count is loaded automatically by ViewModel effect
   }
 
   getUserBadge(item: MenuItem): string | undefined {
     if (item.id === 'users') {
-      const count = this.viewModel.getUserCount();
-      return count > 0 ? count.toString() : undefined;
+      // Use computed badge from ViewModel output
+      return this.viewModel.output.userBadge();
     }
     return item.badge;
   }
