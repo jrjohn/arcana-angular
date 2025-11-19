@@ -1,11 +1,12 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection, APP_INITIALIZER } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withPreloading } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { OfflineSyncService } from './data/sync/offline-sync.service';
 import { AnalyticsService } from './domain/services/analytics.service';
+import { PreloadAllModulesStrategy } from './core/strategies/preload-all-modules.strategy';
 
 /**
  * Initialize offline sync service on app startup
@@ -33,7 +34,10 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModulesStrategy)
+    ),
     provideAnimations(),
     provideHttpClient(withFetch()),
     {

@@ -1,19 +1,18 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { UserService } from '../../../../domain/services/user.service';
-import { NavGraphService } from '../../../../domain/services/nav-graph.service';
 import { User } from '../../../../domain/entities/user.model';
 import { AppError } from '../../../../domain/entities/app-error.model';
+import { BaseViewModel } from '../../../shared/base';
 
 /**
  * User List ViewModel
  * Manages state and logic for user list view
- * Uses NavGraph for centralized navigation
+ * Extends BaseViewModel for common functionality (NavGraph, etc.)
  */
 @Injectable()
-export class UserListViewModel {
+export class UserListViewModel extends BaseViewModel {
   private userService = inject(UserService);
-  private navGraph = inject(NavGraphService);
 
   // State signals
   private readonly usersSignal = signal<User[]>([]);

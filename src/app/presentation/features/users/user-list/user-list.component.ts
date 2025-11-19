@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subject, debounceTime, takeUntil } from 'rxjs';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgbModal, NgbPaginationModule, NgbTooltipModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserListViewModel } from './user-list.view-model';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
@@ -9,10 +10,13 @@ import { ConfirmationDialogComponent } from '../../../shared/components/confirma
 import { User } from '../../../../domain/entities/user.model';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { I18nService } from '../../../../domain/services/i18n.service';
+import { BaseComponent } from '../../../shared/base';
 
 /**
  * User List Component
  * Displays paginated list of users with search and CRUD actions
+ * Extends BaseComponent for common functionality (NavGraph, Route, destroy$, setupEffects)
+ * Supports both traditional pagination and virtual scrolling for optimal performance
  */
 @Component({
   selector: 'app-user-list',
@@ -20,6 +24,7 @@ import { I18nService } from '../../../../domain/services/i18n.service';
   imports: [
     CommonModule,
     FormsModule,
+    ScrollingModule,
     NgbPaginationModule,
     NgbTooltipModule,
     NgbAlertModule,
@@ -30,8 +35,7 @@ import { I18nService } from '../../../../domain/services/i18n.service';
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
 })
-export class UserListComponent implements OnInit, OnDestroy {
-  private readonly destroy$ = new Subject<void>();
+export class UserListComponent extends BaseComponent implements OnInit {
   private readonly searchSubject$ = new Subject<string>();
 
   vm = inject(UserListViewModel);
@@ -46,6 +50,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   Math = Math;
 
   constructor() {
+    super();
     this.setupEffects();
   }
 
@@ -64,7 +69,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   /**
    * Setup effect subscriptions
    */
-  private setupEffects(): void {
+  protected setupEffects(): void {
     // Handle delete confirmation (navigation handled by ViewModel via NavGraph)
     this.vm.effect$.confirmDelete$
       .pipe(takeUntil(this.destroy$))
@@ -86,11 +91,6 @@ export class UserListComponent implements OnInit, OnDestroy {
         console.error('[UserList] Error:', error);
         // Could show toast notification here
       });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   onSearchChange(query: string): void {

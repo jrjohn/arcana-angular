@@ -1,5 +1,10 @@
 import { Routes } from '@angular/router';
 
+/**
+ * Application Routes
+ * Uses lazy loading with loadChildren for better code splitting
+ * Each feature module is loaded only when needed
+ */
 export const routes: Routes = [
   {
     path: '',
@@ -15,38 +20,16 @@ export const routes: Routes = [
       },
       {
         path: 'home',
-        loadComponent: () =>
-          import('./presentation/features/home/home.component').then(
-            m => m.HomeComponent
+        loadChildren: () =>
+          import('./presentation/features/home/home.routes').then(
+            m => m.HOME_ROUTES
           ),
       },
       {
         path: 'users',
-        loadComponent: () =>
-          import('./presentation/features/users/user-list/user-list.component').then(
-            m => m.UserListComponent
-          ),
-      },
-      // More specific routes must come before parameterized routes
-      {
-        path: 'users/new',
-        loadComponent: () =>
-          import('./presentation/features/users/user-form/user-form.component').then(
-            m => m.UserFormComponent
-          ),
-      },
-      {
-        path: 'users/:id/edit',
-        loadComponent: () =>
-          import('./presentation/features/users/user-form/user-form.component').then(
-            m => m.UserFormComponent
-          ),
-      },
-      {
-        path: 'users/:id',
-        loadComponent: () =>
-          import('./presentation/features/users/user-detail/user-detail.component').then(
-            m => m.UserDetailComponent
+        loadChildren: () =>
+          import('./presentation/features/users/users.routes').then(
+            m => m.USERS_ROUTES
           ),
       },
       {

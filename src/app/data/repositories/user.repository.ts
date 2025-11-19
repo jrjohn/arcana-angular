@@ -5,16 +5,11 @@ import { CacheService } from '../storage/cache.service';
 import { MemoryCacheService } from '../storage/memory-cache.service';
 import { IndexedDbService } from '../storage/indexed-db.service';
 import { NetworkStatusService } from '../../domain/services/network-status.service';
-import {
-  User,
-  CreateUserDto,
-  UpdateUserDto,
-  UserApiResponse,
-  mapUserFromApi,
-  mapUserToApi,
-} from '../../domain/entities/user.model';
+import { User, CreateUserDto, UpdateUserDto } from '../../domain/entities/user.model';
 import { PaginatedResponse, PaginationParams } from '../../domain/entities/pagination.model';
 import { ErrorCategory, createAppError } from '../../domain/entities/app-error.model';
+import { PaginatedUserResponseDto, SingleUserResponseDto, UserDto } from '../dto/user.dto';
+import { UserMapper } from '../mappers/user.mapper';
 
 /**
  * User Repository with Offline-First Architecture
@@ -103,26 +98,22 @@ export class UserRepository {
 
   /**
    * Fetches users from API and updates all cache layers
+   * Now uses UserMapper to convert DTOs to domain models
    */
   private fetchAndUpdateUsers(
     params: PaginationParams,
     cacheKey: string
   ): Observable<PaginatedResponse<User>> {
     return this.apiService
-      .get<{
-        data: UserApiResponse[];
-        page: number;
-        per_page: number;
-        total: number;
-        total_pages: number;
-      }>(`/users?page=${params.page}&per_page=${params.pageSize}`)
+      .get<PaginatedUserResponseDto>(`/users?page=${params.page}&per_page=${params.pageSize}`)
       .pipe(
-        map(response => {
-          // Map users and ensure unique IDs based on page offset
-          // This fixes duplicate IDs from mock APIs that cycle IDs across pages
-          const baseIndex = (response.page - 1) * response.per_page;
-          const users = response.data.map((apiUser, index) => {
-            const user = mapUserFromApi(apiUser);
+        map(dto => {
+          // Use mapper to convert DTO to domain model
+          const result = UserMapper.toPaginatedDomain(dto);
+
+          // Fix duplicate IDs from mock APIs that cycle IDs across pages
+          const baseIndex = (result.page - 1) * result.pageSize;
+          result.data = result.data.map((user: User, index: number) => {
             // For mock APIs, ensure unique ID by calculating global offset
             // Only modify if ID appears to be a simple number that might repeat
             if (/^\d+$/.test(user.id)) {
@@ -132,20 +123,12 @@ export class UserRepository {
             return user;
           });
 
-          const result: PaginatedResponse<User> = {
-            data: users,
-            page: response.page,
-            pageSize: response.per_page,
-            total: response.total,
-            totalPages: response.total_pages,
-          };
-
           // Save to all cache layers (waterfall)
           this.saveToAllLayers(cacheKey, result);
 
           // Save individual users to IndexedDB
-          result.data.forEach(user => {
-            this.indexedDb.saveUser(user).catch(err =>
+          result.data.forEach((user: User) => {
+            this.indexedDb.saveUser(user).catch((err: unknown) =>
               console.error('[Repository] Failed to save user to IndexedDB:', err)
             );
           });
@@ -216,11 +199,13 @@ export class UserRepository {
 
   /**
    * Fetches single user from API and caches it
+   * Now uses UserMapper to convert DTOs to domain models
    */
   private fetchAndCacheUser(id: string, cacheKey: string): Observable<User> {
-    return this.apiService.get<{ data: UserApiResponse }>(`/users/${id}`).pipe(
-      map(response => {
-        const user = mapUserFromApi(response.data);
+    return this.apiService.get<SingleUserResponseDto>(`/users/${id}`).pipe(
+      map(dto => {
+        // Use mapper to convert DTO to domain model
+        const user = UserMapper.toSingleDomain(dto);
 
         // Save to all layers
         this.saveToAllLayers(cacheKey, user);
@@ -235,9 +220,11 @@ export class UserRepository {
 
   /**
    * Creates a new user (online/offline with pending operations)
+   * Now uses UserMapper to convert between domain and DTO
    */
   createUser(userData: CreateUserDto): Observable<User> {
-    const apiData = mapUserToApi(userData);
+    // Use mapper to convert domain model to DTO
+    const apiData = UserMapper.toCreateDto(userData);
 
     if (this.networkStatus.isOffline) {
       // Queue for later sync
@@ -268,9 +255,10 @@ export class UserRepository {
       );
     }
 
-    return this.apiService.post<UserApiResponse>('/users', apiData).pipe(
-      map(response => {
-        const user = mapUserFromApi(response);
+    return this.apiService.post<UserDto>('/users', apiData).pipe(
+      map(dto => {
+        // Use mapper to convert DTO to domain model
+        const user = UserMapper.toDomain(dto);
 
         // Save to IndexedDB
         this.indexedDb.saveUser(user);
@@ -285,9 +273,11 @@ export class UserRepository {
 
   /**
    * Updates an existing user (online/offline with pending operations)
+   * Now uses UserMapper to convert between domain and DTO
    */
   updateUser(id: string, userData: UpdateUserDto): Observable<User> {
-    const apiData = mapUserToApi(userData);
+    // Use mapper to convert domain model to DTO
+    const apiData = UserMapper.toUpdateDto(userData);
 
     if (this.networkStatus.isOffline) {
       // Queue for later sync
@@ -329,9 +319,10 @@ export class UserRepository {
       );
     }
 
-    return this.apiService.put<UserApiResponse>(`/users/${id}`, apiData).pipe(
-      map(response => {
-        const user = mapUserFromApi(response);
+    return this.apiService.put<UserDto>(`/users/${id}`, apiData).pipe(
+      map(dto => {
+        // Use mapper to convert DTO to domain model
+        const user = UserMapper.toDomain(dto);
 
         // Save to IndexedDB
         this.indexedDb.saveUser(user);

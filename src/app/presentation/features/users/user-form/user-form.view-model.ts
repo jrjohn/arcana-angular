@@ -3,13 +3,15 @@ import { Subject } from 'rxjs';
 import { UserService } from '../../../../domain/services/user.service';
 import { User, UserValidator } from '../../../../domain/entities/user.model';
 import { AppError } from '../../../../domain/entities/app-error.model';
+import { BaseViewModel } from '../../../shared/base';
 
 /**
  * User Form ViewModel
  * Manages state and logic for user create/edit form
+ * Extends BaseViewModel for common functionality (NavGraph, etc.)
  */
 @Injectable()
-export class UserFormViewModel {
+export class UserFormViewModel extends BaseViewModel {
   // Form field signals
   private readonly firstNameSignal = signal('');
   private readonly lastNameSignal = signal('');
@@ -87,7 +89,9 @@ export class UserFormViewModel {
     userSaved$: new Subject<User>(),
   };
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) {
+    super();
+  }
 
   /**
    * Initializes form (for create or edit mode)

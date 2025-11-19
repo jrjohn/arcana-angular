@@ -41,7 +41,7 @@ export class ApiService {
   get<T>(endpoint: string, options?: RequestOptions): Observable<T> {
     const url = this.buildUrl(endpoint);
     const mergedOptions = this.mergeOptions(options);
-    return this.http.get<T>(url, mergedOptions).pipe(
+    return this.http.get<T>(url, { ...mergedOptions, responseType: 'json' as 'json' }).pipe(
       timeout(this.defaultTimeout),
       retry(this.maxRetries),
       catchError(error => this.handleError(error))
@@ -102,10 +102,20 @@ export class ApiService {
     let appError: AppError;
 
     if (error instanceof HttpErrorResponse) {
+      // Log detailed error information for debugging
+      console.error('[ApiService] HTTP Error Response:', {
+        status: error.status,
+        statusText: error.statusText,
+        url: error.url,
+        error: error.error,
+        message: error.message
+      });
       appError = this.mapHttpError(error);
     } else if (error instanceof Error) {
+      console.error('[ApiService] Error:', error);
       appError = createAppError(error, ErrorCategory.NETWORK);
     } else {
+      console.error('[ApiService] Unknown error:', error);
       appError = createAppError(error, ErrorCategory.UNKNOWN);
     }
 

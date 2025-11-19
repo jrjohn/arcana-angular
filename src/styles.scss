@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Import Bootstrap - using @import is deprecated but @use requires complex migration */
-/* We suppress the warning by importing only what we need in the correct order */
-@import "bootstrap/scss/bootstrap";
+/* Import Bootstrap using modern @use syntax (Dart Sass) */
+@use "bootstrap/scss/bootstrap" as *;

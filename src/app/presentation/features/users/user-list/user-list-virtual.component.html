@@ -1,0 +1,218 @@
+<div class="container-fluid py-4">
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="h3 mb-0">{{ 'user.list.title' | translate }}</h1>
+      <p class="text-muted mb-0">{{ 'user.list.subtitle' | translate }} (Virtual Scroll)</p>
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="vm.input.createUser()"
+    >
+      <i class="bi bi-plus-circle me-2"></i>
+      {{ 'user.list.create' | translate }}
+    </button>
+  </div>
+
+  <!-- Success Alert -->
+  @if (showSuccessAlert) {
+    <ngb-alert type="success" [dismissible]="true" (closed)="showSuccessAlert = false">
+      <i class="bi bi-check-circle me-2"></i>
+      {{ successMessage }}
+    </ngb-alert>
+  }
+
+  <!-- Error Alert -->
+  @if (vm.output.hasError() && vm.output.errorMessage()) {
+    <ngb-alert type="danger" [dismissible]="true" (closed)="vm.input.loadInitial()">
+      <i class="bi bi-exclamation-triangle me-2"></i>
+      {{ (vm.output.errorMessage() ?? 'error.unknown') | translate }}
+    </ngb-alert>
+  }
+
+  <!-- Search and Actions Bar -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-search"></i>
+            </span>
+            <input
+              type="text"
+              class="form-control"
+              [placeholder]="'user.list.search.placeholder' | translate"
+              [(ngModel)]="searchQuery"
+              (ngModelChange)="onSearchChange($event)"
+            />
+            @if (searchQuery) {
+              <button
+                class="btn btn-outline-secondary"
+                type="button"
+                (click)="searchQuery = ''; onSearchChange('')"
+              >
+                <i class="bi bi-x-lg"></i>
+              </button>
+            }
+          </div>
+        </div>
+        <div class="col-md-6 text-end">
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            (click)="vm.input.refresh()"
+            [disabled]="vm.output.isRefreshing()"
+          >
+            @if (vm.output.isRefreshing()) {
+              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            } @else {
+              <i class="bi bi-arrow-clockwise me-2"></i>
+            }
+            {{ 'common.refresh' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  @if (vm.output.isLoading()) {
+    <app-loading-spinner [message]="'common.loading' | translate"></app-loading-spinner>
+  }
+
+  <!-- Empty State -->
+  @else if (vm.output.isEmpty()) {
+    <div class="card">
+      <div class="card-body text-center py-5">
+        <i class="bi bi-people display-1 text-muted mb-3"></i>
+        <h5 class="text-muted">{{ 'user.list.no.results' | translate }}</h5>
+        <p class="text-muted">
+          @if (vm.output.searchQuery()) {
+            {{ 'user.list.empty.search' | translate }}
+          } @else {
+            {{ 'user.list.empty.message' | translate }}
+          }
+        </p>
+        @if (!vm.output.searchQuery()) {
+          <button
+            type="button"
+            class="btn btn-primary mt-3"
+            (click)="vm.input.createUser()"
+          >
+            <i class="bi bi-plus-circle me-2"></i>
+            {{ 'user.list.create' | translate }}
+          </button>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- User List with Virtual Scrolling -->
+  @else {
+    <div class="card">
+      <div class="card-header bg-white">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">
+            Users
+            <span class="badge bg-primary rounded-pill ms-2">{{ vm.output.totalItems() }}</span>
+          </h5>
+          @if (vm.output.searchQuery()) {
+            <span class="text-muted small">
+              Filtered by: "{{ vm.output.searchQuery() }}"
+            </span>
+          }
+        </div>
+      </div>
+
+      <!-- Virtual Scroll Container -->
+      <cdk-virtual-scroll-viewport
+        [itemSize]="80"
+        class="viewport-container"
+        style="height: 600px;"
+      >
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light sticky-header">
+              <tr>
+                <th>ID</th>
+                <th>Avatar</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (user of vm.output.users(); track user.id) {
+                <tr
+                  class="cursor-pointer virtual-scroll-item"
+                  (click)="vm.input.selectUser(user)"
+                  [style.height.px]="80"
+                >
+                  <td>
+                    <span class="badge bg-secondary">{{ user.id }}</span>
+                  </td>
+                  <td>
+                    @if (user.avatar) {
+                      <img
+                        [src]="user.avatar"
+                        [alt]="user.firstName + ' ' + user.lastName"
+                        class="rounded-circle"
+                        width="40"
+                        height="40"
+                      />
+                    } @else {
+                      <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                        {{ user.firstName.charAt(0) }}{{ user.lastName.charAt(0) }}
+                      </div>
+                    }
+                  </td>
+                  <td>
+                    <div class="fw-semibold">{{ user.firstName }} {{ user.lastName }}</div>
+                  </td>
+                  <td>{{ user.email }}</td>
+                  <td class="text-end">
+                    <div class="btn-group" role="group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-primary"
+                        (click)="vm.input.selectUser(user); $event.stopPropagation()"
+                        ngbTooltip="View Details"
+                      >
+                        <i class="bi bi-eye"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                        (click)="onEditUser(user, $event)"
+                        ngbTooltip="Edit User"
+                      >
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-danger"
+                        (click)="onDeleteUser(user, $event)"
+                        ngbTooltip="Delete User"
+                      >
+                        <i class="bi bi-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </cdk-virtual-scroll-viewport>
+
+      <!-- Footer with Stats -->
+      <div class="card-footer bg-white">
+        <div class="text-muted small">
+          Showing {{ vm.output.users().length }} of {{ vm.output.totalItems() }} users
+        </div>
+      </div>
+    </div>
+  }
+</div>
