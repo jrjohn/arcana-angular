@@ -6,7 +6,10 @@
   ></app-header>
 
   <!-- Sidebar -->
-  <app-sidebar [collapsed]="sidebarCollapsed()"></app-sidebar>
+  <app-sidebar
+    [collapsed]="sidebarCollapsed()"
+    [mobileOpen]="sidebarMobileOpen()"
+  ></app-sidebar>
 
   <!-- Main Content -->
   <main class="main-content">
@@ -19,7 +22,12 @@
     (close)="closeRightPanel()"
   ></app-right-panel>
 
-  <!-- Overlay for mobile -->
+  <!-- Overlay for mobile sidebar -->
+  @if (sidebarMobileOpen()) {
+    <div class="overlay" (click)="closeSidebar()"></div>
+  }
+
+  <!-- Overlay for right panel -->
   @if (rightPanelOpen()) {
     <div class="overlay" (click)="closeRightPanel()"></div>
   }

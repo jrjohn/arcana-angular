@@ -33,6 +33,7 @@ interface MenuItem {
 })
 export class SidebarComponent implements OnInit {
   @Input() collapsed = false;
+  @Input() mobileOpen = false;
 
   i18nService = inject(I18nService);
   private userService = inject(UserService);

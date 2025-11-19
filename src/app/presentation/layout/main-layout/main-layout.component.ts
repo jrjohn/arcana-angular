@@ -24,10 +24,16 @@ import { RightPanelComponent } from '../right-panel/right-panel.component';
 })
 export class MainLayoutComponent {
   sidebarCollapsed = signal(false);
+  sidebarMobileOpen = signal(false);
   rightPanelOpen = signal(false);
 
   toggleSidebar(): void {
-    this.sidebarCollapsed.update(value => !value);
+    // Check if mobile
+    if (window.innerWidth <= 768) {
+      this.sidebarMobileOpen.update(value => !value);
+    } else {
+      this.sidebarCollapsed.update(value => !value);
+    }
   }
 
   toggleRightPanel(): void {
@@ -36,5 +42,9 @@ export class MainLayoutComponent {
 
   closeRightPanel(): void {
     this.rightPanelOpen.set(false);
+  }
+
+  closeSidebar(): void {
+    this.sidebarMobileOpen.set(false);
   }
 }
