@@ -262,20 +262,22 @@ Security is implemented through multiple layers:
 
 ![Navigation Flow](docs/diagrams/07-navigation-flow.png)
 
-The application uses a centralized NavGraphService for type-safe navigation:
-- **Users Module**: List, Detail, Create, Edit flows with proper navigation paths
-- **Projects Module**: List, Create, and Archived views
-- **Tasks Module**: My Tasks, Recent, and Important task filters
-- **Analytics Module**: Overview, Reports, and Performance dashboards
-- **Other Routes**: Calendar, Messages, Documents, Profile, Settings, Notifications, Help
-- **Utility Methods**: Back navigation, current URL checking, dynamic routing
+The application uses a centralized **NavGraphService** for type-safe navigation:
 
-**Benefits:**
-- 🔒 Type-safe navigation with compile-time checks
-- 📍 Single source of truth for all routes
-- 🧪 Easy to test navigation logic
-- 📊 Consistent navigation behavior
-- 🔍 Built-in analytics/logging capabilities
+**Core Modules**:
+- **User Actions**: Single entry point for all navigation requests
+- **Core Pages**: Home, Calendar, Messages, Documents, Profile, Settings, Notifications, Help
+- **Users Module**: List, View Detail, Create, Edit operations
+- **Projects Module**: List, Create, Archived views
+- **Tasks Module**: My Tasks, Recent Tasks, Important Tasks filters
+- **Analytics Module**: Overview, Reports, Performance dashboards
+
+**Benefits**:
+- Type-safe navigation with compile-time checks
+- Single source of truth for all routes
+- Easy to test navigation logic
+- Consistent navigation behavior
+- Built-in analytics/logging support
 
 For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 

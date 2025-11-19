@@ -14,7 +14,7 @@ All 7 architecture diagrams have been generated as PNG images and are available 
 | Data Flow | [04-data-flow.mmd](mermaid/04-data-flow.mmd) | [PNG](diagrams/04-data-flow.png) | 43 KB |
 | Security Architecture | [05-security-architecture.mmd](mermaid/05-security-architecture.mmd) | [PNG](diagrams/05-security-architecture.png) | 17 KB |
 | Input/Output/Effect Pattern | [06-input-output-effect-pattern.mmd](mermaid/06-input-output-effect-pattern.mmd) | [PNG](diagrams/06-input-output-effect-pattern.png) | 13 KB |
-| Navigation Flow (NavGraph) | [07-navigation-flow.mmd](mermaid/07-navigation-flow.mmd) | [PNG](diagrams/07-navigation-flow.png) | 13 KB |
+| Navigation Flow (NavGraph) | [07-navigation-flow.mmd](mermaid/07-navigation-flow.mmd) | [PNG](diagrams/07-navigation-flow.png) | 77 KB |
 
 All diagrams are displayed in the main [README.md](../README.md) Architecture Overview section.
 
@@ -77,19 +77,14 @@ ViewModel architecture pattern:
 **File**: `mermaid/07-navigation-flow.mmd`
 
 Centralized navigation architecture using NavGraphService:
-- **Users Module**: Complete CRUD navigation flow
-- **Projects Module**: List, create, and archive navigation
-- **Tasks Module**: Filtered task views (My, Recent, Important)
-- **Analytics Module**: Dashboard navigation hierarchy
-- **Other Routes**: Calendar, Messages, Documents, Profile, Settings, etc.
-- **Utility Functions**: Back navigation, URL checks, dynamic routing
-
-**Key Benefits:**
-- Type-safe navigation with compile-time route validation
-- Single source of truth for all application routes
-- Testable navigation logic
-- Consistent navigation patterns
-- Built-in analytics integration points
+- **User Actions**: Single entry point for all navigation
+- **Core Pages**: Home, Calendar, Messages, Documents, Profile, Settings, Notifications, Help
+- **Users Module**: List, View Detail, Create, Edit workflows
+- **Projects Module**: List, Create, Archived views
+- **Tasks Module**: My Tasks, Recent, Important filters
+- **Analytics Module**: Overview, Reports, Performance dashboards
+- **Type-safe Navigation**: Compile-time route checking
+- **Consistent Behavior**: Single source of truth for routing
 
 ---
 
