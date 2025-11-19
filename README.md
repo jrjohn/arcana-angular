@@ -14,7 +14,7 @@
 
 **Production-ready Angular application with Clean Architecture, Offline-First capabilities, and Enterprise Security**
 
-[Features](#features) • [Architecture](#architecture) • [Getting Started](#getting-started) • [Documentation](#documentation) • [Testing](#testing)
+[Screenshots](#screenshots) • [Architecture](#architecture-evaluation) • [Features](#features) • [Getting Started](#getting-started) • [Testing](#testing) • [Documentation](#documentation)
 
 </div>
 
@@ -22,6 +22,7 @@
 
 ## Table of Contents
 
+- [Screenshots](#screenshots)
 - [Architecture Evaluation](#architecture-evaluation)
 - [Features](#features)
 - [Architecture Overview](#architecture-overview)
@@ -35,6 +36,24 @@
 - [Build & Deployment](#build--deployment)
 - [Contributing](#contributing)
 - [License](#license)
+
+---
+
+## Screenshots
+
+### Home Page
+
+<div align="center">
+  <img src="docs/screen/Home.png" alt="Home Page" width="800" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+  <p><em>Clean and modern home page with responsive navigation</em></p>
+</div>
+
+### User Management
+
+<div align="center">
+  <img src="docs/screen/User Manager.png" alt="User Manager" width="800" style="max-width: 100%; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+  <p><em>User list with pagination, filtering, and CRUD operations</em></p>
+</div>
 
 ---
 
@@ -486,6 +505,9 @@ arcana-angular/
 │   │   ├── 01-overall-architecture.mmd
 │   │   ├── 02-clean-architecture-layers.mmd
 │   │   └── ...                    # 13 .mmd files total
+│   ├── screen/                    # Application screenshots
+│   │   ├── Home.png               # Home page screenshot
+│   │   └── User Manager.png       # User management screenshot
 │   ├── test-reports/              # Test coverage reports
 │   │   ├── COVERAGE-REPORT.md     # Detailed coverage analysis
 │   │   ├── TEST-IMPROVEMENT-SUMMARY.md
