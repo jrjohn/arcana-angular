@@ -18,7 +18,7 @@ All 12 architecture diagrams have been successfully generated from Mermaid sourc
 | 3 | 4-Layer Caching System | `docs/mermaid/03-caching-system.mmd` | `docs/diagrams/03-caching-system.png` | 59 KB | ✅ |
 | 4 | Data Flow & State Management | `docs/mermaid/04-data-flow.mmd` | `docs/diagrams/04-data-flow.png` | 43 KB | ✅ |
 | 5 | Security Architecture | `docs/mermaid/05-security-architecture.mmd` | `docs/diagrams/05-security-architecture.png` | 17 KB | ✅ |
-| 6 | Input/Output/Effect Pattern | `docs/mermaid/06-input-output-effect-pattern.mmd` | `docs/diagrams/06-input-output-effect-pattern.png` | 13 KB | ✅ |
+| 6 | Input/Output/Effect Pattern | `docs/mermaid/06-input-output-effect-pattern.mmd` | `docs/diagrams/06-input-output-effect-pattern.png` | 52 KB | ✅ |
 | **7** | **Navigation Flow (Split by Module)** | | | **207 KB** | ✅ |
 | 7a | ├─ Navigation Overview | `docs/mermaid/07a-navigation-overview.mmd` | `docs/diagrams/07a-navigation-overview.png` | 31 KB | ✅ |
 | 7b | ├─ Home & Core Pages | `docs/mermaid/07b-navigation-home-core.mmd` | `docs/diagrams/07b-navigation-home-core.png` | 32 KB | ✅ |
@@ -27,7 +27,7 @@ All 12 architecture diagrams have been successfully generated from Mermaid sourc
 | 7e | ├─ Tasks Module | `docs/mermaid/07e-navigation-tasks.mmd` | `docs/diagrams/07e-navigation-tasks.png` | 33 KB | ✅ |
 | 7f | └─ Analytics Module | `docs/mermaid/07f-navigation-analytics.mmd` | `docs/diagrams/07f-navigation-analytics.png` | 39 KB | ✅ |
 
-**Total Size**: 428 KB (12 diagrams: 6 core + 6 navigation modules)
+**Total Size**: 467 KB (12 diagrams: 6 core + 6 navigation modules)
 
 ---
 

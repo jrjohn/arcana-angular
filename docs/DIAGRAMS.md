@@ -13,7 +13,7 @@ All 12 architecture diagrams have been generated as PNG images and are available
 | Caching System | [03-caching-system.mmd](mermaid/03-caching-system.mmd) | [PNG](diagrams/03-caching-system.png) | 59 KB |
 | Data Flow | [04-data-flow.mmd](mermaid/04-data-flow.mmd) | [PNG](diagrams/04-data-flow.png) | 43 KB |
 | Security Architecture | [05-security-architecture.mmd](mermaid/05-security-architecture.mmd) | [PNG](diagrams/05-security-architecture.png) | 17 KB |
-| Input/Output/Effect Pattern | [06-input-output-effect-pattern.mmd](mermaid/06-input-output-effect-pattern.mmd) | [PNG](diagrams/06-input-output-effect-pattern.png) | 13 KB |
+| Input/Output/Effect Pattern | [06-input-output-effect-pattern.mmd](mermaid/06-input-output-effect-pattern.mmd) | [PNG](diagrams/06-input-output-effect-pattern.png) | 52 KB |
 | **Navigation Flow (Split by Module)** | | | **207 KB** |
 | ├─ Overview | [07a-navigation-overview.mmd](mermaid/07a-navigation-overview.mmd) | [PNG](diagrams/07a-navigation-overview.png) | 31 KB |
 | ├─ Home & Core | [07b-navigation-home-core.mmd](mermaid/07b-navigation-home-core.mmd) | [PNG](diagrams/07b-navigation-home-core.png) | 32 KB |
@@ -22,7 +22,7 @@ All 12 architecture diagrams have been generated as PNG images and are available
 | ├─ Tasks Module | [07e-navigation-tasks.mmd](mermaid/07e-navigation-tasks.mmd) | [PNG](diagrams/07e-navigation-tasks.png) | 33 KB |
 | └─ Analytics Module | [07f-navigation-analytics.mmd](mermaid/07f-navigation-analytics.mmd) | [PNG](diagrams/07f-navigation-analytics.png) | 39 KB |
 
-**Total Size**: 428 KB (12 diagrams)
+**Total Size**: 467 KB (12 diagrams)
 
 All diagrams are displayed in the main [README.md](../README.md) Architecture Overview section.
 

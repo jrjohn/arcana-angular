@@ -1,38 +1,28 @@
 graph TB
-    subgraph "Component (Dumb)"
+    subgraph Component
         TEMPLATE[Template<br/>HTML + Bindings]
-        OUTPUT[Event Emitters<br/>@Output]
-        INPUT[Input Properties<br/>@Input]
+        OUTPUT[Event Emitters<br/>Output]
+        INPUT[Input Properties<br/>Input]
 
         TEMPLATE -->|User Action| OUTPUT
         INPUT -->|Data Binding| TEMPLATE
     end
 
-    subgraph "ViewModel (Smart)"
-        direction TB
-
-        subgraph "INPUTS (Actions)"
-            ACTIONS[Methods exposed via input()<br/>User actions, lifecycle events]
-        end
-
-        subgraph "OUTPUTS (State)"
-            SIGNALS[WritableSignals<br/>firstName, lastName, etc.]
-            COMPUTED[Computed Signals<br/>isValid, fullName, etc.]
-            SIGNALS -.->|Auto-calculate| COMPUTED
-        end
-
-        subgraph "EFFECTS (Side Effects)"
-            SUBJECTS[RxJS Subjects<br/>submitSuccess$, navigateAway$]
-            SIDEEFFECTS[One-time actions<br/>Toast, Navigation, Analytics]
-            SUBJECTS -->|Subscribe| SIDEEFFECTS
-        end
+    subgraph ViewModel
+        ACTIONS[INPUTS<br/>Methods for actions]
+        SIGNALS[OUTPUTS<br/>WritableSignals]
+        COMPUTED[OUTPUTS<br/>Computed Signals]
+        SUBJECTS[EFFECTS<br/>RxJS Subjects]
+        SIDEEFFECTS[EFFECTS<br/>One-time actions]
 
         ACTIONS -->|Update| SIGNALS
+        SIGNALS -.->|Auto-calc| COMPUTED
         ACTIONS -->|Emit| SUBJECTS
+        SUBJECTS -->|Subscribe| SIDEEFFECTS
     end
 
-    subgraph "Domain Services"
-        SVC[UserService<br/>AuthService<br/>etc.]
+    subgraph Services
+        SVC[Domain Services<br/>UserService, etc.]
     end
 
     OUTPUT -->|Call| ACTIONS
