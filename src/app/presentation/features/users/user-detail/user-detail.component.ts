@@ -1,12 +1,10 @@
-import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-import { UserService } from '../../../../domain/services/user.service';
-import { User } from '../../../../domain/entities/user.model';
-import { AppError } from '../../../../domain/entities/app-error.model';
 import { LoadingSpinnerComponent } from '../../../shared/components/loading-spinner/loading-spinner.component';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
+import { UserDetailViewModel } from './user-detail.view-model';
 
 /**
  * User Detail Component
@@ -16,48 +14,28 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
   selector: 'app-user-detail',
   standalone: true,
   imports: [CommonModule, NgbAlertModule, LoadingSpinnerComponent, TranslatePipe],
+  providers: [UserDetailViewModel],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',
 })
 export class UserDetailComponent implements OnInit {
-  private userService = inject(UserService);
+  viewModel = inject(UserDetailViewModel);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
-  // State signals
-  private userSignal = signal<User | null>(null);
-  private isLoadingSignal = signal(false);
-  private errorSignal = signal<AppError | null>(null);
-
-  // Computed values
-  user = computed(() => this.userSignal());
-  isLoading = computed(() => this.isLoadingSignal());
-  hasError = computed(() => this.errorSignal() !== null);
-  errorMessage = computed(() => this.errorSignal()?.userMessage || '');
+  // Expose ViewModel computed values
+  user = this.viewModel.user;
+  isLoading = this.viewModel.isLoading;
+  hasError = this.viewModel.hasError;
+  errorMessage = this.viewModel.errorMessage;
 
   ngOnInit(): void {
     const userId = this.route.snapshot.paramMap.get('id');
     if (userId) {
-      this.loadUser(userId);
+      this.viewModel.loadUser(userId);
     } else {
       this.router.navigate(['/users']);
     }
-  }
-
-  private loadUser(userId: string): void {
-    this.isLoadingSignal.set(true);
-    this.errorSignal.set(null);
-
-    this.userService.getUser(userId).subscribe({
-      next: user => {
-        this.userSignal.set(user);
-        this.isLoadingSignal.set(false);
-      },
-      error: (error: AppError) => {
-        this.errorSignal.set(error);
-        this.isLoadingSignal.set(false);
-      },
-    });
   }
 
   onBack(): void {
@@ -65,7 +43,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   onEdit(): void {
-    const user = this.userSignal();
+    const user = this.viewModel.getUser();
     if (user) {
       this.router.navigate(['/users', user.id, 'edit']);
     }

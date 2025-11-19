@@ -4,7 +4,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { I18nService } from '../../../domain/services/i18n.service';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
-import { UserService } from '../../../domain/services/user.service';
+import { SidebarViewModel } from './sidebar.view-model';
 
 /**
  * Navigation menu item interface
@@ -28,6 +28,7 @@ interface MenuItem {
   selector: 'app-sidebar',
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive, NgbCollapseModule, TranslatePipe],
+  providers: [SidebarViewModel],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,13 +38,10 @@ export class SidebarComponent implements OnInit {
   @Input() mobileOpen = false;
 
   i18nService = inject(I18nService);
-  private userService = inject(UserService);
+  viewModel = inject(SidebarViewModel);
 
   // Track expanded menu items by stable ID
   expandedMenuId = signal<string | null>(null);
-
-  // Track total user count
-  userCount = signal<number>(0);
 
   // Mock user data
   currentUser = {
@@ -130,25 +128,13 @@ export class SidebarComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    // Fetch initial user count
-    this.loadUserCount();
-  }
-
-  private loadUserCount(): void {
-    this.userService.getUsers({ page: 1, pageSize: 1 }).subscribe({
-      next: response => {
-        this.userCount.set(response.total);
-      },
-      error: () => {
-        // Silently fail - user count is not critical
-        this.userCount.set(0);
-      },
-    });
+    // Fetch initial user count via ViewModel
+    this.viewModel.loadUserCount();
   }
 
   getUserBadge(item: MenuItem): string | undefined {
     if (item.id === 'users') {
-      const count = this.userCount();
+      const count = this.viewModel.getUserCount();
       return count > 0 ? count.toString() : undefined;
     }
     return item.badge;
