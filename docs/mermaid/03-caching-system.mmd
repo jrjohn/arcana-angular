@@ -1,0 +1,32 @@
+graph TD
+    START([Request Data]) --> MEM_CHECK{Memory Cache?}
+
+    MEM_CHECK -->|HIT| MEM_RETURN[Return from Memory<br/>⚡ ~1ms]
+    MEM_CHECK -->|MISS| LRU_CHECK{LRU Cache?}
+
+    LRU_CHECK -->|HIT| LRU_RETURN[Return from LRU<br/>⚡ ~2ms]
+    LRU_CHECK -->|MISS| IDB_CHECK{IndexedDB?}
+
+    IDB_CHECK -->|HIT| IDB_RETURN[Return from IndexedDB<br/>💾 ~10ms]
+    IDB_CHECK -->|MISS| API_CALL[API Request<br/>🌐 ~200ms]
+
+    API_CALL --> POPULATE[Populate All Caches<br/>Write-back Strategy]
+    POPULATE --> API_RETURN[Return Data]
+
+    MEM_RETURN --> END([Data Retrieved])
+    LRU_RETURN --> UPDATE_MEM[Update Memory Cache]
+    UPDATE_MEM --> END
+
+    IDB_RETURN --> UPDATE_LRU[Update LRU Cache]
+    UPDATE_LRU --> UPDATE_MEM2[Update Memory Cache]
+    UPDATE_MEM2 --> END
+
+    API_RETURN --> END
+
+    style START fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    style MEM_RETURN fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    style LRU_RETURN fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    style IDB_RETURN fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    style API_CALL fill:#ffccbc,stroke:#d84315,stroke-width:2px
+    style POPULATE fill:#e1bee7,stroke:#7b1fa2,stroke-width:2px
+    style END fill:#b2dfdb,stroke:#00796b,stroke-width:3px

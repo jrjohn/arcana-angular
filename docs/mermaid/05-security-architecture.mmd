@@ -1,0 +1,38 @@
+graph TD
+    subgraph "HTTP Request Flow"
+        REQ[HTTP Request] --> AUTH_INT[Auth Interceptor]
+        AUTH_INT -->|Add Bearer Token| HTTP_CALL[API Call]
+        HTTP_CALL --> RESPONSE{Response}
+        RESPONSE -->|200-299| SUCCESS[Success]
+        RESPONSE -->|401| LOGOUT[Auto Logout + Redirect]
+        RESPONSE -->|400-500| ERROR_INT[Error Interceptor]
+        ERROR_INT --> ANALYTICS[Track Error in Analytics]
+    end
+
+    subgraph "User Input Flow"
+        INPUT[User Input] --> SANITIZE[Sanitization Service]
+        SANITIZE -->|Remove XSS| CLEAN1[Clean Input]
+        CLEAN1 --> VALIDATE[Validation<br/>ViewModels]
+        VALIDATE --> FINAL_CHECK[Final Sanitization Check<br/>Defense in Depth]
+        FINAL_CHECK --> SUBMIT[Submit to API]
+    end
+
+    subgraph "Security Layers"
+        CSP[Content Security Policy<br/>CSP Headers]
+        HEADERS[Security Headers<br/>X-Frame-Options, X-XSS-Protection]
+        SANITIZATION[Input Sanitization<br/>HTML, URL, Email, Filename]
+        XSS_DETECT[XSS Pattern Detection<br/>Script tags, event handlers]
+    end
+
+    INPUT -.->|Protected by| CSP
+    INPUT -.->|Protected by| HEADERS
+    INPUT -.->|Protected by| SANITIZATION
+    INPUT -.->|Protected by| XSS_DETECT
+
+    classDef securityStyle fill:#ffccbc,stroke:#d84315,stroke-width:2px
+    classDef successStyle fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    classDef errorStyle fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+
+    class AUTH_INT,SANITIZE,CSP,HEADERS,SANITIZATION,XSS_DETECT securityStyle
+    class SUCCESS,CLEAN1,SUBMIT successStyle
+    class LOGOUT,ERROR_INT,ANALYTICS errorStyle

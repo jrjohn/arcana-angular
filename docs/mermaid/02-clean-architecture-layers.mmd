@@ -1,0 +1,47 @@
+graph LR
+    subgraph "External"
+        USER[User Interface]
+        BACKEND[Backend API]
+    end
+
+    subgraph "Presentation Layer"
+        direction TB
+        COMPONENT[Components]
+        VIEWMODEL[ViewModels]
+        COMPONENT -.->|Events| VIEWMODEL
+        VIEWMODEL -.->|State| COMPONENT
+    end
+
+    subgraph "Domain Layer"
+        direction TB
+        SERVICES[Domain Services]
+        ENTITIES[Entities & Models]
+        VALIDATORS[Validators]
+        SERVICES --> ENTITIES
+        SERVICES --> VALIDATORS
+    end
+
+    subgraph "Data Layer"
+        direction TB
+        REPOSITORIES[Repositories]
+        APISERVICE[API Service]
+        STORAGE[Storage<br/>IndexedDB, LRU Cache]
+        REPOSITORIES --> APISERVICE
+        REPOSITORIES --> STORAGE
+    end
+
+    USER -->|Interact| COMPONENT
+    VIEWMODEL -->|Use| SERVICES
+    SERVICES -->|Call| REPOSITORIES
+    APISERVICE -->|HTTP| BACKEND
+
+    classDef userStyle fill:#fff9c4,stroke:#f57f17,stroke-width:3px
+    classDef presentationStyle fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef domainStyle fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef dataStyle fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    classDef externalStyle fill:#ffebee,stroke:#c62828,stroke-width:2px
+
+    class USER,BACKEND externalStyle
+    class COMPONENT,VIEWMODEL presentationStyle
+    class SERVICES,ENTITIES,VALIDATORS domainStyle
+    class REPOSITORIES,APISERVICE,STORAGE dataStyle

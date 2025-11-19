@@ -1,0 +1,55 @@
+graph TB
+    subgraph "Component (Dumb)"
+        TEMPLATE[Template<br/>HTML + Bindings]
+        OUTPUT[Event Emitters<br/>@Output]
+        INPUT[Input Properties<br/>@Input]
+
+        TEMPLATE -->|User Action| OUTPUT
+        INPUT -->|Data Binding| TEMPLATE
+    end
+
+    subgraph "ViewModel (Smart)"
+        direction TB
+
+        subgraph "INPUTS (Actions)"
+            ACTIONS[Methods exposed via input()<br/>User actions, lifecycle events]
+        end
+
+        subgraph "OUTPUTS (State)"
+            SIGNALS[WritableSignals<br/>firstName, lastName, etc.]
+            COMPUTED[Computed Signals<br/>isValid, fullName, etc.]
+            SIGNALS -.->|Auto-calculate| COMPUTED
+        end
+
+        subgraph "EFFECTS (Side Effects)"
+            SUBJECTS[RxJS Subjects<br/>submitSuccess$, navigateAway$]
+            SIDEEFFECTS[One-time actions<br/>Toast, Navigation, Analytics]
+            SUBJECTS -->|Subscribe| SIDEEFFECTS
+        end
+
+        ACTIONS -->|Update| SIGNALS
+        ACTIONS -->|Emit| SUBJECTS
+    end
+
+    subgraph "Domain Services"
+        SVC[UserService<br/>AuthService<br/>etc.]
+    end
+
+    OUTPUT -->|Call| ACTIONS
+    COMPUTED -->|Subscribe| INPUT
+    SIDEEFFECTS -.->|Trigger| TEMPLATE
+
+    ACTIONS -->|Business Logic| SVC
+    SVC -.->|Return Data| SIGNALS
+
+    classDef componentStyle fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef inputStyle fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    classDef outputStyle fill:#c8e6c9,stroke:#388e3c,stroke-width:2px
+    classDef effectStyle fill:#e1bee7,stroke:#7b1fa2,stroke-width:2px
+    classDef serviceStyle fill:#ffccbc,stroke:#d84315,stroke-width:2px
+
+    class TEMPLATE,OUTPUT,INPUT componentStyle
+    class ACTIONS,SIDEEFFECTS inputStyle
+    class SIGNALS,COMPUTED outputStyle
+    class SUBJECTS effectStyle
+    class SVC serviceStyle

@@ -1,0 +1,45 @@
+sequenceDiagram
+    participant User
+    participant Component
+    participant ViewModel
+    participant Service
+    participant Repository
+    participant Cache
+    participant API
+
+    User->>Component: User Action (click, input)
+    Component->>ViewModel: Emit Event via @Output
+
+    activate ViewModel
+    Note over ViewModel: INPUT: Handle action<br/>Update signals
+    ViewModel->>Service: Call business logic
+    activate Service
+
+    Service->>Repository: Request data
+    activate Repository
+
+    Repository->>Cache: Check cache (Memory/LRU/IndexedDB)
+    alt Cache Hit
+        Cache-->>Repository: Return cached data
+    else Cache Miss
+        Repository->>API: HTTP Request
+        API-->>Repository: API Response (DTO)
+        Repository->>Cache: Populate caches
+    end
+
+    Repository-->>Service: Return domain model
+    deactivate Repository
+
+    Service-->>ViewModel: Return processed data
+    deactivate Service
+
+    Note over ViewModel: OUTPUT: Update signals<br/>Trigger computed values
+    ViewModel->>Component: Signal changes detected
+    deactivate ViewModel
+
+    Note over Component: OnPush change detection<br/>Re-render template
+    Component->>User: Display updated UI
+
+    Note over ViewModel: EFFECT: One-time side effects<br/>(navigation, toast, etc.)
+    ViewModel-->>Component: Effect triggered
+    Component-->>User: Show effect (toast, redirect)

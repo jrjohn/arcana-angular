@@ -1,0 +1,34 @@
+graph TB
+    subgraph "PRESENTATION LAYER"
+        COMP[Components<br/>Templates, Styles, OnPush]
+        VM[ViewModels<br/>Input/Output/Effect Pattern<br/>Angular Signals]
+        COMP -->|User Events| VM
+        VM -->|State Updates| COMP
+    end
+
+    subgraph "DOMAIN LAYER"
+        SVC[Services<br/>Business Logic, Validation<br/>NavGraph, Translation]
+        ENT[Entities<br/>User, AppError<br/>Value Objects]
+        SVC --> ENT
+    end
+
+    subgraph "DATA LAYER"
+        REPO[Repositories<br/>4-Layer Cache<br/>CRUD Operations]
+        API[API Service<br/>HTTP Client<br/>Interceptors]
+        DTO[DTOs & Mappers<br/>API Contracts<br/>snake_case ↔ camelCase]
+
+        REPO --> API
+        API --> DTO
+        DTO -.->|Transform| ENT
+    end
+
+    VM --> SVC
+    SVC --> REPO
+
+    classDef presentationStyle fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef domainStyle fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef dataStyle fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+
+    class COMP,VM presentationStyle
+    class SVC,ENT domainStyle
+    class REPO,API,DTO dataStyle
