@@ -468,6 +468,38 @@ arcana-angular/
 │   ├── styles.scss                # Global styles
 │   └── index.html                 # Entry point with CSP headers
 │
+├── docs/                          # Documentation
+│   ├── diagrams/                  # Generated PNG diagrams (4.3 MB, high-res)
+│   │   ├── 01-overall-architecture.png
+│   │   ├── 02-clean-architecture-layers.png
+│   │   ├── 03-caching-system.png
+│   │   ├── 04-data-flow.png
+│   │   ├── 05-security-architecture.png
+│   │   ├── 06-input-output-effect-pattern.png
+│   │   └── 07*-navigation-*.png   # 7 navigation diagrams
+│   ├── mermaid/                   # Mermaid diagram source files
+│   │   ├── 01-overall-architecture.mmd
+│   │   ├── 02-clean-architecture-layers.mmd
+│   │   └── ...                    # 13 .mmd files total
+│   ├── test-reports/              # Test coverage reports
+│   │   ├── COVERAGE-REPORT.md     # Detailed coverage analysis
+│   │   ├── TEST-IMPROVEMENT-SUMMARY.md
+│   │   └── README.md
+│   ├── compodoc/                  # API documentation (generated)
+│   ├── DIAGRAMS.md                # Diagram generation guide
+│   ├── DIAGRAMS-GENERATED.md      # Diagram generation report
+│   ├── NG-BOOTSTRAP.md            # ng-bootstrap usage guide
+│   ├── TEST-REPORT.md             # Test statistics and analysis
+│   ├── UDF-PATTERN-VERIFICATION.md # UDF compliance verification
+│   ├── README.md                  # Documentation index
+│   ├── generate-diagrams-large.sh # High-res diagram generator
+│   ├── generate-diagrams.sh       # Standard diagram generator
+│   └── generate-diagrams-online.sh # Online diagram generator
+│
+├── e2e/                           # End-to-end tests (Playwright)
+│   ├── tests/                     # E2E test specs (22 tests)
+│   └── README.md                  # E2E testing guide
+│
 ├── proxy.conf.json                # Development proxy config
 ├── tsconfig.json                  # TypeScript configuration (strict mode)
 ├── angular.json                   # Angular CLI configuration
