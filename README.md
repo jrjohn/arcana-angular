@@ -260,24 +260,63 @@ Security is implemented through multiple layers:
 
 ### Navigation Flow (NavGraph Pattern)
 
+**Route Collection**:
+- **Home & Core**: `/home`, `/calendar`, `/messages`, `/documents`, `/profile`, `/settings`, `/notifications`, `/help`
+- **Users Module**: `/users`, `/users/:id`, `/users/new`, `/users/:id/edit`
+- **Projects Module**: `/projects`, `/projects/new`, `/projects/archived`
+- **Tasks Module**: `/tasks/my`, `/tasks/recent`, `/tasks/important`
+- **Analytics Module**: `/analytics/overview`, `/analytics/reports`, `/analytics/performance`
+
 ![Navigation Flow](docs/diagrams/07-navigation-flow.png)
 
-The application uses a centralized **NavGraphService** for type-safe navigation:
+The application uses a centralized **NavGraphService** for type-safe navigation with the following flow:
 
-**Core Modules**:
-- **User Actions**: Single entry point for all navigation requests
-- **Core Pages**: Home, Calendar, Messages, Documents, Profile, Settings, Notifications, Help
-- **Users Module**: List, View Detail, Create, Edit operations
-- **Projects Module**: List, Create, Archived views
-- **Tasks Module**: My Tasks, Recent Tasks, Important Tasks filters
-- **Analytics Module**: Overview, Reports, Performance dashboards
+**Navigation Flow by Module**:
+
+1. **Entry Point** → User initiates navigation request
+2. **Home & Core Pages**:
+   - `/home` → Dashboard
+   - `/calendar` → Calendar View
+   - `/messages` → Messages
+   - `/documents` → Documents
+   - `/profile` → User Profile
+   - `/settings` → Settings
+   - `/notifications` → Notifications
+   - `/help` → Help Center
+
+3. **Users Module Flow**:
+   - `/users` → User List → Select Action:
+     - View Details → `/users/:id`
+     - Create New → `/users/new`
+     - Edit User → `/users/:id/edit`
+
+4. **Projects Module Flow**:
+   - Select View:
+     - View List → `/projects`
+     - Create New → `/projects/new`
+     - View Archived → `/projects/archived`
+
+5. **Tasks Module Flow**:
+   - Select Filter:
+     - My Tasks → `/tasks/my`
+     - Recent → `/tasks/recent`
+     - Important → `/tasks/important`
+
+6. **Analytics Module Flow**:
+   - Select Report:
+     - Overview → `/analytics/overview`
+     - Reports → `/analytics/reports`
+     - Performance → `/analytics/performance`
+
+7. **Navigation Complete** → Router Updates URL → Component Loaded → Page Displayed
 
 **Benefits**:
 - Type-safe navigation with compile-time checks
 - Single source of truth for all routes
 - Easy to test navigation logic
-- Consistent navigation behavior
+- Consistent navigation behavior across modules
 - Built-in analytics/logging support
+- Clear route path organization
 
 For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
