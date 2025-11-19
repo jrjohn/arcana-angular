@@ -2,6 +2,21 @@
 
 This directory contains Mermaid diagram source files for the project's architecture documentation.
 
+## ✅ Generated Diagrams
+
+All 6 architecture diagrams have been generated as PNG images and are available in `docs/diagrams/`:
+
+| Diagram | Source | Image | Size |
+|---------|--------|-------|------|
+| Overall Architecture | [01-overall-architecture.mmd](mermaid/01-overall-architecture.mmd) | [PNG](diagrams/01-overall-architecture.png) | 70 KB |
+| Clean Architecture Layers | [02-clean-architecture-layers.mmd](mermaid/02-clean-architecture-layers.mmd) | [PNG](diagrams/02-clean-architecture-layers.png) | 19 KB |
+| Caching System | [03-caching-system.mmd](mermaid/03-caching-system.mmd) | [PNG](diagrams/03-caching-system.png) | 59 KB |
+| Data Flow | [04-data-flow.mmd](mermaid/04-data-flow.mmd) | [PNG](diagrams/04-data-flow.png) | 43 KB |
+| Security Architecture | [05-security-architecture.mmd](mermaid/05-security-architecture.mmd) | [PNG](diagrams/05-security-architecture.png) | 17 KB |
+| Input/Output/Effect Pattern | [06-input-output-effect-pattern.mmd](mermaid/06-input-output-effect-pattern.mmd) | [PNG](diagrams/06-input-output-effect-pattern.png) | 13 KB |
+
+All diagrams are displayed in the main [README.md](../README.md) Architecture Overview section.
+
 ## Available Diagrams
 
 ### 01. Overall Architecture
