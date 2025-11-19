@@ -1,0 +1,384 @@
+
+> arcana-angular@0.0.0 test:coverage
+> ng test --code-coverage --watch=false --browsers=ChromeHeadless
+
+❯ Building...
+✔ Building...
+Initial chunk files                                                            | Names                                                                       |  Raw size
+chunk-SBQIEGMI.js                                                              | -                                                                           |   2.29 MB | 
+chunk-5LXTBJTH.js                                                              | -                                                                           |   1.20 MB | 
+polyfills.js                                                                   | polyfills                                                                   |   1.03 MB | 
+chunk-RWI74D6Q.js                                                              | -                                                                           | 307.14 kB | 
+spec-app-data-interceptors-error.interceptor.spec.js                           | spec-app-data-interceptors-error.interceptor.spec                           | 289.11 kB | 
+styles.css                                                                     | styles                                                                      | 273.21 kB | 
+chunk-URVJ3KYO.js                                                              | -                                                                           | 240.37 kB | 
+chunk-4HGEZ3E4.js                                                              | -                                                                           | 230.94 kB | 
+spec-app-presentation-features-users-user-detail-user-detail.component.spec.js | spec-app-presentation-features-users-user-detail-user-detail.component.spec | 126.03 kB | 
+chunk-3CHGV5PB.js                                                              | -                                                                           |  96.55 kB | 
+spec-app-presentation-layout-sidebar-sidebar.component.spec.js                 | spec-app-presentation-layout-sidebar-sidebar.component.spec                 |  75.01 kB | 
+jasmine-cleanup-1.js                                                           | jasmine-cleanup-1                                                           |  67.20 kB | 
+spec-app-domain-services-sanitization.service.spec.js                          | spec-app-domain-services-sanitization.service.spec                          |  65.53 kB | 
+chunk-WF7NTGM6.js                                                              | -                                                                           |  37.46 kB | 
+chunk-SXVYE52K.js                                                              | -                                                                           |  25.20 kB | 
+chunk-27G2AV5U.js                                                              | -                                                                           |  22.55 kB | 
+chunk-HDJDMSTM.js                                                              | -                                                                           |  20.46 kB | 
+chunk-S6UQA4PX.js                                                              | -                                                                           |  17.29 kB | 
+spec-app-data-interceptors-auth.interceptor.spec.js                            | spec-app-data-interceptors-auth.interceptor.spec                            |  13.06 kB | 
+chunk-PO5TTJZ7.js                                                              | -                                                                           |  12.24 kB | 
+spec-app-domain-services-error-handler.service.spec.js                         | spec-app-domain-services-error-handler.service.spec                         |  12.02 kB | 
+spec-app-domain-guards-auth.guard.spec.js                                      | spec-app-domain-guards-auth.guard.spec                                      |  11.07 kB | 
+spec-app-domain-models-app-error.spec.js                                       | spec-app-domain-models-app-error.spec                                       |  10.96 kB | 
+spec-app-domain-services-auth.service.spec.js                                  | spec-app-domain-services-auth.service.spec                                  |   9.28 kB | 
+test_main.js                                                                   | test_main                                                                   |   4.35 kB | 
+spec-app-app.spec.js                                                           | spec-app-app.spec                                                           |   3.95 kB | 
+chunk-HBW54YOI.js                                                              | -                                                                           |   3.02 kB | 
+jasmine-cleanup-0.js                                                           | jasmine-cleanup-0                                                           | 519 bytes | 
+
+                                                                               | Initial total                                                               |   6.50 MB
+
+Application bundle generation complete. [1.260 seconds] - 2025-11-19T07:05:48.338Z
+
+19 11 2025 15:05:48.401:INFO [karma-server]: Karma v6.4.4 server started at http://localhost:9876/
+19 11 2025 15:05:48.401:INFO [launcher]: Launching browsers ChromeHeadless with concurrency unlimited
+19 11 2025 15:05:48.403:INFO [launcher]: Starting browser ChromeHeadless
+19 11 2025 15:05:49.163:INFO [Chrome Headless 142.0.0.0 (Mac OS 10.15.7)]: Connected on socket 4ErAb-1wmqLhuwHTAAAB with id 4583217
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 0 of 254 SUCCESS (0 secs / 0 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 1 of 254 SUCCESS (0 secs / 0.001 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 2 of 254 SUCCESS (0 secs / 0.001 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 3 of 254 SUCCESS (0 secs / 1.009 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 4 of 254 SUCCESS (0 secs / 2.014 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 5 of 254 SUCCESS (0 secs / 3.018 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 6 of 254 SUCCESS (0 secs / 4.023 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 7 of 254 SUCCESS (0 secs / 5.027 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 8 of 254 SUCCESS (0 secs / 6.032 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 9 of 254 SUCCESS (0 secs / 6.035 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 10 of 254 SUCCESS (0 secs / 8.042 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 11 of 254 SUCCESS (0 secs / 9.047 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 12 of 254 SUCCESS (0 secs / 10.052 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 13 of 254 SUCCESS (0 secs / 11.056 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 14 of 254 SUCCESS (0 secs / 11.058 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 15 of 254 SUCCESS (0 secs / 11.059 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 16 of 254 SUCCESS (0 secs / 11.061 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 17 of 254 SUCCESS (0 secs / 11.062 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 18 of 254 SUCCESS (0 secs / 12.065 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 19 of 254 SUCCESS (0 secs / 13.068 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 20 of 254 SUCCESS (0 secs / 14.073 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 21 of 254 SUCCESS (0 secs / 15.076 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 22 of 254 SUCCESS (0 secs / 16.078 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 23 of 254 SUCCESS (0 secs / 16.081 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 24 of 254 SUCCESS (0 secs / 18.088 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 25 of 254 SUCCESS (0 secs / 19.092 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 26 of 254 SUCCESS (0 secs / 19.094 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 27 of 254 SUCCESS (0 secs / 19.095 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 28 of 254 SUCCESS (0 secs / 19.096 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 29 of 254 SUCCESS (0 secs / 19.097 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 30 of 254 SUCCESS (0 secs / 19.1 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 31 of 254 SUCCESS (0 secs / 19.101 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 32 of 254 SUCCESS (0 secs / 19.102 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 33 of 254 SUCCESS (0 secs / 19.103 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 34 of 254 SUCCESS (0 secs / 19.105 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 35 of 254 SUCCESS (0 secs / 19.106 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 36 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 37 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 38 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 39 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 40 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 41 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 42 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 43 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 44 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 45 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 46 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 47 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 48 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 49 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 50 of 254 SUCCESS (0 secs / 19.107 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 51 of 254 SUCCESS (0 secs / 19.108 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 52 of 254 SUCCESS (0 secs / 19.108 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 53 of 254 SUCCESS (0 secs / 19.108 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 54 of 254 SUCCESS (0 secs / 19.108 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 55 of 254 SUCCESS (0 secs / 19.108 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 56 of 254 SUCCESS (0 secs / 19.108 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 57 of 254 SUCCESS (0 secs / 19.108 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 58 of 254 SUCCESS (0 secs / 19.11 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 59 of 254 SUCCESS (0 secs / 19.11 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 60 of 254 SUCCESS (0 secs / 19.11 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 61 of 254 SUCCESS (0 secs / 19.11 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 62 of 254 SUCCESS (0 secs / 19.111 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 63 of 254 SUCCESS (0 secs / 19.111 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 64 of 254 SUCCESS (0 secs / 19.111 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 65 of 254 SUCCESS (0 secs / 19.111 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 66 of 254 SUCCESS (0 secs / 19.112 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 67 of 254 SUCCESS (0 secs / 19.112 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 68 of 254 SUCCESS (0 secs / 19.112 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 69 of 254 SUCCESS (0 secs / 19.112 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 70 of 254 SUCCESS (0 secs / 19.112 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 71 of 254 SUCCESS (0 secs / 19.112 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 72 of 254 SUCCESS (0 secs / 19.112 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 73 of 254 SUCCESS (0 secs / 19.112 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 74 of 254 SUCCESS (0 secs / 19.112 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 75 of 254 SUCCESS (0 secs / 19.112 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 76 of 254 SUCCESS (0 secs / 19.113 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 77 of 254 SUCCESS (0 secs / 19.113 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 78 of 254 SUCCESS (0 secs / 19.113 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 79 of 254 SUCCESS (0 secs / 19.113 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 80 of 254 SUCCESS (0 secs / 19.113 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 81 of 254 SUCCESS (0 secs / 19.114 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 82 of 254 SUCCESS (0 secs / 19.115 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 83 of 254 SUCCESS (0 secs / 19.116 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 84 of 254 SUCCESS (0 secs / 19.116 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 85 of 254 SUCCESS (0 secs / 19.116 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 86 of 254 SUCCESS (0 secs / 19.117 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 87 of 254 SUCCESS (0 secs / 19.117 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 88 of 254 SUCCESS (0 secs / 19.118 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 89 of 254 SUCCESS (0 secs / 19.118 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 90 of 254 SUCCESS (0 secs / 19.118 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 91 of 254 SUCCESS (0 secs / 19.119 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 92 of 254 SUCCESS (0 secs / 19.141 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 93 of 254 SUCCESS (0 secs / 19.147 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 94 of 254 SUCCESS (0 secs / 19.153 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 95 of 254 SUCCESS (0 secs / 19.159 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 96 of 254 SUCCESS (0 secs / 19.163 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 97 of 254 SUCCESS (0 secs / 19.167 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 98 of 254 SUCCESS (0 secs / 19.172 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 99 of 254 SUCCESS (0 secs / 19.176 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 100 of 254 SUCCESS (0 secs / 19.181 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 101 of 254 SUCCESS (0 secs / 19.187 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 102 of 254 SUCCESS (0 secs / 19.191 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 103 of 254 SUCCESS (0 secs / 19.194 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 104 of 254 SUCCESS (0 secs / 19.205 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 105 of 254 SUCCESS (0 secs / 19.211 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 106 of 254 SUCCESS (0 secs / 19.216 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 107 of 254 SUCCESS (0 secs / 19.219 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 108 of 254 SUCCESS (0 secs / 19.223 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 109 of 254 SUCCESS (0 secs / 19.228 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 110 of 254 SUCCESS (0 secs / 19.232 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 111 of 254 SUCCESS (0 secs / 19.236 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 112 of 254 SUCCESS (0 secs / 19.24 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 113 of 254 SUCCESS (0 secs / 19.244 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 114 of 254 SUCCESS (0 secs / 19.248 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 115 of 254 SUCCESS (0 secs / 19.252 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 116 of 254 SUCCESS (0 secs / 19.256 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 117 of 254 SUCCESS (0 secs / 19.26 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 118 of 254 SUCCESS (0 secs / 19.264 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 119 of 254 SUCCESS (0 secs / 19.267 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 120 of 254 SUCCESS (0 secs / 19.271 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 121 of 254 SUCCESS (0 secs / 19.274 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 122 of 254 SUCCESS (0 secs / 19.279 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 123 of 254 SUCCESS (0 secs / 19.284 secs)
+[1A[2KERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 401, statusText: 'Unauthorized', url: '/api/users', message: 'Http failure response for /api/users: 401 Unauthorized'}
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 123 of 254 SUCCESS (0 secs / 19.284 secs)
+ERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 401, statusText: 'Unauthorized', url: '/api/users', message: 'Http failure response for /api/users: 401 Unauthorized'}
+[1A[2KWARN: '[ErrorInterceptor] Unauthorized request - logging out'
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 123 of 254 SUCCESS (0 secs / 19.284 secs)
+WARN: '[ErrorInterceptor] Unauthorized request - logging out'
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 124 of 254 SUCCESS (0 secs / 19.285 secs)
+[1A[2KERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 400, statusText: 'Bad Request', url: '/api/users', message: 'Http failure response for /api/users: 400 Bad Request'}
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 124 of 254 SUCCESS (0 secs / 19.285 secs)
+ERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 400, statusText: 'Bad Request', url: '/api/users', message: 'Http failure response for /api/users: 400 Bad Request'}
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 125 of 254 SUCCESS (0 secs / 19.285 secs)
+[1A[2KERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 404, statusText: 'Not Found', url: '/api/users/999', message: 'Http failure response for /api/users/999: 404 Not Found'}
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 125 of 254 SUCCESS (0 secs / 19.285 secs)
+ERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 404, statusText: 'Not Found', url: '/api/users/999', message: 'Http failure response for /api/users/999: 404 Not Found'}
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 126 of 254 SUCCESS (0 secs / 19.286 secs)
+[1A[2KERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 502, statusText: 'Bad Gateway', url: '/api/users', message: 'Http failure response for /api/users: 502 Bad Gateway'}
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 126 of 254 SUCCESS (0 secs / 19.286 secs)
+ERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 502, statusText: 'Bad Gateway', url: '/api/users', message: 'Http failure response for /api/users: 502 Bad Gateway'}
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 127 of 254 SUCCESS (0 secs / 19.286 secs)
+[1A[2KERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 403, statusText: 'Forbidden', url: '/api/users', message: 'Http failure response for /api/users: 403 Forbidden'}
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 127 of 254 SUCCESS (0 secs / 19.286 secs)
+ERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 403, statusText: 'Forbidden', url: '/api/users', message: 'Http failure response for /api/users: 403 Forbidden'}
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 128 of 254 SUCCESS (0 secs / 19.286 secs)
+[1A[2KERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 0, statusText: 'Unknown Error', url: '/api/users', message: 'Http failure response for /api/users: 0 '}
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 128 of 254 SUCCESS (0 secs / 19.286 secs)
+ERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 0, statusText: 'Unknown Error', url: '/api/users', message: 'Http failure response for /api/users: 0 '}
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 129 of 254 SUCCESS (0 secs / 19.287 secs)
+[1A[2KERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 500, statusText: 'Internal Server Error', url: '/api/users', message: 'Http failure response for /api/users: 500 Internal Server Error'}
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 129 of 254 SUCCESS (0 secs / 19.287 secs)
+ERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 500, statusText: 'Internal Server Error', url: '/api/users', message: 'Http failure response for /api/users: 500 Internal Server Error'}
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 130 of 254 SUCCESS (0 secs / 19.287 secs)
+[1A[2KERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 404, statusText: 'Not Found', url: '/api/users', message: 'Http failure response for /api/users: 404 Not Found'}
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 130 of 254 SUCCESS (0 secs / 19.287 secs)
+ERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 404, statusText: 'Not Found', url: '/api/users', message: 'Http failure response for /api/users: 404 Not Found'}
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 131 of 254 SUCCESS (0 secs / 19.287 secs)
+[1A[2KERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 418, statusText: 'I'm a teapot', url: '/api/users', message: 'Http failure response for /api/users: 418 I'm a teapot'}
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 131 of 254 SUCCESS (0 secs / 19.287 secs)
+ERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 418, statusText: 'I'm a teapot', url: '/api/users', message: 'Http failure response for /api/users: 418 I'm a teapot'}
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 132 of 254 SUCCESS (0 secs / 19.288 secs)
+[1A[2KERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 503, statusText: 'Service Unavailable', url: '/api/users', message: 'Http failure response for /api/users: 503 Service Unavailable'}
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 132 of 254 SUCCESS (0 secs / 19.288 secs)
+ERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 503, statusText: 'Service Unavailable', url: '/api/users', message: 'Http failure response for /api/users: 503 Service Unavailable'}
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 133 of 254 SUCCESS (0 secs / 19.288 secs)
+[1A[2KERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 404, statusText: 'Not Found', url: '/api/users', message: 'Http failure response for /api/users: 404 Not Found'}
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 133 of 254 SUCCESS (0 secs / 19.288 secs)
+ERROR: '[ErrorInterceptor] HTTP Error:', Object{status: 404, statusText: 'Not Found', url: '/api/users', message: 'Http failure response for /api/users: 404 Not Found'}
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 134 of 254 SUCCESS (0 secs / 19.288 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 135 of 254 SUCCESS (0 secs / 19.289 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 136 of 254 SUCCESS (0 secs / 19.29 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 137 of 254 SUCCESS (0 secs / 19.29 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 138 of 254 SUCCESS (0 secs / 19.291 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 139 of 254 SUCCESS (0 secs / 19.291 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 140 of 254 SUCCESS (0 secs / 19.291 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 141 of 254 SUCCESS (0 secs / 19.291 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 142 of 254 SUCCESS (0 secs / 19.292 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 143 of 254 SUCCESS (0 secs / 19.292 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 144 of 254 SUCCESS (0 secs / 19.292 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 145 of 254 SUCCESS (0 secs / 19.292 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 146 of 254 SUCCESS (0 secs / 19.293 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 147 of 254 SUCCESS (0 secs / 19.293 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 148 of 254 SUCCESS (0 secs / 19.293 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 149 of 254 SUCCESS (0 secs / 19.293 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 150 of 254 SUCCESS (0 secs / 19.294 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 151 of 254 SUCCESS (0 secs / 19.294 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 152 of 254 SUCCESS (0 secs / 19.294 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 153 of 254 SUCCESS (0 secs / 19.294 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 154 of 254 SUCCESS (0 secs / 19.294 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 155 of 254 SUCCESS (0 secs / 19.295 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 156 of 254 SUCCESS (0 secs / 19.295 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 157 of 254 SUCCESS (0 secs / 19.295 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 158 of 254 SUCCESS (0 secs / 19.295 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 159 of 254 SUCCESS (0 secs / 19.295 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 160 of 254 SUCCESS (0 secs / 19.295 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 161 of 254 SUCCESS (0 secs / 19.296 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 162 of 254 SUCCESS (0 secs / 19.296 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 163 of 254 SUCCESS (0 secs / 19.296 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 164 of 254 SUCCESS (0 secs / 19.296 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 165 of 254 SUCCESS (0 secs / 19.297 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 166 of 254 SUCCESS (0 secs / 19.297 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 167 of 254 SUCCESS (0 secs / 19.297 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 168 of 254 SUCCESS (0 secs / 19.297 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 169 of 254 SUCCESS (0 secs / 19.298 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 170 of 254 SUCCESS (0 secs / 19.298 secs)
+[1A[2KWARN: 'WARNING: sanitizing HTML stripped some content, see https://angular.dev/best-practices/security#preventing-cross-site-scripting-xss'
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 170 of 254 SUCCESS (0 secs / 19.298 secs)
+WARN: 'WARNING: sanitizing HTML stripped some content, see https://angular.dev/best-practices/security#preventing-cross-site-scripting-xss'
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 171 of 254 SUCCESS (0 secs / 19.299 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 172 of 254 SUCCESS (0 secs / 19.299 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 173 of 254 SUCCESS (0 secs / 19.3 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 174 of 254 SUCCESS (0 secs / 19.3 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 175 of 254 SUCCESS (0 secs / 19.3 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 176 of 254 SUCCESS (0 secs / 19.3 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 177 of 254 SUCCESS (0 secs / 19.3 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 178 of 254 SUCCESS (0 secs / 19.301 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 179 of 254 SUCCESS (0 secs / 19.301 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 180 of 254 SUCCESS (0 secs / 19.301 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 181 of 254 SUCCESS (0 secs / 19.301 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 182 of 254 SUCCESS (0 secs / 19.302 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7) SanitizationService sanitizeFilename should remove path traversal attempts FAILED
+	Expected 'etcpasswd' to be 'passwd'.
+	    at <Jasmine>
+	    at UserContext.<anonymous> (src/app/domain/services/sanitization.service.spec.ts:142:22)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:398:28)
+	    at _ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:397:34)
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 183 of 254 (1 FAILED) (0 secs / 19.302 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 184 of 254 (1 FAILED) (0 secs / 19.303 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 185 of 254 (1 FAILED) (0 secs / 19.303 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 186 of 254 (1 FAILED) (0 secs / 19.303 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 187 of 254 (1 FAILED) (0 secs / 19.303 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 188 of 254 (1 FAILED) (0 secs / 19.303 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 189 of 254 (1 FAILED) (0 secs / 19.304 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 190 of 254 (1 FAILED) (0 secs / 19.304 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 191 of 254 (1 FAILED) (0 secs / 19.304 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 192 of 254 (1 FAILED) (0 secs / 19.304 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 193 of 254 (1 FAILED) (0 secs / 19.304 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 194 of 254 (1 FAILED) (0 secs / 19.305 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 195 of 254 (1 FAILED) (0 secs / 19.305 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 196 of 254 (1 FAILED) (0 secs / 19.305 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 197 of 254 (1 FAILED) (0 secs / 19.306 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 198 of 254 (1 FAILED) (0 secs / 19.306 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 199 of 254 (1 FAILED) (0 secs / 19.306 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 200 of 254 (1 FAILED) (0 secs / 19.306 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 201 of 254 (1 FAILED) (0 secs / 19.306 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 202 of 254 (1 FAILED) (0 secs / 19.306 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 203 of 254 (1 FAILED) (0 secs / 19.306 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 204 of 254 (1 FAILED) (0 secs / 19.306 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 205 of 254 (1 FAILED) (0 secs / 19.306 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 206 of 254 (1 FAILED) (0 secs / 19.306 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 207 of 254 (1 FAILED) (0 secs / 19.307 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 208 of 254 (1 FAILED) (0 secs / 19.307 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 209 of 254 (1 FAILED) (0 secs / 19.307 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 210 of 254 (1 FAILED) (0 secs / 19.307 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 211 of 254 (1 FAILED) (0 secs / 19.307 secs)
+[1A[2KWARN: 'WARNING: sanitizing unsafe URL value javascript:alert("XSS") (see https://angular.dev/best-practices/security#preventing-cross-site-scripting-xss)'
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 211 of 254 (1 FAILED) (0 secs / 19.307 secs)
+WARN: 'WARNING: sanitizing unsafe URL value javascript:alert("XSS") (see https://angular.dev/best-practices/security#preventing-cross-site-scripting-xss)'
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 212 of 254 (1 FAILED) (0 secs / 19.308 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 213 of 254 (1 FAILED) (0 secs / 19.308 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 214 of 254 (1 FAILED) (0 secs / 19.308 secs)
+[1A[2KWARN: 'WARNING: sanitizing HTML stripped some content, see https://angular.dev/best-practices/security#preventing-cross-site-scripting-xss'
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 214 of 254 (1 FAILED) (0 secs / 19.308 secs)
+WARN: 'WARNING: sanitizing HTML stripped some content, see https://angular.dev/best-practices/security#preventing-cross-site-scripting-xss'
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 215 of 254 (1 FAILED) (0 secs / 19.308 secs)
+[1A[2KWARN: 'WARNING: sanitizing HTML stripped some content, see https://angular.dev/best-practices/security#preventing-cross-site-scripting-xss'
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 215 of 254 (1 FAILED) (0 secs / 19.308 secs)
+WARN: 'WARNING: sanitizing HTML stripped some content, see https://angular.dev/best-practices/security#preventing-cross-site-scripting-xss'
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 216 of 254 (1 FAILED) (0 secs / 19.309 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 217 of 254 (1 FAILED) (0 secs / 19.309 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 218 of 254 (1 FAILED) (0 secs / 19.309 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7) SanitizationService sanitizeText should remove all HTML tags FAILED
+	Expected 'alert(&quot;XSS&quot;)Hello World' to be 'Hello World'.
+	    at <Jasmine>
+	    at UserContext.<anonymous> (src/app/domain/services/sanitization.service.spec.ts:50:22)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:398:28)
+	    at _ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:397:34)
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 219 of 254 (2 FAILED) (0 secs / 19.309 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7) SanitizationService sanitizeText should escape special HTML characters FAILED
+	Expected 'Test &amp;  &quot; &#x27; &#x2F;' to contain '&lt;'.
+	    at <Jasmine>
+	    at UserContext.<anonymous> (src/app/domain/services/sanitization.service.spec.ts:57:22)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:398:28)
+	    at _ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:397:34)
+	Expected 'Test &amp;  &quot; &#x27; &#x2F;' to contain '&gt;'.
+	    at <Jasmine>
+	    at UserContext.<anonymous> (src/app/domain/services/sanitization.service.spec.ts:58:22)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:398:28)
+	    at _ProxyZoneSpec.onInvoke (node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+	    at _ZoneDelegate.invoke (node_modules/zone.js/fesm2015/zone.js:397:34)
+Chrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 220 of 254 (3 FAILED) (0 secs / 19.31 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 221 of 254 (3 FAILED) (0 secs / 19.31 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 222 of 254 (3 FAILED) (0 secs / 19.322 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 223 of 254 (3 FAILED) (0 secs / 19.327 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 224 of 254 (3 FAILED) (0 secs / 19.331 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 225 of 254 (3 FAILED) (0 secs / 19.335 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 226 of 254 (3 FAILED) (0 secs / 19.342 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 227 of 254 (3 FAILED) (0 secs / 19.35 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 228 of 254 (3 FAILED) (0 secs / 19.355 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 229 of 254 (3 FAILED) (0 secs / 19.359 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 230 of 254 (3 FAILED) (0 secs / 19.363 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 231 of 254 (3 FAILED) (0 secs / 19.367 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 232 of 254 (3 FAILED) (0 secs / 19.371 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 233 of 254 (3 FAILED) (0 secs / 19.376 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 234 of 254 (3 FAILED) (0 secs / 19.38 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 235 of 254 (3 FAILED) (0 secs / 19.384 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 236 of 254 (3 FAILED) (0 secs / 19.388 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 237 of 254 (3 FAILED) (0 secs / 19.392 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 238 of 254 (3 FAILED) (0 secs / 19.396 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 239 of 254 (3 FAILED) (0 secs / 19.402 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 240 of 254 (3 FAILED) (0 secs / 19.406 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 241 of 254 (3 FAILED) (0 secs / 19.41 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 242 of 254 (3 FAILED) (0 secs / 19.414 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 243 of 254 (3 FAILED) (0 secs / 19.418 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 244 of 254 (3 FAILED) (0 secs / 19.421 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 245 of 254 (3 FAILED) (0 secs / 19.426 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 246 of 254 (3 FAILED) (0 secs / 19.43 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 247 of 254 (3 FAILED) (0 secs / 19.434 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 248 of 254 (3 FAILED) (0 secs / 19.438 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 249 of 254 (3 FAILED) (0 secs / 19.441 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 250 of 254 (3 FAILED) (0 secs / 19.445 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 251 of 254 (3 FAILED) (0 secs / 19.45 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 252 of 254 (3 FAILED) (0 secs / 19.453 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 253 of 254 (3 FAILED) (0 secs / 19.457 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 254 of 254 (3 FAILED) (0 secs / 19.461 secs)
+[1A[2KChrome Headless 142.0.0.0 (Mac OS 10.15.7): Executed 254 of 254 (3 FAILED) (19.536 secs / 19.461 secs)
+TOTAL: 3 FAILED, 251 SUCCESS
+
+=============================== Coverage summary ===============================
+Statements   : 39.64% ( 507/1279 )
+Branches     : 28.42% ( 108/380 )
+Functions    : 20.52% ( 71/346 )
+Lines        : 39.28% ( 491/1250 )
+================================================================================
+19 11 2025 15:06:11.034:WARN [launcher]: ChromeHeadless was not killed in 2000 ms, sending SIGKILL.
