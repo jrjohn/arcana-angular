@@ -222,11 +222,20 @@ export class I18nService {
       'nav.home': 'Dashboard',
       'nav.users': 'User Management',
       'nav.projects': 'Projects',
+      'nav.projects.all': 'All Projects',
+      'nav.projects.create': 'Create Project',
+      'nav.projects.archived': 'Archived',
       'nav.tasks': 'Tasks',
+      'nav.tasks.my': 'My Tasks',
+      'nav.tasks.recent': 'Recent',
+      'nav.tasks.important': 'Important',
       'nav.calendar': 'Calendar',
       'nav.messages': 'Messages',
       'nav.documents': 'Documents',
       'nav.analytics': 'Analytics',
+      'nav.analytics.overview': 'Overview',
+      'nav.analytics.reports': 'Reports',
+      'nav.analytics.performance': 'Performance',
       'nav.settings': 'Settings',
       'nav.profile': 'View Profile',
       'nav.logout': 'Logout',
@@ -236,6 +245,9 @@ export class I18nService {
 
       // Header
       'header.search.placeholder': 'Search...',
+
+      // Sidebar
+      'sidebar.storage': 'Storage',
 
       // User Panel
       'panel.activity.center': 'Activity Center',
@@ -403,11 +415,20 @@ export class I18nService {
       'nav.home': '仪表板',
       'nav.users': '用户管理',
       'nav.projects': '项目',
+      'nav.projects.all': '所有项目',
+      'nav.projects.create': '创建项目',
+      'nav.projects.archived': '已归档',
       'nav.tasks': '任务',
+      'nav.tasks.my': '我的任务',
+      'nav.tasks.recent': '最近',
+      'nav.tasks.important': '重要',
       'nav.calendar': '日历',
       'nav.messages': '消息',
       'nav.documents': '文档',
       'nav.analytics': '分析',
+      'nav.analytics.overview': '概览',
+      'nav.analytics.reports': '报告',
+      'nav.analytics.performance': '性能',
       'nav.settings': '设置',
       'nav.profile': '查看个人资料',
       'nav.logout': '退出登录',
@@ -417,6 +438,9 @@ export class I18nService {
 
       // Header
       'header.search.placeholder': '搜索...',
+
+      // Sidebar
+      'sidebar.storage': '存储',
 
       // User Panel
       'panel.activity.center': '活动中心',
@@ -475,12 +499,31 @@ export class I18nService {
     zhTW['validation.email.invalid'] = '請輸入有效的電子郵件地址';
     zhTW['validation.avatar.invalid.url'] = '請輸入有效的URL';
     zhTW['nav.main.menu'] = '主選單';
+    zhTW['nav.home'] = '儀表板';
     zhTW['nav.users'] = '使用者管理';
+    zhTW['nav.projects'] = '專案';
+    zhTW['nav.projects.all'] = '所有專案';
+    zhTW['nav.projects.create'] = '建立專案';
+    zhTW['nav.projects.archived'] = '已封存';
+    zhTW['nav.tasks'] = '任務';
+    zhTW['nav.tasks.my'] = '我的任務';
+    zhTW['nav.tasks.recent'] = '最近';
+    zhTW['nav.tasks.important'] = '重要';
+    zhTW['nav.calendar'] = '行事曆';
+    zhTW['nav.messages'] = '訊息';
+    zhTW['nav.documents'] = '文件';
+    zhTW['nav.analytics'] = '分析';
+    zhTW['nav.analytics.overview'] = '概覽';
+    zhTW['nav.analytics.reports'] = '報告';
+    zhTW['nav.analytics.performance'] = '效能';
+    zhTW['nav.settings'] = '設定';
     zhTW['nav.profile'] = '檢視個人資料';
+    zhTW['nav.logout'] = '登出';
     zhTW['nav.my.profile'] = '我的資料';
     zhTW['nav.notifications'] = '通知';
     zhTW['nav.help'] = '幫助';
     zhTW['header.search.placeholder'] = '搜尋...';
+    zhTW['sidebar.storage'] = '儲存空間';
     zhTW['panel.activity.center'] = '活動中心';
     zhTW['panel.activity.tab'] = '活動';
     zhTW['panel.notifications.tab'] = '通知';

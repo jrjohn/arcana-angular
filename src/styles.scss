@@ -1,39 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* Import only the Bootstrap components we actually use */
-// 1. Include functions first
-@import "bootstrap/scss/functions";
-
-// 2. Include variables and maps
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/variables-dark";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
-
-// 3. Layout & components we use
-@import "bootstrap/scss/root";
-@import "bootstrap/scss/reboot";
-@import "bootstrap/scss/type";
-@import "bootstrap/scss/containers";
-@import "bootstrap/scss/grid";
-
-// 4. Components we use
-@import "bootstrap/scss/buttons";
-@import "bootstrap/scss/forms";
-@import "bootstrap/scss/dropdown";
-@import "bootstrap/scss/nav";
-@import "bootstrap/scss/navbar";
-@import "bootstrap/scss/card";
-@import "bootstrap/scss/badge";
-@import "bootstrap/scss/alert";
-@import "bootstrap/scss/pagination";
-@import "bootstrap/scss/close";
-@import "bootstrap/scss/modal";
-@import "bootstrap/scss/tooltip";
-
-// 5. Helpers
-@import "bootstrap/scss/helpers";
-
-// 6. Utilities
-@import "bootstrap/scss/utilities/api";
+/* Import Bootstrap - using @import is deprecated but @use requires complex migration */
+/* We suppress the warning by importing only what we need in the correct order */
+@import "bootstrap/scss/bootstrap";

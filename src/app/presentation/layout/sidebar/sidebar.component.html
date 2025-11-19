@@ -42,33 +42,33 @@
       @if (!collapsed) {
         <div class="nav-section-title">{{ 'nav.main.menu' | translate }}</div>
       }
-      @for (item of menuItems(); track item.label) {
+      @for (item of menuItems; track item.id) {
         @if (item.children) {
           <!-- Parent menu item with children -->
           <div class="nav-item-wrapper">
             <button
               type="button"
               class="nav-link nav-link-parent"
-              [class.active]="item.expanded"
+              [class.active]="isMenuExpanded(item)"
               (click)="toggleMenuItem(item)"
-              [title]="collapsed ? item.label : ''"
+              [title]="collapsed ? (item.labelKey | translate) : ''"
             >
               <i [class]="item.icon + ' nav-icon'"></i>
               @if (!collapsed) {
-                <span class="nav-label">{{ item.label }}</span>
-                <i class="bi bi-chevron-down nav-arrow" [class.rotated]="item.expanded"></i>
+                <span class="nav-label">{{ item.labelKey | translate }}</span>
+                <i class="bi bi-chevron-down nav-arrow" [class.rotated]="isMenuExpanded(item)"></i>
               }
             </button>
             @if (!collapsed) {
-              <div class="nav-submenu" [ngbCollapse]="!item.expanded">
-                @for (child of item.children; track child.label) {
+              <div class="nav-submenu" [ngbCollapse]="!isMenuExpanded(item)">
+                @for (child of item.children; track child.id) {
                   <a
                     [routerLink]="child.route"
                     routerLinkActive="active"
                     class="nav-link nav-link-child"
                   >
                     <i [class]="child.icon + ' nav-icon'"></i>
-                    <span class="nav-label">{{ child.label }}</span>
+                    <span class="nav-label">{{ child.labelKey | translate }}</span>
                   </a>
                 }
               </div>
@@ -80,15 +80,15 @@
             [routerLink]="item.route"
             routerLinkActive="active"
             class="nav-link"
-            [title]="collapsed ? item.label : ''"
+            [title]="collapsed ? (item.labelKey | translate) : ''"
           >
             <i [class]="item.icon + ' nav-icon'"></i>
             @if (!collapsed) {
-              <span class="nav-label">{{ item.label }}</span>
-              @if (item.badge) {
-                <span [class]="'badge ms-auto ' + item.badgeClass">{{ item.badge }}</span>
+              <span class="nav-label">{{ item.labelKey | translate }}</span>
+              @if (getUserBadge(item)) {
+                <span [class]="'badge ms-auto ' + item.badgeClass">{{ getUserBadge(item) }}</span>
               }
-            } @else if (item.badge) {
+            } @else if (getUserBadge(item)) {
               <span class="badge-dot" [class]="item.badgeClass"></span>
             }
           </a>
@@ -104,7 +104,7 @@
         <div class="stat-item">
           <i class="bi bi-hdd text-primary"></i>
           <div class="stat-info">
-            <div class="stat-label">Storage</div>
+            <div class="stat-label">{{ 'sidebar.storage' | translate }}</div>
             <div class="stat-value">4.2 GB / 10 GB</div>
           </div>
         </div>

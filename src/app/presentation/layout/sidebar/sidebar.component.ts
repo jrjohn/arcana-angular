@@ -1,21 +1,22 @@
-import { Component, Input, Output, EventEmitter, signal, inject, computed } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal, inject, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { I18nService } from '../../../domain/services/i18n.service';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { UserService } from '../../../domain/services/user.service';
 
 /**
  * Navigation menu item interface
  */
 interface MenuItem {
+  id: string; // Stable unique identifier
   icon: string;
-  label: string;
+  labelKey: string; // Translation key instead of translated label
   route?: string;
   badge?: string;
   badgeClass?: string;
   children?: MenuItem[];
-  expanded?: boolean;
   action?: 'userPanel' | 'navigate';
 }
 
@@ -30,10 +31,17 @@ interface MenuItem {
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   @Input() collapsed = false;
 
-  private i18nService = inject(I18nService);
+  i18nService = inject(I18nService);
+  private userService = inject(UserService);
+
+  // Track expanded menu items by stable ID
+  expandedMenuId = signal<string | null>(null);
+
+  // Track total user count
+  userCount = signal<number>(0);
 
   // Mock user data
   currentUser = {
@@ -44,75 +52,105 @@ export class SidebarComponent {
     status: 'online' as 'online' | 'away' | 'busy' | 'offline',
   };
 
-  // Computed menu items that update when language changes
-  menuItems = computed<MenuItem[]>(() => [
+  // Static menu items with translation keys - objects never change
+  menuItems: MenuItem[] = [
     {
+      id: 'home',
       icon: 'bi-house-door',
-      label: this.i18nService.translate('nav.home'),
+      labelKey: 'nav.home',
       route: '/home',
       badge: 'New',
       badgeClass: 'bg-success',
     },
     {
+      id: 'users',
       icon: 'bi-people',
-      label: this.i18nService.translate('nav.users'),
+      labelKey: 'nav.users',
       route: '/users',
-      badge: '12',
       badgeClass: 'bg-primary',
     },
     {
+      id: 'projects',
       icon: 'bi-folder',
-      label: this.i18nService.translate('nav.projects'),
+      labelKey: 'nav.projects',
       children: [
-        { icon: 'bi-list-ul', label: 'All Projects', route: '/projects' },
-        { icon: 'bi-plus-circle', label: 'Create Project', route: '/projects/new' },
-        { icon: 'bi-archive', label: 'Archived', route: '/projects/archived' },
+        { id: 'projects-all', icon: 'bi-list-ul', labelKey: 'nav.projects.all', route: '/projects' },
+        { id: 'projects-create', icon: 'bi-plus-circle', labelKey: 'nav.projects.create', route: '/projects/new' },
+        { id: 'projects-archived', icon: 'bi-archive', labelKey: 'nav.projects.archived', route: '/projects/archived' },
       ],
-      expanded: false,
     },
     {
+      id: 'tasks',
       icon: 'bi-kanban',
-      label: this.i18nService.translate('nav.tasks'),
+      labelKey: 'nav.tasks',
       children: [
-        { icon: 'bi-check2-square', label: 'My Tasks', route: '/tasks/my' },
-        { icon: 'bi-clock-history', label: 'Recent', route: '/tasks/recent' },
-        { icon: 'bi-star', label: 'Important', route: '/tasks/important' },
+        { id: 'tasks-my', icon: 'bi-check2-square', labelKey: 'nav.tasks.my', route: '/tasks/my' },
+        { id: 'tasks-recent', icon: 'bi-clock-history', labelKey: 'nav.tasks.recent', route: '/tasks/recent' },
+        { id: 'tasks-important', icon: 'bi-star', labelKey: 'nav.tasks.important', route: '/tasks/important' },
       ],
-      expanded: false,
     },
     {
+      id: 'calendar',
       icon: 'bi-calendar-event',
-      label: this.i18nService.translate('nav.calendar'),
+      labelKey: 'nav.calendar',
       route: '/calendar',
     },
     {
+      id: 'messages',
       icon: 'bi-chat-dots',
-      label: this.i18nService.translate('nav.messages'),
+      labelKey: 'nav.messages',
       route: '/messages',
       badge: '5',
       badgeClass: 'bg-danger',
     },
     {
+      id: 'documents',
       icon: 'bi-file-earmark-text',
-      label: this.i18nService.translate('nav.documents'),
+      labelKey: 'nav.documents',
       route: '/documents',
     },
     {
+      id: 'analytics',
       icon: 'bi-graph-up',
-      label: this.i18nService.translate('nav.analytics'),
+      labelKey: 'nav.analytics',
       children: [
-        { icon: 'bi-pie-chart', label: 'Overview', route: '/analytics/overview' },
-        { icon: 'bi-bar-chart', label: 'Reports', route: '/analytics/reports' },
-        { icon: 'bi-trophy', label: 'Performance', route: '/analytics/performance' },
+        { id: 'analytics-overview', icon: 'bi-pie-chart', labelKey: 'nav.analytics.overview', route: '/analytics/overview' },
+        { id: 'analytics-reports', icon: 'bi-bar-chart', labelKey: 'nav.analytics.reports', route: '/analytics/reports' },
+        { id: 'analytics-performance', icon: 'bi-trophy', labelKey: 'nav.analytics.performance', route: '/analytics/performance' },
       ],
-      expanded: false,
     },
     {
+      id: 'settings',
       icon: 'bi-gear',
-      label: this.i18nService.translate('nav.settings'),
+      labelKey: 'nav.settings',
       route: '/settings',
     },
-  ]);
+  ];
+
+  ngOnInit(): void {
+    // Fetch initial user count
+    this.loadUserCount();
+  }
+
+  private loadUserCount(): void {
+    this.userService.getUsers({ page: 1, pageSize: 1 }).subscribe({
+      next: response => {
+        this.userCount.set(response.total);
+      },
+      error: () => {
+        // Silently fail - user count is not critical
+        this.userCount.set(0);
+      },
+    });
+  }
+
+  getUserBadge(item: MenuItem): string | undefined {
+    if (item.id === 'users') {
+      const count = this.userCount();
+      return count > 0 ? count.toString() : undefined;
+    }
+    return item.badge;
+  }
 
   onMenuItemClick(item: MenuItem): void {
     if (item.children) {
@@ -123,14 +161,18 @@ export class SidebarComponent {
 
   toggleMenuItem(item: MenuItem): void {
     if (item.children) {
-      item.expanded = !item.expanded;
-      // Close other expanded items
-      this.menuItems().forEach(menuItem => {
-        if (menuItem !== item && menuItem.children) {
-          menuItem.expanded = false;
-        }
-      });
+      // Toggle: if this item is already expanded, collapse it; otherwise expand it
+      const currentExpanded = this.expandedMenuId();
+      if (currentExpanded === item.id) {
+        this.expandedMenuId.set(null); // Collapse
+      } else {
+        this.expandedMenuId.set(item.id); // Expand this, collapse others
+      }
     }
+  }
+
+  isMenuExpanded(item: MenuItem): boolean {
+    return this.expandedMenuId() === item.id;
   }
 
   getStatusClass(status: string): string {
