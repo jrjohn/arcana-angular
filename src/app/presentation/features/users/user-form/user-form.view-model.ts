@@ -4,6 +4,7 @@ import { UserService } from '../../../../domain/services/user.service';
 import { User, UserValidator } from '../../../../domain/entities/user.model';
 import { AppError } from '../../../../domain/entities/app-error.model';
 import { BaseViewModel } from '../../../shared/base';
+import { SanitizationService } from '../../../../domain/services/sanitization.service';
 
 /**
  * User Form ViewModel
@@ -89,7 +90,10 @@ export class UserFormViewModel extends BaseViewModel {
     userSaved$: new Subject<User>(),
   };
 
-  constructor(private userService: UserService) {
+  constructor(
+    private userService: UserService,
+    private sanitizationService: SanitizationService
+  ) {
     super();
   }
 
@@ -131,35 +135,51 @@ export class UserFormViewModel extends BaseViewModel {
   }
 
   /**
-   * Updates first name with validation
+   * Updates first name with validation and sanitization
    */
   private updateFirstName(value: string): void {
-    this.firstNameSignal.set(value);
-    this.firstNameErrorSignal.set(UserValidator.validateFirstName(value));
+    // Sanitize input to prevent XSS
+    const sanitized = this.sanitizationService.sanitizeInput(value, {
+      allowHtml: false,
+      maxLength: 100,
+      allowedChars: /a-zA-Z\s'-/
+    });
+    this.firstNameSignal.set(sanitized);
+    this.firstNameErrorSignal.set(UserValidator.validateFirstName(sanitized));
   }
 
   /**
-   * Updates last name with validation
+   * Updates last name with validation and sanitization
    */
   private updateLastName(value: string): void {
-    this.lastNameSignal.set(value);
-    this.lastNameErrorSignal.set(UserValidator.validateLastName(value));
+    // Sanitize input to prevent XSS
+    const sanitized = this.sanitizationService.sanitizeInput(value, {
+      allowHtml: false,
+      maxLength: 100,
+      allowedChars: /a-zA-Z\s'-/
+    });
+    this.lastNameSignal.set(sanitized);
+    this.lastNameErrorSignal.set(UserValidator.validateLastName(sanitized));
   }
 
   /**
-   * Updates email with validation
+   * Updates email with validation and sanitization
    */
   private updateEmail(value: string): void {
-    this.emailSignal.set(value);
-    this.emailErrorSignal.set(UserValidator.validateEmail(value));
+    // Sanitize email input
+    const sanitized = this.sanitizationService.sanitizeEmail(value);
+    this.emailSignal.set(sanitized);
+    this.emailErrorSignal.set(UserValidator.validateEmail(sanitized));
   }
 
   /**
-   * Updates avatar with validation
+   * Updates avatar with validation and sanitization
    */
   private updateAvatar(value: string): void {
-    this.avatarSignal.set(value);
-    this.avatarErrorSignal.set(UserValidator.validateAvatar(value));
+    // Sanitize URL to prevent javascript: and other malicious URLs
+    const sanitized = this.sanitizationService.sanitizeUrl(value);
+    this.avatarSignal.set(sanitized);
+    this.avatarErrorSignal.set(UserValidator.validateAvatar(sanitized));
   }
 
   /**
@@ -172,11 +192,19 @@ export class UserFormViewModel extends BaseViewModel {
 
     this.isSavingSignal.set(true);
 
-    const userData = {
+    // Final sanitization before submission (defense in depth)
+    const sanitizedData = this.sanitizationService.sanitizeUserInput({
       firstName: this.firstNameSignal(),
       lastName: this.lastNameSignal(),
       email: this.emailSignal(),
       avatar: this.avatarSignal() || undefined,
+    });
+
+    const userData = {
+      firstName: sanitizedData.firstName,
+      lastName: sanitizedData.lastName,
+      email: sanitizedData.email,
+      avatar: sanitizedData.avatar,
     };
 
     const request$ = this.isEditModeSignal()

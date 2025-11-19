@@ -1,12 +1,14 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection, APP_INITIALIZER } from '@angular/core';
 import { provideRouter, withPreloading } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { OfflineSyncService } from './data/sync/offline-sync.service';
 import { AnalyticsService } from './domain/services/analytics.service';
 import { PreloadAllModulesStrategy } from './core/strategies/preload-all-modules.strategy';
+import { authInterceptor } from './data/interceptors/auth.interceptor';
+import { errorInterceptor } from './data/interceptors/error.interceptor';
 
 /**
  * Initialize offline sync service on app startup
@@ -39,7 +41,10 @@ export const appConfig: ApplicationConfig = {
       withPreloading(PreloadAllModulesStrategy)
     ),
     provideAnimations(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([authInterceptor, errorInterceptor])
+    ),
     {
       provide: APP_INITIALIZER,
       useFactory: initializeOfflineSync,

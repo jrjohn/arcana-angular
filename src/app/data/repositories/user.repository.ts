@@ -321,8 +321,14 @@ export class UserRepository {
 
     return this.apiService.put<UserDto>(`/users/${id}`, apiData).pipe(
       map(dto => {
+        // reqres.in PUT/PATCH doesn't return the id, so we need to add it
+        const dtoWithId: UserDto = {
+          ...dto,
+          id: id  // Preserve the ID from the request
+        };
+
         // Use mapper to convert DTO to domain model
-        const user = UserMapper.toDomain(dto);
+        const user = UserMapper.toDomain(dtoWithId);
 
         // Save to IndexedDB
         this.indexedDb.saveUser(user);
