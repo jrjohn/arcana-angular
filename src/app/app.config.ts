@@ -13,10 +13,9 @@ import { errorInterceptor } from './data/interceptors/error.interceptor';
 /**
  * Initialize offline sync service on app startup
  */
-function initializeOfflineSync(syncService: OfflineSyncService) {
+function initializeOfflineSync(_syncService: OfflineSyncService) {
   return () => {
-    console.log('[App] Offline sync service initialized');
-    // Service is instantiated and monitoring starts automatically
+    // Service is instantiated and monitoring starts automatically via DI
     return Promise.resolve();
   };
 }
@@ -24,10 +23,9 @@ function initializeOfflineSync(syncService: OfflineSyncService) {
 /**
  * Initialize analytics service on app startup
  */
-function initializeAnalytics(analyticsService: AnalyticsService) {
+function initializeAnalytics(_analyticsService: AnalyticsService) {
   return () => {
-    console.log('[App] Analytics service initialized');
-    // Service is instantiated and starts tracking automatically
+    // Service is instantiated and starts tracking automatically via DI
     return Promise.resolve();
   };
 }

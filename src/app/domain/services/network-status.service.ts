@@ -1,5 +1,5 @@
-import { Injectable, signal } from '@angular/core';
-import { fromEvent, merge, of } from 'rxjs';
+import { Injectable, signal, OnDestroy } from '@angular/core';
+import { fromEvent, merge, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 /**
@@ -9,11 +9,16 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class NetworkStatusService {
+export class NetworkStatusService implements OnDestroy {
   private readonly onlineSignal = signal<boolean>(navigator.onLine);
+  private networkSubscription?: Subscription;
 
   constructor() {
     this.initializeNetworkMonitoring();
+  }
+
+  ngOnDestroy(): void {
+    this.networkSubscription?.unsubscribe();
   }
 
   /**
@@ -46,13 +51,12 @@ export class NetworkStatusService {
     }
 
     // Listen to online/offline events
-    merge(
+    this.networkSubscription = merge(
       of(navigator.onLine),
       fromEvent(window, 'online').pipe(map(() => true)),
       fromEvent(window, 'offline').pipe(map(() => false))
     ).subscribe(isOnline => {
       this.onlineSignal.set(isOnline);
-      console.log('[NetworkStatus] Status changed:', isOnline ? 'ONLINE' : 'OFFLINE');
     });
   }
 }

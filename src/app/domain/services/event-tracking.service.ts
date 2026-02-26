@@ -1,5 +1,6 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -22,7 +23,7 @@ import { AppError } from '../entities/app-error.model';
 @Injectable({
   providedIn: 'root',
 })
-export class EventTrackingService {
+export class EventTrackingService implements OnDestroy {
   private router = inject(Router);
   private sessionService = inject(SessionManagementService);
   private indexedDb = inject(IndexedDbService);
@@ -30,10 +31,15 @@ export class EventTrackingService {
   private eventQueue: AnalyticsEvent[] = [];
   private readonly MAX_QUEUE_SIZE = 100;
   private readonly FLUSH_INTERVAL = 30000; // 30 seconds
+  private routerSubscription?: Subscription;
 
   constructor() {
     this.initializeTracking();
     this.setupAutoFlush();
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscription?.unsubscribe();
   }
 
   /**
@@ -41,7 +47,7 @@ export class EventTrackingService {
    */
   private initializeTracking(): void {
     // Track page views
-    this.router.events
+    this.routerSubscription = this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: unknown) => {
         const navEvent = event as NavigationEnd;

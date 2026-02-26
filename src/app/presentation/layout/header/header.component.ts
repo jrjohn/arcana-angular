@@ -87,7 +87,6 @@ export class HeaderComponent {
   changeLanguage(language: Language): void {
     // Update the I18nService with the new language
     this.i18nService.setLanguage(language.code as I18nLanguage);
-    console.log('Language changed to:', language.code);
   }
 
   onUserMenuAction(action: string): void {
@@ -111,7 +110,6 @@ export class HeaderComponent {
   }
 
   private handleLogout(): void {
-    console.log('Logging out...');
     // Here you would integrate with auth service
     // For now, just navigate to login or home
     this.navGraph.toHome();
