@@ -1,0 +1,6 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.ci
+    image: localhost:5000/arcana/angular-app:${VERSION:-1.0.0}
