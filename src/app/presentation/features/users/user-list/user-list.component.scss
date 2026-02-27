@@ -76,6 +76,15 @@
     }
   }
 
+  // Sticky Header for Virtual Scroll
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
   // Column widths for better spacing
   > thead > tr > th,
   > tbody > tr > td {
@@ -249,13 +258,3 @@
   }
 }
 
-// Sticky Header for Virtual Scroll
-::ng-deep .table {
-  .sticky-header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-}
