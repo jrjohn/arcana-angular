@@ -1,13 +1,13 @@
 import { Observable } from 'rxjs';
 
 /**
- * BaseDao - Generic CRUD abstraction interface
+ * BaseRepository - Generic CRUD abstraction interface
  * Mirrors arcana-cloud-springboot's BaseDao<T, K> pattern.
  *
  * @template T  - Domain entity type
  * @template K  - Primary key type (e.g. string, number)
  */
-export interface BaseDao<T, K> {
+export interface BaseRepository<T, K> {
   /**
    * Persist (create or update) an entity.
    */

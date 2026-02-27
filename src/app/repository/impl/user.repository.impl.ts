@@ -1,29 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, switchMap, of } from 'rxjs';
-import { UserDao } from '../user.dao';
-import { UserRepository } from '../../data/repositories/user.repository';
+import { Observable, map } from 'rxjs';
+import { UserRepository } from '../user.repository';
+import { UserRepository as UserDataRepository } from '../../data/repositories/user.repository';
 import { User, CreateUserDto, UpdateUserDto } from '../../domain/entities/user.model';
 import { PaginatedResponse, PaginationParams } from '../../domain/entities/pagination.model';
 
 /**
- * UserDaoImpl - Concrete implementation of UserDao.
+ * UserRepositoryImpl - Concrete implementation of UserRepository.
  *
- * Wraps the existing UserRepository so that the domain / service layer never
+ * Wraps the existing UserDataRepository so that the domain / service layer never
  * depends on the repository (or HTTP / caching internals) directly.
  * This mirrors the arcana-cloud-springboot pattern where UserDaoImpl
  * delegates to UserRepository (JPA) internally.
  */
 @Injectable()
-export class UserDaoImpl implements UserDao {
+export class UserRepositoryImpl implements UserRepository {
 
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(private readonly userDataRepository: UserDataRepository) {}
 
-  // ── BaseDao ───────────────────────────────────────────────────────────────
+  // ── BaseRepository ────────────────────────────────────────────────────────
 
   /**
    * Save (create) an entity.
    * Because the repository distinguishes create / update, "save" maps to
-   * create when called from BaseDao context (no id mutation needed here –
+   * create when called from BaseRepository context (no id mutation needed here –
    * callers with an id should use update() instead).
    */
   save(entity: User): Observable<User> {
@@ -33,11 +33,11 @@ export class UserDaoImpl implements UserDao {
       lastName:  entity.lastName,
       avatar:    entity.avatar,
     };
-    return this.userRepository.createUser(dto);
+    return this.userDataRepository.createUser(dto);
   }
 
   findById(id: string): Observable<User> {
-    return this.userRepository.getUser(id);
+    return this.userDataRepository.getUser(id);
   }
 
   /**
@@ -45,29 +45,29 @@ export class UserDaoImpl implements UserDao {
    * For paginated access use findPaginated().
    */
   findAll(): Observable<User[]> {
-    return this.userRepository.getUsers({ page: 1, pageSize: 100 }).pipe(
+    return this.userDataRepository.getUsers({ page: 1, pageSize: 100 }).pipe(
       map(response => response.data)
     );
   }
 
   count(): Observable<number> {
-    return this.userRepository.getUsers({ page: 1, pageSize: 1 }).pipe(
+    return this.userDataRepository.getUsers({ page: 1, pageSize: 1 }).pipe(
       map(response => response.total)
     );
   }
 
   deleteById(id: string): Observable<void> {
-    return this.userRepository.deleteUser(id);
+    return this.userDataRepository.deleteUser(id);
   }
 
-  // ── UserDao extensions ────────────────────────────────────────────────────
+  // ── UserRepository extensions ─────────────────────────────────────────────
 
   findPaginated(params: PaginationParams): Observable<PaginatedResponse<User>> {
-    return this.userRepository.getUsers(params);
+    return this.userDataRepository.getUsers(params);
   }
 
   findByQuery(query: string, params: PaginationParams): Observable<PaginatedResponse<User>> {
-    return this.userRepository.getUsers(params).pipe(
+    return this.userDataRepository.getUsers(params).pipe(
       map(response => {
         if (!query || query.trim().length === 0) {
           return response;
@@ -91,7 +91,7 @@ export class UserDaoImpl implements UserDao {
 
   findByEmail(email: string): Observable<User | null> {
     // No direct API endpoint for single-email lookup; filter client-side
-    return this.userRepository.getUsers({ page: 1, pageSize: 100 }).pipe(
+    return this.userDataRepository.getUsers({ page: 1, pageSize: 100 }).pipe(
       map(response =>
         response.data.find(u => u.email.toLowerCase() === email.toLowerCase()) ?? null
       )
@@ -99,10 +99,10 @@ export class UserDaoImpl implements UserDao {
   }
 
   create(dto: CreateUserDto): Observable<User> {
-    return this.userRepository.createUser(dto);
+    return this.userDataRepository.createUser(dto);
   }
 
   update(id: string, dto: UpdateUserDto): Observable<User> {
-    return this.userRepository.updateUser(id, dto);
+    return this.userDataRepository.updateUser(id, dto);
   }
 }

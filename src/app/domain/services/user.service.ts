@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Observable, map, tap, catchError, throwError } from 'rxjs';
-import { UserDao } from '../../dao/user.dao';
-import { USER_DAO_TOKEN } from '../../dao/dao.tokens';
+import { UserRepository } from '../../repository/user.repository';
+import { USER_REPOSITORY_TOKEN } from '../../repository/repository.tokens';
 import {
   User,
   CreateUserDto,
@@ -15,15 +15,15 @@ import { AppError, ErrorCategory, createAppError } from '../entities/app-error.m
  * User Service (Domain Layer)
  * Handles business logic for user management.
  *
- * Depends on UserDao (via USER_DAO_TOKEN) rather than UserRepository directly,
- * following the arcana-cloud-springboot DAO abstraction pattern.
+ * Depends on UserRepository (via USER_REPOSITORY_TOKEN) rather than the data
+ * repository directly, following the Service→Repository→DAO→DB abstraction pattern.
  */
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   constructor(
-    @Inject(USER_DAO_TOKEN) private readonly userDao: UserDao
+    @Inject(USER_REPOSITORY_TOKEN) private readonly userRepository: UserRepository
   ) {}
 
   /**
@@ -32,7 +32,7 @@ export class UserService {
   getUsers(params?: PaginationParams): Observable<PaginatedResponse<User>> {
     const paginationParams = params || { page: 1, pageSize: 10 };
 
-    return this.userDao.findPaginated(paginationParams).pipe(
+    return this.userRepository.findPaginated(paginationParams).pipe(
       tap(() => console.log('[UserService] Users loaded successfully')),
       catchError(error => this.handleError(error, 'Failed to load users'))
     );
@@ -52,7 +52,7 @@ export class UserService {
       );
     }
 
-    return this.userDao.findById(id).pipe(
+    return this.userRepository.findById(id).pipe(
       tap(user => console.log('[UserService] User loaded:', user.id)),
       catchError(error => this.handleError(error, 'Failed to load user'))
     );
@@ -79,7 +79,7 @@ export class UserService {
       );
     }
 
-    return this.userDao.create(userData).pipe(
+    return this.userRepository.create(userData).pipe(
       tap(user => console.log('[UserService] User created:', user.id)),
       catchError(error => this.handleError(error, 'Failed to create user'))
     );
@@ -116,7 +116,7 @@ export class UserService {
       );
     }
 
-    return this.userDao.update(id, userData).pipe(
+    return this.userRepository.update(id, userData).pipe(
       tap(user => console.log('[UserService] User updated:', user.id)),
       catchError(error => this.handleError(error, 'Failed to update user'))
     );
@@ -136,7 +136,7 @@ export class UserService {
       );
     }
 
-    return this.userDao.deleteById(id).pipe(
+    return this.userRepository.deleteById(id).pipe(
       tap(() => console.log('[UserService] User deleted:', id)),
       catchError(error => this.handleError(error, 'Failed to delete user'))
     );
@@ -151,7 +151,7 @@ export class UserService {
   ): Observable<PaginatedResponse<User>> {
     const paginationParams = params || { page: 1, pageSize: 10 };
 
-    return this.userDao.findByQuery(query, paginationParams).pipe(
+    return this.userRepository.findByQuery(query, paginationParams).pipe(
       tap(() => console.log('[UserService] Search performed:', query)),
       catchError(error => this.handleError(error, 'Failed to search users'))
     );

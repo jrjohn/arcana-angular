@@ -1,14 +1,14 @@
 import { Observable } from 'rxjs';
-import { BaseDao } from './base.dao';
+import { BaseRepository } from './base.repository';
 import { User, CreateUserDto, UpdateUserDto } from '../domain/entities/user.model';
 import { PaginatedResponse, PaginationParams } from '../domain/entities/pagination.model';
 
 /**
- * UserDao - Data Access Object interface for User entities.
- * Extends BaseDao with user-specific query and mutation methods.
+ * UserRepository - Repository interface for User entities.
+ * Extends BaseRepository with user-specific query and mutation methods.
  * Mirrors arcana-cloud-springboot's UserDao pattern.
  */
-export interface UserDao extends BaseDao<User, string> {
+export interface UserRepository extends BaseRepository<User, string> {
   // ── Paginated reads ──────────────────────────────────────────────────────
   /**
    * Retrieve a paginated list of users.
