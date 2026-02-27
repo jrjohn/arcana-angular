@@ -10,6 +10,10 @@ import { PreloadAllModulesStrategy } from './core/strategies/preload-all-modules
 import { authInterceptor } from './data/interceptors/auth.interceptor';
 import { errorInterceptor } from './data/interceptors/error.interceptor';
 
+// ── DAO layer ────────────────────────────────────────────────────────────────
+import { USER_DAO_TOKEN } from './dao/dao.tokens';
+import { UserDaoImpl } from './dao/impl/user.dao.impl';
+
 /**
  * Initialize offline sync service on app startup
  */
@@ -55,5 +59,7 @@ export const appConfig: ApplicationConfig = {
       deps: [AnalyticsService],
       multi: true,
     },
+    // ── DAO providers ──────────────────────────────────────────────────────
+    { provide: USER_DAO_TOKEN, useClass: UserDaoImpl },
   ]
 };
