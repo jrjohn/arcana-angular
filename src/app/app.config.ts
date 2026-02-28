@@ -10,6 +10,10 @@ import { PreloadAllModulesStrategy } from './core/strategies/preload-all-modules
 import { authInterceptor } from './data/interceptors/auth.interceptor';
 import { errorInterceptor } from './data/interceptors/error.interceptor';
 
+// ── DAO layer ─────────────────────────────────────────────────────────────────
+import { USER_DAO_TOKEN } from './dao/index';
+import { UserDaoImpl } from './dao/impl/user.dao.impl';
+
 // ── Repository layer ─────────────────────────────────────────────────────────
 import { USER_REPOSITORY_TOKEN } from './repository/repository.tokens';
 import { UserRepositoryImpl } from './repository/impl/user.repository.impl';
@@ -59,6 +63,8 @@ export const appConfig: ApplicationConfig = {
       deps: [AnalyticsService],
       multi: true,
     },
+    // ── DAO providers ──────────────────────────────────────────────────────
+    { provide: USER_DAO_TOKEN, useClass: UserDaoImpl },
     // ── Repository providers ───────────────────────────────────────────────
     { provide: USER_REPOSITORY_TOKEN, useClass: UserRepositoryImpl },
   ]
