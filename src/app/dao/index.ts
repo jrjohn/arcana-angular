@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { IUserDao } from './interfaces/user.dao';
+import { IUserDao } from './user.dao';
 
 /**
  * Angular DI token for IUserDao.
@@ -13,5 +13,5 @@ import { IUserDao } from './interfaces/user.dao';
 export const USER_DAO_TOKEN = new InjectionToken<IUserDao>('UserDao');
 
 // ── Public API ───────────────────────────────────────────────────────────────
-export * from './interfaces/user.dao';
+export * from './user.dao';
 export * from './impl/user.dao.impl';

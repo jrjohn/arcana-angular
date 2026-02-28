@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from '../../data/api/api.service';
-import { IUserDao } from '../interfaces/user.dao';
+import { IUserDao } from '../user.dao';
 import {
   UserDto,
   PaginatedUserResponseDto,

@@ -3,7 +3,7 @@ import { Observable, of, throwError, map, catchError, from, switchMap } from 'rx
 
 import { UserRepository } from '../user.repository';
 import { USER_DAO_TOKEN } from '../../dao/index';
-import { IUserDao } from '../../dao/interfaces/user.dao';
+import { IUserDao } from '../../dao/user.dao';
 
 import { User, CreateUserDto, UpdateUserDto } from '../../domain/entities/user.model';
 import { PaginatedResponse, PaginationParams } from '../../domain/entities/pagination.model';
