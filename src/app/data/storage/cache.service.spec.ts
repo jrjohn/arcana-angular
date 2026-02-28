@@ -232,20 +232,28 @@ describe('CacheService', () => {
     });
 
     it('should evict based on access time', () => {
+      jasmine.clock().install();
+      const baseTime = Date.now();
+      jasmine.clock().mockDate(new Date(baseTime));
+
       service.set('key1', 'value1');
+      jasmine.clock().tick(10);
       service.set('key2', 'value2');
 
-      // Access key1 to make it more recent
+      // Advance time and access key1 to make it more recent than key2
+      jasmine.clock().tick(10);
       service.get('key1');
 
-      // Fill cache to trigger eviction
+      // Fill cache to trigger eviction (all new keys get timestamps after key2)
+      jasmine.clock().tick(10);
       for (let i = 3; i < 102; i++) {
         service.set(`key${i}`, `value${i}`);
       }
 
-      // key1 should still exist (accessed recently)
+      // key1 should still exist (accessed most recently)
       // key2 should be evicted (oldest access time)
       expect(service.get('key1')).toBe('value1');
+      jasmine.clock().uninstall();
     });
   });
 
@@ -261,9 +269,9 @@ describe('CacheService', () => {
 
     it('should handle undefined value', () => {
       service.set('key1', undefined);
-      // Similar to null, undefined will be stored but has() will return false
+      // get() returns the stored undefined value
       const result = service.get('key1');
-      expect(result).toBeDefined(); // undefined is defined as a value
+      expect(result).toBeUndefined();
     });
 
     it('should handle empty string key', () => {
