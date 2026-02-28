@@ -1,4 +1,4 @@
-import { Component, Input, signal, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, signal, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -33,7 +33,7 @@ interface MenuItem {
   styleUrl: './sidebar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
   @Input() collapsed = false;
   @Input() mobileOpen = false;
 
