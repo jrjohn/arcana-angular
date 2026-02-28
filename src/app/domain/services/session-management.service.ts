@@ -13,7 +13,7 @@ export class SessionManagementService {
   private readonly SESSION_KEY = 'analytics_session';
   private readonly SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
 
-  private currentSessionSignal = signal<AnalyticsSession | null>(null);
+  private readonly currentSessionSignal = signal<AnalyticsSession | null>(null);
 
   constructor() {
     this.initializeSession();

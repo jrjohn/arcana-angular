@@ -9,8 +9,8 @@ import { UserService } from '../../../domain/services/user.service';
 @Injectable()
 export class SidebarViewModel {
   // ========== PRIVATE STATE ==========
-  private userCountSignal = signal<number>(0);
-  private isLoadingSignal = signal<boolean>(false);
+  private readonly userCountSignal = signal<number>(0);
+  private readonly isLoadingSignal = signal<boolean>(false);
 
   // ========== INPUT (Actions) ==========
   readonly input = {

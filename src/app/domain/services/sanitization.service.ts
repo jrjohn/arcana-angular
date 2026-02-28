@@ -84,16 +84,16 @@ export class SanitizationService {
     if (!text) return '';
 
     // Remove all HTML tags
-    let sanitized = text.replaceAll(/<[^>]*>/g, '');
+    let sanitized = text.replaceAll('<[^>]*>', '');
 
     // Escape special HTML characters
     sanitized = sanitized
-      .replaceAll(/&/g, '&amp;')
-      .replaceAll(/</g, '&lt;')
-      .replaceAll(/>/g, '&gt;')
-      .replaceAll(/"/g, '&quot;')
-      .replaceAll(/'/g, '&#x27;')
-      .replaceAll(/\//g, '&#x2F;');
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#x27;')
+      .replaceAll('/', '&#x2F;');
 
     return sanitized.trim();
   }
@@ -176,7 +176,7 @@ export class SanitizationService {
     let sanitized = filename.replaceAll(/[/\\]/g, '');
 
     // Remove potentially dangerous characters
-    sanitized = sanitized.replaceAll(/[^a-zA-Z0-9._-]/g, '_');
+    sanitized = sanitized.replaceAll('[^a-zA-Z0-9._-]', '_');
 
     // Remove leading dots (hidden files)
     sanitized = sanitized.replace(/^\.+/, '');
@@ -198,12 +198,12 @@ export class SanitizationService {
 
     // Remove common SQL injection patterns
     let sanitized = input
-      .replaceAll(/'/g, '')  // Remove single quotes
-      .replaceAll(/"/g, '')  // Remove double quotes
-      .replaceAll(/;/g, '')  // Remove semicolons
-      .replaceAll(/--/g, '') // Remove SQL comments
-      .replaceAll(/\/\*/g, '') // Remove block comment start
-      .replaceAll(/\*\//g, ''); // Remove block comment end
+      .replaceAll("'", '')  // Remove single quotes
+      .replaceAll('"', '')  // Remove double quotes
+      .replaceAll(';', '')  // Remove semicolons
+      .replaceAll('--', '') // Remove SQL comments
+      .replaceAll('/*', '') // Remove block comment start
+      .replaceAll('*/', ''); // Remove block comment end
 
     return sanitized.trim();
   }

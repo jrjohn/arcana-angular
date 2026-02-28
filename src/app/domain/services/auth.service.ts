@@ -21,8 +21,8 @@ export class AuthService {
   private readonly USER_KEY = 'auth_user';
 
   // Reactive authentication state
-  private currentUserSignal = signal<AuthUser | null>(this.loadUserFromStorage());
-  private tokenSignal = signal<string | null>(this.loadTokenFromStorage());
+  private readonly currentUserSignal = signal<AuthUser | null>(this.loadUserFromStorage());
+  private readonly tokenSignal = signal<string | null>(this.loadTokenFromStorage());
 
   // Public computed signals
   currentUser = computed(() => this.currentUserSignal());

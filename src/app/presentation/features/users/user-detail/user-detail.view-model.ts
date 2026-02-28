@@ -14,10 +14,10 @@ import { BaseViewModel } from '../../../shared/base';
 @Injectable()
 export class UserDetailViewModel extends BaseViewModel {
   // ========== PRIVATE STATE ==========
-  private userIdSignal = signal<string | null>(null);
-  private userSignal = signal<User | null>(null);
+  private readonly userIdSignal = signal<string | null>(null);
+  private readonly userSignal = signal<User | null>(null);
   private readonly isLoadingSignal = signal(false);
-  private errorSignal = signal<AppError | null>(null);
+  private readonly errorSignal = signal<AppError | null>(null);
 
   // ========== INPUT (Actions) ==========
   readonly input = {
