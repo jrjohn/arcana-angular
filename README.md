@@ -1123,3 +1123,221 @@ For questions or issues, please:
 [⬆ Back to Top](#arcana-angular---enterprise-angular-application)
 
 </div>
+
+## 部署指南
+
+本章節說明如何將 Arcana Angular 應用程式部署到生產環境，提供三種常見部署方式。
+
+### 建置應用程式
+
+所有部署方式均需先執行生產建置：
+
+```bash
+npm run build
+```
+
+建置產出位於 `dist/arcana-angular/browser/` 目錄。
+
+---
+
+### 1. 單機部署（Nginx）
+
+**步驟：**
+
+```bash
+# 1. 建置應用程式
+npm run build
+
+# 2. 複製檔案到 Web 根目錄
+sudo cp -r dist/arcana-angular/browser/* /var/www/arcana-angular/
+```
+
+**Nginx 設定（`/etc/nginx/sites-available/arcana-angular`）：**
+
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com;
+    root /var/www/arcana-angular;
+    index index.html;
+
+    # 支援 Angular SPA 路由（History API）
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # 靜態資源快取
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # 安全標頭
+    add_header X-Frame-Options "DENY";
+    add_header X-Content-Type-Options "nosniff";
+    add_header X-XSS-Protection "1; mode=block";
+}
+```
+
+```bash
+# 啟用站台設定
+sudo ln -s /etc/nginx/sites-available/arcana-angular /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+---
+
+### 2. Docker 部署
+
+**Dockerfile（多階段建置）：**
+
+```dockerfile
+# ── Stage 1: Build ──────────────────────────────────────────
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
+# ── Stage 2: Serve ──────────────────────────────────────────
+FROM nginx:alpine
+
+# 複製建置產出
+COPY --from=builder /app/dist/arcana-angular/browser /usr/share/nginx/html
+
+# 自訂 Nginx 設定（支援 SPA 路由）
+RUN echo 'server { \
+    listen 80; \
+    root /usr/share/nginx/html; \
+    index index.html; \
+    location / { \
+        try_files $uri $uri/ /index.html; \
+    } \
+}' > /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+**建置與執行：**
+
+```bash
+# 建置映像
+docker build -t arcana-angular:latest .
+
+# 執行容器
+docker run -d -p 8080:80 --name arcana-angular arcana-angular:latest
+
+# 開啟瀏覽器：http://localhost:8080
+```
+
+**Docker Compose（`docker-compose.yml`）：**
+
+```yaml
+version: '3.8'
+
+services:
+  arcana-angular:
+    build: .
+    image: arcana-angular:latest
+    container_name: arcana-angular
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+```
+
+```bash
+# 啟動服務
+docker compose up -d
+
+# 查看日誌
+docker compose logs -f
+
+# 停止服務
+docker compose down
+```
+
+---
+
+### 3. Kubernetes 部署
+
+建立以下 YAML 檔案（`k8s-arcana-angular.yaml`）：
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arcana-angular
+  labels:
+    app: arcana-angular
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: arcana-angular
+  template:
+    metadata:
+      labels:
+        app: arcana-angular
+    spec:
+      containers:
+        - name: arcana-angular
+          image: arcana-angular:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: arcana-angular-service
+spec:
+  selector:
+    app: arcana-angular
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+```
+
+**部署指令：**
+
+```bash
+# 套用設定
+kubectl apply -f k8s-arcana-angular.yaml
+
+# 查看部署狀態
+kubectl get deployments
+kubectl get pods
+kubectl get services
+
+# 查看 Pod 日誌
+kubectl logs -l app=arcana-angular
+
+# 更新映像版本
+kubectl set image deployment/arcana-angular \
+  arcana-angular=arcana-angular:v2.0.0
+
+# 刪除部署
+kubectl delete -f k8s-arcana-angular.yaml
+```
+
+---
