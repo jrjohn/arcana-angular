@@ -33,9 +33,9 @@ export enum UserActionType {
   providedIn: 'root',
 })
 export class AnalyticsService {
-  private sessionService = inject(SessionManagementService);
-  private eventTracking = inject(EventTrackingService);
-  private networkStatus = inject(NetworkStatusService);
+  private readonly sessionService = inject(SessionManagementService);
+  private readonly eventTracking = inject(EventTrackingService);
+  private readonly networkStatus = inject(NetworkStatusService);
 
   constructor() {
     this.initializeAnalytics();

@@ -13,8 +13,8 @@ import { AppError } from '../../../domain/entities/app-error.model';
  */
 @Injectable()
 export class UserPanelViewModel {
-  private userService = inject(UserService);
-  private navGraph = inject(NavGraphService);
+  private readonly userService = inject(UserService);
+  private readonly navGraph = inject(NavGraphService);
 
   // State signals - Private internal state
   private readonly usersSignal = signal<User[]>([]);

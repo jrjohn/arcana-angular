@@ -24,9 +24,9 @@ import { AppError } from '../entities/app-error.model';
   providedIn: 'root',
 })
 export class EventTrackingService implements OnDestroy {
-  private router = inject(Router);
-  private sessionService = inject(SessionManagementService);
-  private indexedDb = inject(IndexedDbService);
+  private readonly router = inject(Router);
+  private readonly sessionService = inject(SessionManagementService);
+  private readonly indexedDb = inject(IndexedDbService);
 
   private eventQueue: AnalyticsEvent[] = [];
   private readonly MAX_QUEUE_SIZE = 100;

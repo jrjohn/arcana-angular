@@ -32,7 +32,7 @@ export class UserPanelComponent implements OnInit, OnDestroy {
   @Output() close = new EventEmitter<void>(); // NOSONAR
 
   // Inject dependencies using Angular 14+ inject() function
-  private viewModel = inject(UserPanelViewModel);
+  private readonly viewModel = inject(UserPanelViewModel);
 
   // Expose ViewModel output to template
   readonly vm = this.viewModel.output;
@@ -44,7 +44,7 @@ export class UserPanelComponent implements OnInit, OnDestroy {
   Math = Math;
 
   // Component lifecycle management
-  private destroy$ = new Subject<void>();
+  private readonly destroy$ = new Subject<void>();
 
   constructor() {
     this.setupEffects();

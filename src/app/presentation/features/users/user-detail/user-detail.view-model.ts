@@ -16,7 +16,7 @@ export class UserDetailViewModel extends BaseViewModel {
   // ========== PRIVATE STATE ==========
   private userIdSignal = signal<string | null>(null);
   private userSignal = signal<User | null>(null);
-  private isLoadingSignal = signal(false);
+  private readonly isLoadingSignal = signal(false);
   private errorSignal = signal<AppError | null>(null);
 
   // ========== INPUT (Actions) ==========

@@ -26,15 +26,15 @@ import { RightPanelComponent } from '../right-panel/right-panel.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainLayoutComponent implements OnInit, OnDestroy {
-  private breakpointObserver = inject(BreakpointObserver);
-  private destroy$ = new Subject<void>();
+  private readonly breakpointObserver = inject(BreakpointObserver);
+  private readonly destroy$ = new Subject<void>();
 
   sidebarCollapsed = signal(false);
   sidebarMobileOpen = signal(false);
   rightPanelOpen = signal(false);
 
   // Track if current viewport is mobile (SSR-safe)
-  private isMobile = signal(false);
+  private readonly isMobile = signal(false);
 
   ngOnInit(): void {
     // Observe mobile breakpoint changes

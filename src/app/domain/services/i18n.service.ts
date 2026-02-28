@@ -606,7 +606,7 @@ export class I18nService {
     // Interpolate parameters
     if (params) {
       Object.entries(params).forEach(([paramKey, paramValue]) => {
-        translation = translation.replace(
+        translation = translation.replaceAll(
           new RegExp(`{{${paramKey}}}`, 'g'),
           String(paramValue)
         );

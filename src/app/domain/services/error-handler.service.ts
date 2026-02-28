@@ -143,7 +143,7 @@ export class ErrorHandlerService {
     }
 
     // In production, send to external logging service
-    // TODO: Implement external logging (e.g., Sentry, LogRocket) // NOSONAR
+
   }
 
   /**

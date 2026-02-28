@@ -12,7 +12,7 @@ import { BaseViewModel } from '../../../shared/base';
  */
 @Injectable()
 export class UserListViewModel extends BaseViewModel {
-  private userService = inject(UserService);
+  private readonly userService = inject(UserService);
 
   // State signals
   private readonly usersSignal = signal<User[]>([]);

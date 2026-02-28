@@ -39,8 +39,8 @@ export class UserListComponent extends BaseComponent implements OnInit {
   private readonly searchSubject$ = new Subject<string>();
 
   vm = inject(UserListViewModel);
-  private modalService = inject(NgbModal);
-  private i18nService = inject(I18nService);
+  private readonly modalService = inject(NgbModal);
+  private readonly i18nService = inject(I18nService);
 
   searchQuery = '';
   showSuccessAlert = false;

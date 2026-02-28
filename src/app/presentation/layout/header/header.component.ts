@@ -40,8 +40,8 @@ export class HeaderComponent {
   @Output() sidebarToggle = new EventEmitter<void>();
   @Output() rightPanelToggle = new EventEmitter<void>();
 
-  private navGraph = inject(NavGraphService);
-  private i18nService = inject(I18nService);
+  private readonly navGraph = inject(NavGraphService);
+  private readonly i18nService = inject(I18nService);
 
   // Get current language from I18nService
   currentLanguage = computed(() => {

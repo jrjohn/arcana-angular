@@ -18,7 +18,7 @@ import { User } from '../entities/user.model';
   providedIn: 'root'
 })
 export class NavGraphService {
-  private router = inject(Router);
+  private readonly router = inject(Router);
 
   /**
    * Navigation to Home/Dashboard

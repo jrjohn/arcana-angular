@@ -84,16 +84,16 @@ export class SanitizationService {
     if (!text) return '';
 
     // Remove all HTML tags
-    let sanitized = text.replace(/<[^>]*>/g, '');
+    let sanitized = text.replaceAll(/<[^>]*>/g, '');
 
     // Escape special HTML characters
     sanitized = sanitized
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#x27;')
-      .replace(/\//g, '&#x2F;');
+      .replaceAll(/&/g, '&amp;')
+      .replaceAll(/</g, '&lt;')
+      .replaceAll(/>/g, '&gt;')
+      .replaceAll(/"/g, '&quot;')
+      .replaceAll(/'/g, '&#x27;')
+      .replaceAll(/\//g, '&#x2F;');
 
     return sanitized.trim();
   }
@@ -126,7 +126,7 @@ export class SanitizationService {
 
     // Apply character filter if provided
     if (options.allowedChars) {
-      sanitized = sanitized.replace(new RegExp(`[^${options.allowedChars.source}]`, 'g'), '');
+      sanitized = sanitized.replaceAll(new RegExp(`[^${options.allowedChars.source}]`, 'g'), '');
     }
 
     // Trim to max length
@@ -173,10 +173,10 @@ export class SanitizationService {
     if (!filename) return '';
 
     // Remove path separators
-    let sanitized = filename.replace(/[/\\]/g, '');
+    let sanitized = filename.replaceAll(/[/\\]/g, '');
 
     // Remove potentially dangerous characters
-    sanitized = sanitized.replace(/[^a-zA-Z0-9._-]/g, '_');
+    sanitized = sanitized.replaceAll(/[^a-zA-Z0-9._-]/g, '_');
 
     // Remove leading dots (hidden files)
     sanitized = sanitized.replace(/^\.+/, '');
@@ -198,12 +198,12 @@ export class SanitizationService {
 
     // Remove common SQL injection patterns
     let sanitized = input
-      .replace(/'/g, '')  // Remove single quotes
-      .replace(/"/g, '')  // Remove double quotes
-      .replace(/;/g, '')  // Remove semicolons
-      .replace(/--/g, '') // Remove SQL comments
-      .replace(/\/\*/g, '') // Remove block comment start
-      .replace(/\*\//g, ''); // Remove block comment end
+      .replaceAll(/'/g, '')  // Remove single quotes
+      .replaceAll(/"/g, '')  // Remove double quotes
+      .replaceAll(/;/g, '')  // Remove semicolons
+      .replaceAll(/--/g, '') // Remove SQL comments
+      .replaceAll(/\/\*/g, '') // Remove block comment start
+      .replaceAll(/\*\//g, ''); // Remove block comment end
 
     return sanitized.trim();
   }
