@@ -1,10 +1,12 @@
 services:
   test:
-    image: zenika/alpine-chrome:124-with-node-22
+    build:
+      context: .
+      dockerfile: Dockerfile.test
     working_dir: /app
-    volumes:
-      - .:/app
     environment:
-      - CHROME_FLAGS=--no-sandbox --disable-gpu --disable-dev-shm-usage
+      - CHROME_BIN=/usr/bin/chromium
+    volumes:
+      - ./coverage:/app/coverage
     command: >
-      sh -c "npm ci && npx ng test --watch=false --browsers=ChromeHeadlessNoSandbox"
+      npx ng test --watch=false --browsers=ChromeHeadlessNoSandbox
