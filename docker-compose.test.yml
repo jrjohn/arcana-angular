@@ -1,0 +1,10 @@
+services:
+  test:
+    image: zenika/alpine-chrome:124-with-node-22
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - CHROME_FLAGS=--no-sandbox --disable-gpu --disable-dev-shm-usage
+    command: >
+      sh -c "npm ci && npx ng test --watch=false --browsers=ChromeHeadlessNoSandbox"
