@@ -92,7 +92,14 @@
               "src/styles.scss"
             ],
             "karmaConfig": "karma.conf.js",
-            "codeCoverage": true
+            "codeCoverage": true,
+            "browsers": [
+              "ChromeHeadlessNoSandbox"
+            ],
+            "reporters": [
+              "progress",
+              "coverage"
+            ]
           }
         }
       }

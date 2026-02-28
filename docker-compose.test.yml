@@ -8,5 +8,4 @@ services:
       - CHROME_BIN=/usr/bin/chromium
     volumes:
       - ./coverage:/app/coverage
-    command: >
-      npx ng test --watch=false --browsers=ChromeHeadlessNoSandbox
+    command: npx ng test --watch=false
