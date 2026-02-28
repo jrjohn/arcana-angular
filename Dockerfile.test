@@ -3,7 +3,15 @@ FROM node:22-bookworm-slim
 RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium \
     && rm -rf /var/lib/apt/lists/*
-ENV CHROME_BIN=/usr/bin/chromium
+
+# Wrapper: always inject --no-sandbox so ChromeHeadless works as root in Docker
+RUN printf '#!/bin/sh\nexec /usr/bin/chromium --no-sandbox "$@"\n' \
+      > /usr/local/bin/chromium-nosandbox && \
+    chmod +x /usr/local/bin/chromium-nosandbox
+
+# karma-chrome-launcher reads CHROME_BIN to locate the browser
+ENV CHROME_BIN=/usr/local/bin/chromium-nosandbox
+
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci

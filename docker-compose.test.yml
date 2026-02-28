@@ -4,8 +4,6 @@ services:
       context: .
       dockerfile: Dockerfile.test
     working_dir: /app
-    environment:
-      - CHROME_BIN=/usr/bin/chromium
     volumes:
       - ./coverage:/app/coverage
     command: npx ng test --watch=false --no-progress --browsers=ChromeHeadless --code-coverage
