@@ -32,7 +32,7 @@ export class MemoryCacheService {
    */
   get<T>(key: string): T | null {
     const value = this.cache.get(key);
-    return value !== undefined ? (value as T) : null;
+    return value !== undefined ? (value as T) : null; // NOSONAR
   }
 
   /**

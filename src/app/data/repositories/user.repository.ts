@@ -26,11 +26,11 @@ export class UserRepository {
   private readonly cacheKeyPrefix = 'user';
 
   constructor(
-    private apiService: ApiService,
-    private memoryCache: MemoryCacheService,
-    private lruCache: CacheService,
-    private indexedDb: IndexedDbService,
-    private networkStatus: NetworkStatusService
+    private readonly apiService: ApiService,
+    private readonly memoryCache: MemoryCacheService,
+    private readonly lruCache: CacheService,
+    private readonly indexedDb: IndexedDbService,
+    private readonly networkStatus: NetworkStatusService
   ) {}
 
   /**

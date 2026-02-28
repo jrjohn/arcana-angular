@@ -90,11 +90,11 @@ export class EventTrackingService implements OnDestroy {
 
       metadata: options?.metadata || {},
 
-      url: window.location.href,
+      url: globalThis.window.location.href,
       userAgent: navigator.userAgent,
       viewport: {
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: globalThis.window.innerWidth,
+        height: globalThis.window.innerHeight,
       },
     };
 
@@ -137,11 +137,11 @@ export class EventTrackingService implements OnDestroy {
         ...metadata,
       },
 
-      url: window.location.href,
+      url: globalThis.window.location.href,
       userAgent: navigator.userAgent,
       viewport: {
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: globalThis.window.innerWidth,
+        height: globalThis.window.innerHeight,
       },
     };
 
@@ -176,11 +176,11 @@ export class EventTrackingService implements OnDestroy {
 
       metadata: metadata || {},
 
-      url: window.location.href,
+      url: globalThis.window.location.href,
       userAgent: navigator.userAgent,
       viewport: {
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: globalThis.window.innerWidth,
+        height: globalThis.window.innerHeight,
       },
     };
 
@@ -367,8 +367,8 @@ export class EventTrackingService implements OnDestroy {
     }, this.FLUSH_INTERVAL);
 
     // Flush on page unload
-    if (typeof window !== 'undefined') {
-      window.addEventListener('beforeunload', () => {
+    if (typeof globalThis !== 'undefined') {
+      globalThis.window.addEventListener('beforeunload', () => {
         this.flushEvents();
       });
     }
@@ -378,10 +378,10 @@ export class EventTrackingService implements OnDestroy {
    * Setup global error tracking
    */
   private setupErrorTracking(): void {
-    if (typeof window === 'undefined') return;
+    if (typeof globalThis === 'undefined') return;
 
     // Track unhandled errors
-    window.addEventListener('error', (event: ErrorEvent) => {
+    globalThis.window.addEventListener('error', (event: ErrorEvent) => {
       this.trackError(
         new Error(event.message),
         AnalyticsErrorCode.E90001,
@@ -394,7 +394,7 @@ export class EventTrackingService implements OnDestroy {
     });
 
     // Track unhandled promise rejections
-    window.addEventListener('unhandledrejection', (event: PromiseRejectionEvent) => {
+    globalThis.window.addEventListener('unhandledrejection', (event: PromiseRejectionEvent) => {
       this.trackError(
         new Error(event.reason?.toString() || 'Unhandled promise rejection'),
         AnalyticsErrorCode.E90001,
@@ -409,10 +409,10 @@ export class EventTrackingService implements OnDestroy {
    * Setup performance tracking
    */
   private setupPerformanceTracking(): void {
-    if (typeof window === 'undefined' || !('performance' in window)) return;
+    if (typeof globalThis === 'undefined' || !('performance' in globalThis)) return;
 
     // Track page load time
-    window.addEventListener('load', () => {
+    globalThis.window.addEventListener('load', () => {
       setTimeout(() => {
         const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
 

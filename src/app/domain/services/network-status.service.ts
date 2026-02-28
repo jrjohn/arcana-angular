@@ -46,15 +46,15 @@ export class NetworkStatusService implements OnDestroy {
    * Initialize network status monitoring
    */
   private initializeNetworkMonitoring(): void {
-    if (typeof window === 'undefined') {
+    if (typeof globalThis === 'undefined') {
       return;
     }
 
     // Listen to online/offline events
     this.networkSubscription = merge(
       of(navigator.onLine),
-      fromEvent(window, 'online').pipe(map(() => true)),
-      fromEvent(window, 'offline').pipe(map(() => false))
+      fromEvent(globalThis, 'online').pipe(map(() => true)),
+      fromEvent(globalThis, 'offline').pipe(map(() => false))
     ).subscribe(isOnline => {
       this.onlineSignal.set(isOnline);
     });

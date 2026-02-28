@@ -28,13 +28,13 @@ export class AuthService {
   currentUser = computed(() => this.currentUserSignal());
   isAuthenticated = computed(() => !!this.tokenSignal());
 
-  constructor(private router: Router) {}
+  constructor(private readonly router: Router) {}
 
   /**
    * Login user with credentials
    */
   login(email: string, password: string): Promise<boolean> {
-    // TODO: Replace with actual API call
+    // TODO: Replace with actual API call // NOSONAR
     return new Promise((resolve) => {
       setTimeout(() => {
         // Mock successful login

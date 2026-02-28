@@ -178,7 +178,7 @@ export class NavGraphService {
    * Navigate back to previous page
    */
   back(): void {
-    window.history.back();
+    globalThis.window.history.back();
   }
 
   /**

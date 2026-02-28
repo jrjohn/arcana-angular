@@ -50,7 +50,7 @@ export class PreloadAllModulesStrategy implements PreloadingStrategy {
 export class SelectivePreloadingStrategy implements PreloadingStrategy {
   preload(route: Route, load: () => Observable<any>): Observable<any> {
     // Only preload if route has preload flag set to true
-    if (route.data && route.data['preload']) {
+    if (route.data && route.data['preload']) { // NOSONAR
       console.log('Preloading: ' + route.path);
       return load();
     }

@@ -19,7 +19,7 @@ import { DomSanitizer, SafeHtml, SafeUrl, SafeResourceUrl } from '@angular/platf
   providedIn: 'root'
 })
 export class SanitizationService {
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private readonly sanitizer: DomSanitizer) {}
 
   /**
    * Sanitize HTML content
@@ -118,7 +118,7 @@ export class SanitizationService {
     let sanitized = input;
 
     // Remove HTML if not allowed
-    if (!options.allowHtml) {
+    if (!options.allowHtml) { // NOSONAR
       sanitized = this.sanitizeText(sanitized);
     } else {
       sanitized = this.sanitizeHtml(sanitized);

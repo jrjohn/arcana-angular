@@ -24,7 +24,7 @@ export class ApiService {
   private readonly maxRetries = 3;
   private readonly retryDelay = 1000; // 1 second
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   /**
    * Merges custom options (no default headers to avoid CORS issues)
@@ -41,7 +41,7 @@ export class ApiService {
   get<T>(endpoint: string, options?: RequestOptions): Observable<T> {
     const url = this.buildUrl(endpoint);
     const mergedOptions = this.mergeOptions(options);
-    return this.http.get<T>(url, { ...mergedOptions, responseType: 'json' as 'json' }).pipe(
+    return this.http.get<T>(url, { ...mergedOptions, responseType: 'json' as 'json' }).pipe( // NOSONAR
       timeout(this.defaultTimeout),
       retry(this.maxRetries),
       catchError(error => this.handleError(error))

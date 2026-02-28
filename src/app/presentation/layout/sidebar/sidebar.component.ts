@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, signal, inject, computed, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, signal, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';

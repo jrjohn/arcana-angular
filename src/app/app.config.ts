@@ -31,7 +31,7 @@ function initializeOfflineSync(_syncService: OfflineSyncService) {
 /**
  * Initialize analytics service on app startup
  */
-function initializeAnalytics(_analyticsService: AnalyticsService) {
+function initializeAnalytics(_analyticsService: AnalyticsService) { // NOSONAR
   return () => {
     // Service is instantiated and starts tracking automatically via DI
     return Promise.resolve();

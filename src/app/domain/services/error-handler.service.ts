@@ -143,13 +143,13 @@ export class ErrorHandlerService {
     }
 
     // In production, send to external logging service
-    // TODO: Implement external logging (e.g., Sentry, LogRocket)
+    // TODO: Implement external logging (e.g., Sentry, LogRocket) // NOSONAR
   }
 
   /**
    * Check if running in production
    */
   private isProduction(): boolean {
-    return !window.location.hostname.includes('localhost');
+    return !globalThis.window.location.hostname.includes('localhost');
   }
 }

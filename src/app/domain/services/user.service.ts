@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Observable, map, tap, catchError, throwError } from 'rxjs';
+import { Observable, tap, catchError, throwError } from 'rxjs';
 import { UserRepository } from '../../repository/user.repository';
 import { USER_REPOSITORY_TOKEN } from '../../repository/repository.tokens';
 import {

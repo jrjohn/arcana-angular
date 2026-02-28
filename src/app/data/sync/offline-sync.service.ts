@@ -20,9 +20,9 @@ export class OfflineSyncService {
   private readonly maxRetries = 3;
 
   constructor(
-    private networkStatus: NetworkStatusService,
-    private indexedDb: IndexedDbService,
-    private apiService: ApiService
+    private readonly networkStatus: NetworkStatusService,
+    private readonly indexedDb: IndexedDbService,
+    private readonly apiService: ApiService
   ) {
     this.initializeSyncMonitoring();
   }

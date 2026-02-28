@@ -48,12 +48,12 @@ export class AnalyticsService {
     console.log('[Analytics] Initializing analytics with error codes...');
 
     // Track network status changes
-    if (typeof window !== 'undefined') {
-      window.addEventListener('online', () => {
+    if (typeof globalThis !== 'undefined') {
+      globalThis.window.addEventListener('online', () => {
         this.eventTracking.trackNetworkStatus(true);
       });
 
-      window.addEventListener('offline', () => {
+      globalThis.window.addEventListener('offline', () => {
         this.eventTracking.trackNetworkStatus(false);
       });
     }

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const coverageFile = path.join(__dirname, '../coverage/arcana-angular/coverage-summary.json');
 if (!fs.existsSync(coverageFile)) {

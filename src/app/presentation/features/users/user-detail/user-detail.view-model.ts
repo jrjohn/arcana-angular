@@ -92,8 +92,8 @@ export class UserDetailViewModel extends BaseViewModel {
   };
 
   constructor(
-    private userService: UserService,
-    private errorHandler: ErrorHandlerService
+    private readonly userService: UserService,
+    private readonly errorHandler: ErrorHandlerService
   ) {
     super();
 

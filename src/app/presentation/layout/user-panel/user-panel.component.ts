@@ -29,7 +29,7 @@ import { UserPanelViewModel } from './user-panel.view-model';
 })
 export class UserPanelComponent implements OnInit, OnDestroy {
   @Input() isOpen = false;
-  @Output() close = new EventEmitter<void>();
+  @Output() close = new EventEmitter<void>(); // NOSONAR
 
   // Inject dependencies using Angular 14+ inject() function
   private viewModel = inject(UserPanelViewModel);

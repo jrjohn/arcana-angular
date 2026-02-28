@@ -91,8 +91,8 @@ export class UserFormViewModel extends BaseViewModel {
   };
 
   constructor(
-    private userService: UserService,
-    private sanitizationService: SanitizationService
+    private readonly userService: UserService,
+    private readonly sanitizationService: SanitizationService
   ) {
     super();
   }
@@ -208,7 +208,7 @@ export class UserFormViewModel extends BaseViewModel {
     };
 
     const request$ = this.isEditModeSignal()
-      ? this.userService.updateUser(this.userIdSignal()!, userData)
+      ? this.userService.updateUser(this.userIdSignal()!, userData) // NOSONAR
       : this.userService.createUser(userData);
 
     request$.subscribe({

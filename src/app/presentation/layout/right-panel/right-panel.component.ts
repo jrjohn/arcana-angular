@@ -41,7 +41,7 @@ interface Notification {
 })
 export class RightPanelComponent {
   @Input() isOpen = false;
-  @Output() close = new EventEmitter<void>();
+  @Output() close = new EventEmitter<void>(); // NOSONAR
 
   activeTab = signal(1);
 

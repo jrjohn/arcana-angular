@@ -25,8 +25,8 @@ export class NetworkMonitorService {
    */
   readonly onlineStatus$ = merge(
     of(navigator.onLine),
-    fromEvent(window, 'online').pipe(map(() => true)),
-    fromEvent(window, 'offline').pipe(map(() => false))
+    fromEvent(globalThis, 'online').pipe(map(() => true)),
+    fromEvent(globalThis, 'offline').pipe(map(() => false))
   );
 
   constructor() {
@@ -38,12 +38,12 @@ export class NetworkMonitorService {
    * Setup event listeners for online/offline events
    */
   private setupListeners(): void {
-    window.addEventListener('online', () => {
+    globalThis.window.addEventListener('online', () => {
       this.isOnlineSignal.set(true);
       console.log('[NetworkMonitor] Status changed: ONLINE');
     });
 
-    window.addEventListener('offline', () => {
+    globalThis.window.addEventListener('offline', () => {
       this.isOnlineSignal.set(false);
       console.log('[NetworkMonitor] Status changed: OFFLINE');
     });

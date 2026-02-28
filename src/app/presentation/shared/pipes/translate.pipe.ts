@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, effect } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { I18nService } from '../../../domain/services/i18n.service';
 
 /**
@@ -20,7 +20,7 @@ export class TranslatePipe implements PipeTransform {
   private lastValue: string | null = null;
   private lastLanguage: string | null = null;
 
-  constructor(private i18n: I18nService) {}
+  constructor(private readonly i18n: I18nService) {}
 
   transform(key: string, params?: Record<string, string | number>): string {
     const currentLanguage = this.i18n.getCurrentLanguage();

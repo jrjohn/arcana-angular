@@ -49,7 +49,7 @@ export class SidebarViewModel {
     loadError$: new Subject<Error>(),
   };
 
-  constructor(private userService: UserService) {
+  constructor(private readonly userService: UserService) {
     // Auto-load user count on initialization
     effect(() => {
       this.loadUserCount();

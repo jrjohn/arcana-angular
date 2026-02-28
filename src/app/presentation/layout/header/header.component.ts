@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, signal, inject, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Output, EventEmitter, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
