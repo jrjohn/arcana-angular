@@ -5,7 +5,7 @@ import {
   SingleUserResponseDto,
   CreateUserRequestDto,
   UpdateUserRequestDto,
-} from '../../data/dto/user.dto';
+} from '../data/dto/user.dto';
 
 /**
  * IUserDao — HTTP-level DAO interface for User resources.
