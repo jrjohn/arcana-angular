@@ -90,7 +90,7 @@
               </div>
             } @else {
               @for (notification of notifications(); track notification.id) {
-                <div <!-- NOSONAR -->
+                <div
                   class="notification-item"
                   [class.unread]="!notification.read"
                   (click)="markAsRead(notification)"

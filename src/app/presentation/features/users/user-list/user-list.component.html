@@ -66,7 +66,7 @@
             [disabled]="vm.output.isRefreshing()"
           >
             @if (vm.output.isRefreshing()) {
-              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> <!-- NOSONAR -->
+              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
             } @else {
               <i class="bi bi-arrow-clockwise me-2"></i>
             }
@@ -138,7 +138,7 @@
           </thead>
           <tbody>
             @for (user of vm.output.users(); track user.id) {
-              <tr class="cursor-pointer" (click)="vm.input.selectUser(user)"> <!-- NOSONAR -->
+              <tr class="cursor-pointer" (click)="vm.input.selectUser(user)">
                 <td>
                   <span class="badge bg-secondary">{{ user.id }}</span>
                 </td>
@@ -162,7 +162,7 @@
                 </td>
                 <td>{{ user.email }}</td>
                 <td class="text-end">
-                  <div class="btn-group" role="group"> <!-- NOSONAR -->
+                  <div class="btn-group" role="group">
                     <button
                       type="button"
                       class="btn btn-sm btn-outline-primary"

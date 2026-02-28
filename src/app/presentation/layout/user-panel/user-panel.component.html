@@ -65,7 +65,7 @@
     } @else {
       <div class="user-list">
         @for (user of vm.users(); track user.id) {
-          <div class="user-item" (click)="onViewUser(user)"> <!-- NOSONAR -->
+          <div class="user-item" (click)="onViewUser(user)">
             <div class="user-avatar">
               @if (user.avatar) {
                 <img [src]="user.avatar" [alt]="user.firstName + ' ' + user.lastName" />
@@ -119,5 +119,5 @@
 
 <!-- Overlay -->
 @if (isOpen) {
-  <div class="panel-overlay" (click)="onClose()"></div> <!-- NOSONAR -->
+  <div class="panel-overlay" (click)="onClose()"></div>
 }
