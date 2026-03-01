@@ -91,8 +91,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "codeCoverage": true,
-            "karmaConfig": "karma.conf.js"
+            "codeCoverage": true
           }
         }
       }
