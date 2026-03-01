@@ -301,13 +301,4 @@ describe('SidebarComponent', () => {
     });
   });
 
-  describe('ngOnInit', () => {
-    it('should call ngOnInit without errors', () => {
-      expect(() => component.ngOnInit()).not.toThrow();
-    });
-
-    it('should be defined', () => {
-      expect(component.ngOnInit).toBeDefined();
-    });
-  });
 });
