@@ -72,8 +72,8 @@ describe('UserRepositoryImpl', () => {
     mockMemoryCache.get.and.returnValue(null);
     mockLruCache.get.and.returnValue(null);
     mockIndexedDb.getAllUsers.and.returnValue(Promise.resolve([]));
-    mockIndexedDb.getUserById.and.returnValue(Promise.resolve(null));
-    mockIndexedDb.saveUser.and.returnValue(Promise.resolve());
+    mockIndexedDb.getUserById.and.returnValue(Promise.resolve(undefined));
+    mockIndexedDb.saveUser.and.returnValue(Promise.resolve('cached-id'));
     mockIndexedDb.deleteUser.and.returnValue(Promise.resolve());
     mockIndexedDb.addPendingOperation.and.returnValue(Promise.resolve(1));
 

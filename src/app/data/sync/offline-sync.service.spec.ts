@@ -17,7 +17,7 @@ describe('OfflineSyncService', () => {
     entityId: '42',
     operationType: 'update',
     payload: { id: '42', firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', avatar: '', createdAt: new Date(), updatedAt: new Date() },
-    timestamp: Date.now(),
+    timestamp: new Date(),
     retryCount: 0,
     ...overrides,
   });
