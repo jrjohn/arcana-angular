@@ -6,28 +6,4 @@ services:
     working_dir: /app
     volumes:
       - ./coverage:/app/coverage
-    command: >
-      sh -c "
-        node -e \"
-          var fs = require('fs');
-          var p = '/app/node_modules/karma-coverage/lib/reporter.js';
-          var s = fs.readFileSync(p,'utf8');
-          if (s.indexOf('lcov-injected') < 0) {
-            // karma-coverage 2.2.x: var config = rootConfig.coverageReporter || {}
-            // then: var reporters = config.reporters
-            var patched = s.replace(
-              'var reporters = config.reporters',
-              'if (!config.reporters) { config.reporters = [{type:\"html\",subdir:\".\"},{type:\"lcovonly\",subdir:\".\",file:\"lcov.info\"}]; } /* lcov-injected */\n  var reporters = config.reporters'
-            );
-            if (patched !== s) {
-              fs.writeFileSync(p, patched);
-              console.log('[lcov-inject] karma-coverage patched OK');
-            } else {
-              console.log('[lcov-inject] WARNING: patch target not found');
-            }
-          } else {
-            console.log('[lcov-inject] already patched');
-          }
-        \" &&
-        npx ng test --watch=false --no-progress --browsers=ChromeHeadless --code-coverage
-      "
+    command: sh -c "node /app/coverage-patch.js && npx ng test --watch=false --no-progress --browsers=ChromeHeadless --code-coverage"
