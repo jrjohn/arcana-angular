@@ -5,7 +5,7 @@ import { UserPanelViewModel } from './user-panel.view-model';
 import { UserService } from '../../../domain/services/user.service';
 import { NavGraphService } from '../../../domain/services/nav-graph.service';
 import { User } from '../../../domain/entities/user.model';
-import { AppError, ErrorType } from '../../../domain/entities/app-error.model';
+import { AppError, ErrorType } from '../../../domain/models/app-error';
 
 describe('UserPanelViewModel', () => {
   let vm: UserPanelViewModel;

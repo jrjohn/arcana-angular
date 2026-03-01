@@ -4,6 +4,7 @@ import { OfflineSyncService } from './offline-sync.service';
 import { NetworkStatusService } from '../../domain/services/network-status.service';
 import { IndexedDbService, PendingOperation } from '../storage/indexed-db.service';
 import { ApiService } from '../api/api.service';
+import { User } from '../../domain/entities/user.model';
 
 describe('OfflineSyncService', () => {
   let service: OfflineSyncService;
@@ -11,12 +12,32 @@ describe('OfflineSyncService', () => {
   let mockIndexedDb: jasmine.SpyObj<IndexedDbService>;
   let mockApiService: jasmine.SpyObj<ApiService>;
 
+  const mockUser: User = {
+    id: '42',
+    firstName: 'Alice',
+    lastName: 'Smith',
+    email: 'alice@example.com',
+    avatar: '',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
+
+  const mockApiResponse = {
+    id: '42',
+    first_name: 'Alice',
+    last_name: 'Smith',
+    email: 'alice@example.com',
+    avatar: '',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
   const makePendingOp = (overrides: Partial<PendingOperation> = {}): PendingOperation => ({
     id: 1,
+    type: 'update',
     entityType: 'user',
     entityId: '42',
-    operationType: 'update',
-    payload: { id: '42', firstName: 'Alice', lastName: 'Smith', email: 'alice@example.com', avatar: '', createdAt: new Date(), updatedAt: new Date() },
+    data: mockUser,
     timestamp: new Date(),
     retryCount: 0,
     ...overrides,
@@ -25,20 +46,23 @@ describe('OfflineSyncService', () => {
   beforeEach(() => {
     mockNetworkStatus = jasmine.createSpyObj<NetworkStatusService>(
       'NetworkStatusService',
-      ['checkOnline', 'checkOffline'],
-      { isOnline: jasmine.createSpy().and.returnValue(true), isOffline: false }
+      [],
+      { isOffline: false }
     );
+    // isOnline is a signal - mock as a function returning true
+    (mockNetworkStatus as any).isOnline = jasmine.createSpy('isOnline').and.returnValue(true);
+
     mockIndexedDb = jasmine.createSpyObj('IndexedDbService', [
-      'getPendingOperations', 'markOperationComplete', 'incrementRetryCount',
+      'getPendingOperations', 'deletePendingOperation', 'incrementRetryCount',
       'deleteUser', 'saveUser', 'getAllUsers', 'getUserById', 'addPendingOperation'
     ]);
     mockApiService = jasmine.createSpyObj('ApiService', ['get', 'post', 'put', 'delete']);
 
     mockIndexedDb.getPendingOperations.and.returnValue(Promise.resolve([]));
-    mockIndexedDb.markOperationComplete.and.returnValue(Promise.resolve());
+    mockIndexedDb.deletePendingOperation.and.returnValue(Promise.resolve());
     mockIndexedDb.incrementRetryCount.and.returnValue(Promise.resolve());
     mockIndexedDb.deleteUser.and.returnValue(Promise.resolve());
-    mockIndexedDb.saveUser.and.returnValue(Promise.resolve());
+    mockIndexedDb.saveUser.and.returnValue(Promise.resolve('42'));
 
     TestBed.configureTestingModule({
       providers: [
@@ -86,55 +110,61 @@ describe('OfflineSyncService', () => {
     });
 
     it('should do nothing when no pending operations', async () => {
-      (mockNetworkStatus as any).isOffline = false;
       mockIndexedDb.getPendingOperations.and.returnValue(Promise.resolve([]));
       await service.syncPendingOperations();
-      expect(mockIndexedDb.markOperationComplete).not.toHaveBeenCalled();
+      expect(mockIndexedDb.deletePendingOperation).not.toHaveBeenCalled();
     });
 
-    it('should sync update operations', async () => {
-      (mockNetworkStatus as any).isOffline = false;
-      const op = makePendingOp({ operationType: 'update' });
+    it('should sync update operations and remove them on success', async () => {
+      const op = makePendingOp({ type: 'update' });
       mockIndexedDb.getPendingOperations.and.returnValue(Promise.resolve([op]));
-      mockApiService.put.and.returnValue(of({ id: '42', email: 'alice@example.com', first_name: 'Alice', last_name: 'Smith', avatar: '', createdAt: '', updatedAt: '' }));
+      mockApiService.put.and.returnValue(of(mockApiResponse));
       await service.syncPendingOperations();
       expect(mockApiService.put).toHaveBeenCalled();
+      expect(mockIndexedDb.deletePendingOperation).toHaveBeenCalledWith(1);
     });
 
     it('should sync create operations', async () => {
-      (mockNetworkStatus as any).isOffline = false;
-      const op = makePendingOp({ operationType: 'create' });
+      const op = makePendingOp({ type: 'create' });
       mockIndexedDb.getPendingOperations.and.returnValue(Promise.resolve([op]));
-      mockApiService.post.and.returnValue(of({ id: '99', email: 'alice@example.com', first_name: 'Alice', last_name: 'Smith', avatar: '', createdAt: '', updatedAt: '' }));
+      mockApiService.post.and.returnValue(of({ ...mockApiResponse, id: '99' }));
       await service.syncPendingOperations();
       expect(mockApiService.post).toHaveBeenCalled();
+      expect(mockIndexedDb.deletePendingOperation).toHaveBeenCalledWith(1);
     });
 
     it('should sync delete operations', async () => {
-      (mockNetworkStatus as any).isOffline = false;
-      const op = makePendingOp({ operationType: 'delete' });
+      const op = makePendingOp({ type: 'delete' });
       mockIndexedDb.getPendingOperations.and.returnValue(Promise.resolve([op]));
       mockApiService.delete.and.returnValue(of(undefined));
       await service.syncPendingOperations();
       expect(mockApiService.delete).toHaveBeenCalled();
+      expect(mockIndexedDb.deletePendingOperation).toHaveBeenCalledWith(1);
     });
 
     it('should handle 404 on delete gracefully', async () => {
-      (mockNetworkStatus as any).isOffline = false;
-      const op = makePendingOp({ operationType: 'delete' });
+      const op = makePendingOp({ type: 'delete' });
       mockIndexedDb.getPendingOperations.and.returnValue(Promise.resolve([op]));
       mockApiService.delete.and.returnValue(throwError(() => ({ status: 404 })));
       await service.syncPendingOperations();
       expect(mockIndexedDb.deleteUser).toHaveBeenCalledWith('42');
+      expect(mockIndexedDb.deletePendingOperation).toHaveBeenCalledWith(1);
     });
 
     it('should increment retry count when operation fails', async () => {
-      (mockNetworkStatus as any).isOffline = false;
-      const op = makePendingOp({ operationType: 'update' });
+      const op = makePendingOp({ type: 'update' });
       mockIndexedDb.getPendingOperations.and.returnValue(Promise.resolve([op]));
       mockApiService.put.and.returnValue(throwError(() => new Error('Network error')));
       await service.syncPendingOperations();
       expect(mockIndexedDb.incrementRetryCount).toHaveBeenCalledWith(1);
+    });
+
+    it('should remove operation when max retries exceeded', async () => {
+      const op = makePendingOp({ type: 'update', retryCount: 3 });
+      mockIndexedDb.getPendingOperations.and.returnValue(Promise.resolve([op]));
+      mockApiService.put.and.returnValue(throwError(() => new Error('Persistent error')));
+      await service.syncPendingOperations();
+      expect(mockIndexedDb.deletePendingOperation).toHaveBeenCalledWith(1);
     });
   });
 });
