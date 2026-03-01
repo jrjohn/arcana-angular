@@ -104,7 +104,7 @@ describe('OfflineSyncService', () => {
 
   describe('syncPendingOperations', () => {
     it('should return early when offline', async () => {
-      (mockNetworkStatus as any).isOffline = true;
+      Object.defineProperty(mockNetworkStatus, 'isOffline', { get: () => true, configurable: true });
       await service.syncPendingOperations();
       expect(mockIndexedDb.getPendingOperations).not.toHaveBeenCalled();
     });

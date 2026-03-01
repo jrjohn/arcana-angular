@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 import { of } from 'rxjs';
 import { MainLayoutComponent } from './main-layout.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -22,8 +23,15 @@ describe('MainLayoutComponent', () => {
         provideRouter([]),
         { provide: BreakpointObserver, useValue: mockBreakpointObserver },
       ],
-      schemas: [NO_ERRORS_SCHEMA],
-    }).compileComponents();
+    })
+    // Override child component imports to avoid their DI dependencies
+    .overrideComponent(MainLayoutComponent, {
+      set: {
+        imports: [CommonModule, RouterOutlet],
+        template: '<router-outlet></router-outlet>',
+      }
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(MainLayoutComponent);
     component = fixture.componentInstance;
@@ -44,7 +52,6 @@ describe('MainLayoutComponent', () => {
 
   describe('toggleSidebar on desktop', () => {
     it('should toggle sidebarCollapsed', () => {
-      // breakpoint returns false (desktop) by default
       component.toggleSidebar();
       expect(component.sidebarCollapsed()).toBe(true);
       component.toggleSidebar();
@@ -67,13 +74,11 @@ describe('MainLayoutComponent', () => {
   });
 
   it('should close mobile sidebar when switching to desktop', () => {
-    // First go mobile and open sidebar
     mockBreakpointObserver.observe.and.returnValue(of(makeBreakpointResult(true)));
     component.ngOnInit();
-    component.toggleSidebar(); // opens mobile sidebar
+    component.toggleSidebar();
     expect(component.sidebarMobileOpen()).toBe(true);
 
-    // Switch to desktop — sidebar should auto-close
     mockBreakpointObserver.observe.and.returnValue(of(makeBreakpointResult(false)));
     component.ngOnInit();
     expect(component.sidebarMobileOpen()).toBe(false);
