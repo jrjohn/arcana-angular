@@ -44,11 +44,12 @@ describe('NetworkMonitorService', () => {
   });
 
   it('onlineStatus$ should emit values', (done) => {
-    let received = false;
-    service.onlineStatus$.subscribe(status => {
+    const sub = service.onlineStatus$.subscribe(status => {
       expect(typeof status).toBe('boolean');
-      received = true;
+      sub.unsubscribe();
       done();
     });
+    // Trigger an event to ensure the observable emits
+    globalThis.dispatchEvent(new Event('online'));
   });
 });

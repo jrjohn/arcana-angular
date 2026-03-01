@@ -77,6 +77,7 @@
           "builder": "@angular/build:karma",
           "options": {
             "polyfills": [
+              "@angular/localize/init",
               "zone.js",
               "zone.js/testing"
             ],

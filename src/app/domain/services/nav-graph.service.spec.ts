@@ -185,8 +185,9 @@ describe('NavGraphService', () => {
     });
 
     it('should return false when url does not start with route', () => {
-      (mockRouter as any).url = '/users';
-      expect(service.isActiveRoute('/home')).toBe(false);
+      // mockRouter.url defaults to '/home' (set in createSpyObj initializer)
+      // '/home' does NOT start with '/users', so isActiveRoute('/users') is false
+      expect(service.isActiveRoute('/users')).toBe(false);
     });
   });
 });
