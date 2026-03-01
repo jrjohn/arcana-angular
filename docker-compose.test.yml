@@ -6,4 +6,23 @@ services:
     working_dir: /app
     volumes:
       - ./coverage:/app/coverage
-    command: npx ng test --watch=false --no-progress --browsers=ChromeHeadless --code-coverage
+    command: >
+      sh -c "
+        node -e \"
+          var fs = require('fs');
+          var p = '/app/node_modules/karma-coverage/lib/reporter.js';
+          var s = fs.readFileSync(p,'utf8');
+          if (s.indexOf('lcov-injected') < 0) {
+            s = s.replace(
+              'var reporters = helper.isDefined(coverageReporter.reporters)',
+              'coverageReporter.reporters = (coverageReporter.reporters || [{type:coverageReporter.type||\\\"html\\\"}]);' +
+              'if(!coverageReporter.reporters.some(function(r){return r.type===\\\"lcovonly\\\";}))' +
+              '{coverageReporter.reporters.push({type:\\\"lcovonly\\\",subdir:\\\".\\\",file:\\\"lcov.info\\\"});}' +
+              '/* lcov-injected */var reporters = helper.isDefined(coverageReporter.reporters)'
+            );
+            fs.writeFileSync(p,s);
+            console.log(\\\"[lcov-inject] karma-coverage patched\\\");
+          }
+        \" &&
+        npx ng test --watch=false --no-progress --browsers=ChromeHeadless --code-coverage
+      "
