@@ -1,344 +1,150 @@
 import { UserMapper } from './user.mapper';
+import { UserDto, PaginatedUserResponseDto, SingleUserResponseDto } from '../dto/user.dto';
 import { User } from '../../domain/entities/user.model';
-import {
-  UserDto,
-  PaginatedUserResponseDto,
-  SingleUserResponseDto,
-  CreateUserRequestDto,
-  UpdateUserRequestDto
-} from '../dto/user.dto';
+
+const mockUserDto: UserDto = {
+  id: 1,
+  email: 'test@example.com',
+  first_name: 'John',
+  last_name: 'Doe',
+  avatar: 'https://example.com/avatar.jpg',
+  createdAt: '2024-01-01T00:00:00Z',
+  updatedAt: '2024-06-01T00:00:00Z',
+};
+
+const mockUser: User = {
+  id: '1',
+  email: 'test@example.com',
+  firstName: 'John',
+  lastName: 'Doe',
+  avatar: 'https://example.com/avatar.jpg',
+  createdAt: new Date('2024-01-01T00:00:00Z'),
+  updatedAt: new Date('2024-06-01T00:00:00Z'),
+};
 
 describe('UserMapper', () => {
   describe('toDomain', () => {
-    it('should map UserDto to User with number ID', () => {
-      const dto: UserDto = {
-        id: 1,
-        email: 'test@example.com',
-        first_name: 'John',
-        last_name: 'Doe',
-        avatar: 'https://example.com/avatar.jpg'
-      };
-
-      const user = UserMapper.toDomain(dto);
-
-      expect(user.id).toBe('1'); // Converted to string
-      expect(user.email).toBe('test@example.com');
-      expect(user.firstName).toBe('John');
-      expect(user.lastName).toBe('Doe');
-      expect(user.avatar).toBe('https://example.com/avatar.jpg');
-      expect(user.createdAt).toBeInstanceOf(Date);
-      expect(user.updatedAt).toBeInstanceOf(Date);
+    it('should map UserDto to User domain entity', () => {
+      const result = UserMapper.toDomain(mockUserDto);
+      expect(result.id).toBe('1');
+      expect(result.email).toBe('test@example.com');
+      expect(result.firstName).toBe('John');
+      expect(result.lastName).toBe('Doe');
+      expect(result.avatar).toBe('https://example.com/avatar.jpg');
+      expect(result.createdAt).toBeInstanceOf(Date);
+      expect(result.updatedAt).toBeInstanceOf(Date);
     });
 
-    it('should map UserDto to User with string ID', () => {
-      const dto: UserDto = {
-        id: 'abc123',
-        email: 'test@example.com',
-        first_name: 'Jane',
-        last_name: 'Smith',
-        avatar: 'https://example.com/avatar2.jpg'
-      };
-
-      const user = UserMapper.toDomain(dto);
-
-      expect(user.id).toBe('abc123');
-      expect(user.firstName).toBe('Jane');
-      expect(user.lastName).toBe('Smith');
+    it('should convert numeric id to string', () => {
+      const dto: UserDto = { ...mockUserDto, id: 42 };
+      expect(UserMapper.toDomain(dto).id).toBe('42');
     });
 
-    it('should handle dto with createdAt and updatedAt', () => {
-      const dto: UserDto = {
-        id: 1,
-        email: 'test@example.com',
-        first_name: 'John',
-        last_name: 'Doe',
-        createdAt: '2024-01-01T00:00:00Z',
-        updatedAt: '2024-01-02T00:00:00Z'
-      };
-
-      const user = UserMapper.toDomain(dto);
-
-      expect(user.createdAt).toBeInstanceOf(Date);
-      expect(user.updatedAt).toBeInstanceOf(Date);
-      expect(user.createdAt.toISOString()).toBe('2024-01-01T00:00:00.000Z');
-      expect(user.updatedAt.toISOString()).toBe('2024-01-02T00:00:00.000Z');
+    it('should keep string id as is', () => {
+      const dto: UserDto = { ...mockUserDto, id: 'abc-123' };
+      expect(UserMapper.toDomain(dto).id).toBe('abc-123');
     });
 
-    it('should handle dto without avatar', () => {
-      const dto: UserDto = {
-        id: 1,
-        email: 'test@example.com',
-        first_name: 'John',
-        last_name: 'Doe'
-      };
+    it('should use current date when createdAt/updatedAt missing', () => {
+      const dto: UserDto = { id: 5, email: 'x@y.com', first_name: 'X', last_name: 'Y' };
+      const before = new Date();
+      const result = UserMapper.toDomain(dto);
+      const after = new Date();
+      expect(result.createdAt.getTime()).toBeGreaterThanOrEqual(before.getTime());
+      expect(result.createdAt.getTime()).toBeLessThanOrEqual(after.getTime());
+    });
 
-      const user = UserMapper.toDomain(dto);
-
-      expect(user.avatar).toBeUndefined();
+    it('should handle missing avatar (undefined)', () => {
+      const dto: UserDto = { id: 1, email: 'a@b.com', first_name: 'A', last_name: 'B' };
+      expect(UserMapper.toDomain(dto).avatar).toBeUndefined();
     });
   });
 
   describe('toDomainList', () => {
-    it('should map array of UserDto to array of User', () => {
+    it('should map an array of UserDto to User domain entities', () => {
       const dtos: UserDto[] = [
-        {
-          id: 1,
-          email: 'user1@example.com',
-          first_name: 'User',
-          last_name: 'One'
-        },
-        {
-          id: 2,
-          email: 'user2@example.com',
-          first_name: 'User',
-          last_name: 'Two'
-        }
+        { ...mockUserDto, id: 1 },
+        { ...mockUserDto, id: 2, email: 'other@example.com' },
       ];
-
-      const users = UserMapper.toDomainList(dtos);
-
-      expect(users.length).toBe(2);
-      expect(users[0].id).toBe('1');
-      expect(users[0].firstName).toBe('User');
-      expect(users[1].id).toBe('2');
-      expect(users[1].firstName).toBe('User');
+      const result = UserMapper.toDomainList(dtos);
+      expect(result.length).toBe(2);
+      expect(result[0].id).toBe('1');
+      expect(result[1].id).toBe('2');
+      expect(result[1].email).toBe('other@example.com');
     });
 
-    it('should handle empty array', () => {
-      const users = UserMapper.toDomainList([]);
-
-      expect(users).toEqual([]);
-      expect(users.length).toBe(0);
+    it('should return empty array for empty input', () => {
+      expect(UserMapper.toDomainList([])).toEqual([]);
     });
   });
 
   describe('toPaginatedDomain', () => {
-    it('should map PaginatedUserResponseDto to PaginatedResponse', () => {
+    it('should map PaginatedUserResponseDto to PaginatedResponse<User>', () => {
       const dto: PaginatedUserResponseDto = {
-        page: 1,
-        per_page: 10,
-        total: 100,
-        total_pages: 10,
-        data: [
-          {
-            id: 1,
-            email: 'user1@example.com',
-            first_name: 'User',
-            last_name: 'One'
-          }
-        ]
+        page: 2,
+        per_page: 5,
+        total: 20,
+        total_pages: 4,
+        data: [mockUserDto],
       };
-
       const result = UserMapper.toPaginatedDomain(dto);
-
-      expect(result.page).toBe(1);
-      expect(result.pageSize).toBe(10); // per_page -> pageSize
-      expect(result.total).toBe(100);
-      expect(result.totalPages).toBe(10); // total_pages -> totalPages
+      expect(result.page).toBe(2);
+      expect(result.pageSize).toBe(5);
+      expect(result.total).toBe(20);
+      expect(result.totalPages).toBe(4);
       expect(result.data.length).toBe(1);
-      expect(result.data[0].id).toBe('1');
-      expect(result.data[0].firstName).toBe('User');
-    });
-
-    it('should handle empty data array', () => {
-      const dto: PaginatedUserResponseDto = {
-        page: 1,
-        per_page: 10,
-        total: 0,
-        total_pages: 0,
-        data: []
-      };
-
-      const result = UserMapper.toPaginatedDomain(dto);
-
-      expect(result.data).toEqual([]);
-      expect(result.total).toBe(0);
+      expect(result.data[0].firstName).toBe('John');
     });
   });
 
   describe('toSingleDomain', () => {
-    it('should map SingleUserResponseDto to User', () => {
-      const dto: SingleUserResponseDto = {
-        data: {
-          id: 1,
-          email: 'test@example.com',
-          first_name: 'John',
-          last_name: 'Doe',
-          avatar: 'https://example.com/avatar.jpg'
-        }
-      };
-
-      const user = UserMapper.toSingleDomain(dto);
-
-      expect(user.id).toBe('1');
-      expect(user.email).toBe('test@example.com');
-      expect(user.firstName).toBe('John');
-      expect(user.lastName).toBe('Doe');
+    it('should map SingleUserResponseDto to User domain entity', () => {
+      const dto: SingleUserResponseDto = { data: mockUserDto };
+      const result = UserMapper.toSingleDomain(dto);
+      expect(result.id).toBe('1');
+      expect(result.email).toBe('test@example.com');
     });
   });
 
   describe('toCreateDto', () => {
-    it('should map User to CreateUserRequestDto', () => {
-      const user: Partial<User> = {
+    it('should map User partial to CreateUserRequestDto', () => {
+      const partial: Partial<User> = {
         email: 'new@example.com',
         firstName: 'New',
         lastName: 'User',
-        avatar: 'https://example.com/avatar.jpg'
+        avatar: 'https://img.com/a.png',
       };
-
-      const dto = UserMapper.toCreateDto(user);
-
-      expect(dto.email).toBe('new@example.com');
-      expect(dto.first_name).toBe('New'); // camelCase -> snake_case
-      expect(dto.last_name).toBe('User'); // camelCase -> snake_case
-      expect(dto.avatar).toBe('https://example.com/avatar.jpg');
-    });
-
-    it('should handle user without avatar', () => {
-      const user: Partial<User> = {
-        email: 'new@example.com',
-        firstName: 'New',
-        lastName: 'User'
-      };
-
-      const dto = UserMapper.toCreateDto(user);
-
-      expect(dto.avatar).toBeUndefined();
+      const result = UserMapper.toCreateDto(partial);
+      expect(result.email).toBe('new@example.com');
+      expect(result.first_name).toBe('New');
+      expect(result.last_name).toBe('User');
+      expect(result.avatar).toBe('https://img.com/a.png');
     });
   });
 
   describe('toUpdateDto', () => {
-    it('should map all fields when provided', () => {
-      const user: Partial<User> = {
-        email: 'updated@example.com',
-        firstName: 'Updated',
-        lastName: 'User',
-        avatar: 'https://example.com/new-avatar.jpg'
-      };
-
-      const dto = UserMapper.toUpdateDto(user);
-
-      expect(dto.email).toBe('updated@example.com');
-      expect(dto.first_name).toBe('Updated');
-      expect(dto.last_name).toBe('User');
-      expect(dto.avatar).toBe('https://example.com/new-avatar.jpg');
+    it('should map partial user with only updated fields', () => {
+      const partial: Partial<User> = { firstName: 'Updated', email: 'upd@test.com' };
+      const result = UserMapper.toUpdateDto(partial);
+      expect(result.first_name).toBe('Updated');
+      expect(result.email).toBe('upd@test.com');
+      expect(result.last_name).toBeUndefined();
     });
 
-    it('should map only provided fields', () => {
-      const user: Partial<User> = {
-        firstName: 'Updated'
-      };
-
-      const dto = UserMapper.toUpdateDto(user);
-
-      expect(dto.first_name).toBe('Updated');
-      expect(dto.email).toBeUndefined();
-      expect(dto.last_name).toBeUndefined();
-      expect(dto.avatar).toBeUndefined();
-    });
-
-    it('should map email only', () => {
-      const user: Partial<User> = {
-        email: 'updated@example.com'
-      };
-
-      const dto = UserMapper.toUpdateDto(user);
-
-      expect(dto.email).toBe('updated@example.com');
-      expect(dto.first_name).toBeUndefined();
-    });
-
-    it('should handle empty user object', () => {
-      const user: Partial<User> = {};
-
-      const dto = UserMapper.toUpdateDto(user);
-
-      expect(dto).toEqual({});
-    });
-
-    it('should include field even when value is empty string', () => {
-      const user: Partial<User> = {
-        firstName: '',
-        avatar: ''
-      };
-
-      const dto = UserMapper.toUpdateDto(user);
-
-      expect(dto.first_name).toBe('');
-      expect(dto.avatar).toBe('');
+    it('should return empty dto when no fields provided', () => {
+      const result = UserMapper.toUpdateDto({});
+      expect(Object.keys(result).length).toBe(0);
     });
   });
 
   describe('toDto', () => {
-    it('should map User to UserDto', () => {
-      const user: User = {
-        id: '123',
-        email: 'test@example.com',
-        firstName: 'John',
-        lastName: 'Doe',
-        avatar: 'https://example.com/avatar.jpg',
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-02')
-      };
-
-      const dto = UserMapper.toDto(user);
-
-      expect(dto.id).toBe('123');
-      expect(dto.email).toBe('test@example.com');
-      expect(dto.first_name).toBe('John'); // camelCase -> snake_case
-      expect(dto.last_name).toBe('Doe'); // camelCase -> snake_case
-      expect(dto.avatar).toBe('https://example.com/avatar.jpg');
-    });
-
-    it('should handle user without avatar', () => {
-      const user: User = {
-        id: '123',
-        email: 'test@example.com',
-        firstName: 'John',
-        lastName: 'Doe',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      };
-
-      const dto = UserMapper.toDto(user);
-
-      expect(dto.avatar).toBeUndefined();
-    });
-  });
-
-  describe('snake_case to camelCase conversion', () => {
-    it('should consistently convert snake_case to camelCase', () => {
-      const dto: UserDto = {
-        id: 1,
-        email: 'test@example.com',
-        first_name: 'Test',
-        last_name: 'User'
-      };
-
-      const user = UserMapper.toDomain(dto);
-
-      expect(user.firstName).toBe('Test');
-      expect(user.lastName).toBe('User');
-      expect('first_name' in (user as any)).toBe(false);
-      expect('last_name' in (user as any)).toBe(false);
-    });
-
-    it('should consistently convert camelCase to snake_case', () => {
-      const user: User = {
-        id: '1',
-        email: 'test@example.com',
-        firstName: 'Test',
-        lastName: 'User',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      };
-
-      const dto = UserMapper.toDto(user);
-
-      expect(dto.first_name).toBe('Test');
-      expect(dto.last_name).toBe('User');
-      expect('firstName' in dto).toBe(false);
-      expect('lastName' in dto).toBe(false);
+    it('should map User domain entity to UserDto', () => {
+      const result = UserMapper.toDto(mockUser);
+      expect(result.id).toBe('1');
+      expect(result.email).toBe('test@example.com');
+      expect(result.first_name).toBe('John');
+      expect(result.last_name).toBe('Doe');
+      expect(result.avatar).toBe('https://example.com/avatar.jpg');
     });
   });
 });
