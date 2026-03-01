@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.test
+      args:
+        - CACHEBUST=${GIT_COMMIT:-latest}
     working_dir: /app
     volumes:
       - ./coverage:/app/coverage
