@@ -1,4 +1,4 @@
-import { Injectable, signal, computed, effect } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { Subject } from 'rxjs';
 import { UserService } from '../../../domain/services/user.service';
 
@@ -51,9 +51,7 @@ export class SidebarViewModel {
 
   constructor(private readonly userService: UserService) {
     // Auto-load user count on initialization
-    effect(() => {
-      this.loadUserCount();
-    }, { allowSignalWrites: true });
+    this.loadUserCount();
   }
 
   // ========== PRIVATE METHODS ==========

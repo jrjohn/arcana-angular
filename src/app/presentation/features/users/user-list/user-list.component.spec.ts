@@ -51,11 +51,12 @@ describe('UserListComponent', () => {
       }
     };
     mockModalService = jasmine.createSpyObj('NgbModal', ['open']);
-    mockI18nService = jasmine.createSpyObj('I18nService', ['translate']);
+    mockI18nService = jasmine.createSpyObj('I18nService', ['translate', 'getCurrentLanguage']);
 
     mockUserService.getUsers.and.returnValue(of(mockPaginatedResponse));
     mockUserService.searchUsers.and.returnValue(of(mockPaginatedResponse));
     mockI18nService.translate.and.callFake((key: string) => key);
+    mockI18nService.getCurrentLanguage.and.returnValue('en');
 
     await TestBed.configureTestingModule({
       imports: [UserListComponent],
