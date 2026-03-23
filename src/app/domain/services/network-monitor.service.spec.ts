@@ -41,18 +41,27 @@ describe('NetworkMonitorService', () => {
   });
 
   it('onlineStatus$ should emit current status synchronously', (done) => {
-    // onlineStatus$ starts with of(navigator.onLine) which emits synchronously
+    // onlineStatus$ starts with of(navigator.onLine) which emits synchronously.
+    // Declare `sub` with `let` before subscribing so the variable is initialized
+    // by the time the synchronous emission triggers the callback (avoids TDZ).
     let emitted = false;
-    const sub = service.onlineStatus$.subscribe({
+    let sub: ReturnType<typeof service.onlineStatus$.subscribe> | undefined;
+    sub = service.onlineStatus$.subscribe({
       next: (status) => {
         expect(typeof status).toBe('boolean');
         emitted = true;
-        sub.unsubscribe();
+        // sub may still be undefined if emission is truly synchronous
+        // (before the assignment completes), so guard the unsubscribe call
+        if (sub) {
+          sub.unsubscribe();
+        }
         done();
       }
     });
-    // of(navigator.onLine) emits synchronously so done is always called immediately
-    if (!emitted) {
+    // If the callback already fired synchronously, unsubscribe now to be safe
+    if (emitted) {
+      sub.unsubscribe();
+    } else {
       // Fallback: just confirm observable exists
       sub.unsubscribe();
       expect(service.onlineStatus$).toBeTruthy();
