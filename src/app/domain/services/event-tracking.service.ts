@@ -13,7 +13,6 @@ import {
   getErrorCodeFromCategory,
 } from '../entities/analytics-event.model';
 import { SessionManagementService } from './session-management.service';
-import { IndexedDbService } from '../../data/storage/indexed-db.service';
 import { AppError } from '../entities/app-error.model';
 
 /**
@@ -26,7 +25,6 @@ import { AppError } from '../entities/app-error.model';
 export class EventTrackingService implements OnDestroy {
   private readonly router = inject(Router);
   private readonly sessionService = inject(SessionManagementService);
-  private readonly indexedDb = inject(IndexedDbService);
 
   private eventQueue: AnalyticsEvent[] = [];
   private readonly MAX_QUEUE_SIZE = 100;
