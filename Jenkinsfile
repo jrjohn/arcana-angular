@@ -78,11 +78,7 @@ pipeline {
                             // PR builds get PR-decoration params so SonarQube
                             // attaches the report to the GitHub PR instead of
                             // overwriting the long-lived main branch report.
-                            def prArgs = env.CHANGE_ID ? """ \
-                                -Dsonar.pullrequest.key=${env.CHANGE_ID} \
-                                -Dsonar.pullrequest.branch=${env.BRANCH_NAME} \
-                                -Dsonar.pullrequest.base=${env.CHANGE_TARGET}""" : ''
-                            sh "sonar-scanner -Dsonar.projectKey=angular-app -Dsonar.scm.disabled=true${prArgs}"
+                            sh "sonar-scanner -Dsonar.projectKey=angular-app -Dsonar.scm.disabled=true"
                         }
                     }
                 }
