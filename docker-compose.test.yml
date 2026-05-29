@@ -6,6 +6,4 @@ services:
       args:
         - CACHEBUST=${GIT_COMMIT:-latest}
     working_dir: /app
-    volumes:
-      - ./coverage:/app/coverage
     command: sh -c "node /app/coverage-patch.js && npx ng test --watch=false --no-progress --browsers=ChromeHeadless --code-coverage"

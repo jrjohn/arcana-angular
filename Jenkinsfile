@@ -63,43 +63,87 @@ pipeline {
         }
 
         stage("Test Coverage") {
+            // Blocking: failing tests fail the build. DinD-safe coverage export: the
+            // ./coverage bind mount is dropped (the host daemon resolves it to a stray
+            // path the Jenkins workspace cannot read, so SonarQube imported empty
+            // coverage = gate ERROR). Run a NAMED container, then docker cp the report
+            // into the workspace for sonar-scanner to pick up.
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
-                    sh 'docker compose -f docker-compose.test.yml run --build --rm test'
-                }
+                sh '''
+                    set -e
+                    docker rm -f angular-test 2>/dev/null || true
+                    docker compose -f docker-compose.test.yml run --build --name angular-test test
+                    mkdir -p coverage
+                    docker cp angular-test:/app/coverage/. coverage/
+                    docker rm -f angular-test 2>/dev/null || true
+                '''
             }
         }
 
         stage("SonarQube Analysis") {
+            // Blocking quality gate: build FAILS if the gate is not OK. Community Build
+            // has no server->Jenkins webhook, so poll the compute-engine task named in
+            // .scannerwork/report-task.txt and read the gate status by THIS run's
+            // analysisId. No sonar.pullrequest.* params (Community Build rejects them).
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
-                    withSonarQubeEnv('SonarQube') {
-                        script {
-                            // PR builds get PR-decoration params so SonarQube
-                            // attaches the report to the GitHub PR instead of
-                            // overwriting the long-lived main branch report.
-                            sh "sonar-scanner -Dsonar.projectKey=angular-app -Dsonar.scm.disabled=true"
-                        }
-                    }
+                withSonarQubeEnv('SonarQube') {
+                    sh "sonar-scanner -Dsonar.projectKey=angular-app -Dsonar.scm.disabled=true"
+                    sh '''
+                        set -e
+                        TOKEN="${SONAR_AUTH_TOKEN:-$SONAR_TOKEN}"
+                        RT=.scannerwork/report-task.txt
+                        [ -f "$RT" ] || { echo "report-task.txt not found — scanner did not run"; exit 1; }
+                        CE_TASK_ID=$(grep '^ceTaskId=' "$RT" | cut -d= -f2-)
+                        echo "CE task id: $CE_TASK_ID"
+                        ANALYSIS_ID=""
+                        for i in $(seq 1 60); do
+                            RESP=$(curl -s -u "$TOKEN:" "$SONAR_HOST_URL/api/ce/task?id=$CE_TASK_ID")
+                            ST=$(echo "$RESP" | grep -o '"status":"[A-Z_]*"' | head -1 | cut -d'"' -f4)
+                            echo "  CE status: ${ST:-?} (try $i)"
+                            if [ "$ST" = "SUCCESS" ]; then
+                                ANALYSIS_ID=$(echo "$RESP" | grep -o '"analysisId":"[^"]*"' | head -1 | cut -d'"' -f4)
+                                break
+                            elif [ "$ST" = "FAILED" ] || [ "$ST" = "CANCELED" ]; then
+                                echo "CE task ended $ST"; exit 1
+                            fi
+                            sleep 5
+                        done
+                        [ -n "$ANALYSIS_ID" ] || { echo "CE task did not finish in time"; exit 1; }
+                        GATE=$(curl -s -u "$TOKEN:" "$SONAR_HOST_URL/api/qualitygates/project_status?analysisId=$ANALYSIS_ID")
+                        GST=$(echo "$GATE" | grep -o '"status":"[A-Z]*"' | head -1 | cut -d'"' -f4)
+                        echo "Quality gate: ${GST:-UNKNOWN}"
+                        if [ "$GST" != "OK" ]; then
+                            echo "--- gate response ---"; echo "$GATE"
+                            exit 1
+                        fi
+                    '''
                 }
             }
         }
 
         stage("Architecture Qube") {
+            // Blocking: arch-qube exits non-zero if score < --threshold 90. DinD-safe:
+            // bind mounts resolve on the host daemon, so source is copied IN via a tar
+            // stream and the report copied OUT through anonymous volumes (/src, /output).
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
-                    sh """
-                        mkdir -p arch-qube-reports
-                        docker run --rm \
-                            --network devops_default \
-                            -v \$(pwd):/project \
-                            -v \$(pwd)/arch-qube-reports:/output \
-                            arcana.boo/arcana/arch-qube:latest scan /project \
-                            --framework angular --no-ai \
-                            --ci --format json,markdown \
-                            -o /output --threshold 90 || true
-                    """
-                }
+                sh '''
+                    docker rm -f arcana-arch-qube 2>/dev/null || true
+                    docker create --name arcana-arch-qube --network devops_default \
+                        -v /src -v /output \
+                        arcana.boo/arcana/arch-qube:latest \
+                        scan /src --framework angular --no-ai --ci \
+                        --format json,markdown -o /output --threshold 90 || exit 1
+                    tar --exclude=./.git --exclude=./node_modules --exclude=./dist \
+                        --exclude=./.angular --exclude=./coverage --exclude=./.scannerwork \
+                        --exclude=./arch-qube-reports -C . -cf - . \
+                        | docker cp - arcana-arch-qube:/src || exit 1
+                    docker start -a arcana-arch-qube
+                    AQ_RC=$?
+                    mkdir -p arch-qube-reports
+                    docker cp arcana-arch-qube:/output/. arch-qube-reports/ 2>/dev/null || true
+                    docker rm -f arcana-arch-qube 2>/dev/null || true
+                    exit $AQ_RC
+                '''
             }
         }
 
