@@ -1,14 +1,5 @@
 # Arcana Angular - Enterprise Angular Application
 
-<!-- agent-managed badges START -->
-[![Quality Gate](https://img.shields.io/badge/Quality_Gate-OK-brightgreen)](https://arcana.boo/sonarqube/dashboard?id=angular-app)
-[![Build](https://img.shields.io/badge/Build-passing-brightgreen)](https://arcana.boo/jenkins/job/angular-app-pipeline-mb/job/main/)
-**Rank**: Quality Gate `OK` · Build `blue` · Sonar coverage `81.3%`
-<!-- agent-managed badges END -->
-<!-- arch-rank START -->
-**Architecture**: arch-qube `100.0/100` · grade `A+` · `PASS`
-<!-- arch-rank END -->
-
 <div align="center">
 
 [![Architecture Rating](https://img.shields.io/badge/Architecture%20Rating-⭐⭐⭐⭐⭐%209.4%2F10-gold.svg)](#architecture-evaluation)
@@ -26,6 +17,20 @@
 [Screenshots](#screenshots) • [Architecture](#architecture-evaluation) • [Features](#features) • [Getting Started](#getting-started) • [Testing](#testing) • [Documentation](#documentation)
 
 </div>
+
+<!-- agent-managed badges START -->
+<p align="center">
+  <a href="https://arcana.boo/sonarqube/dashboard?id=angular-app"><img src="https://img.shields.io/badge/Quality_Gate-OK-brightgreen?style=for-the-badge" alt="Quality Gate"></a>
+  <a href="https://arcana.boo/jenkins/job/angular-app-pipeline-mb/job/main/"><img src="https://img.shields.io/badge/Build-passing-brightgreen?style=for-the-badge" alt="Build"></a>
+</p>
+<!-- agent-managed badges END -->
+<!-- arch-rank START -->
+<p align="center">
+  <img src="https://img.shields.io/badge/arch--qube-100.0%2F100-blue?style=for-the-badge" alt="arch-qube">
+  <img src="https://img.shields.io/badge/Grade-A%2B-brightgreen?style=for-the-badge" alt="Grade">
+  <img src="https://img.shields.io/badge/Arch_Gate-PASS-brightgreen?style=for-the-badge" alt="Architecture Gate">
+</p>
+<!-- arch-rank END -->
 
 ---
 
