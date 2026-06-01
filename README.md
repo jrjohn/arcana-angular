@@ -1,7 +1,7 @@
 # Arcana Angular - Enterprise Angular Application
 
 <!-- agent-managed badges START -->
-[![Quality Gate](https://arcana.boo/sonarqube/api/project_badges/quality_gate?project=angular-app)](https://arcana.boo/sonarqube/dashboard?id=angular-app)
+[![Quality Gate](https://img.shields.io/badge/Quality_Gate-OK-brightgreen)](https://arcana.boo/sonarqube/dashboard?id=angular-app)
 [![Build](https://arcana.boo/jenkins/buildStatus/icon?job=angular-app-pipeline-mb/job/main)](https://arcana.boo/jenkins/job/angular-app-pipeline-mb/job/main/)
 **Rank**: Quality Gate `OK` · Build `blue` · Sonar coverage `81.3%`
 <!-- agent-managed badges END -->
