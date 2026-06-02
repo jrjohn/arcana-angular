@@ -3,8 +3,8 @@
 <div align="center">
 
 [![Architecture Rating](https://img.shields.io/badge/Architecture%20Rating-⭐⭐⭐⭐⭐%209.4%2F10-gold.svg)](#architecture-evaluation)
-![Angular](https://img.shields.io/badge/Angular-20.3-red?style=flat-square&logo=angular)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?style=flat-square&logo=typescript)
+![Angular](https://img.shields.io/badge/Angular-21.2-red?style=flat-square&logo=angular)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?style=flat-square&logo=typescript)
 ![RxJS](https://img.shields.io/badge/RxJS-7.8-purple?style=flat-square&logo=reactivex)
 ![Tests](https://img.shields.io/badge/Tests-374%20(372%20passing)-success?style=flat-square)
 ![Coverage](https://img.shields.io/badge/Coverage-48.08%25-yellow?style=flat-square)
@@ -226,7 +226,7 @@ This Angular application demonstrates exceptional architecture with enterprise-g
   - Custom SCSS variables and theming
 
 - **ng-bootstrap Components**
-  - Native Angular Bootstrap widgets (v19.0.1)
+  - Native Angular Bootstrap widgets (v20.0.0)
   - Modal, Datepicker, Pagination, Tooltip, and more
   - Tree-shakeable standalone component imports
   - Full TypeScript support and accessibility
