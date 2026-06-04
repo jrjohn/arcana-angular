@@ -70,11 +70,16 @@ pipeline {
             steps {
                 sh '''
                     set -e
-                    docker rm -f angular-test 2>/dev/null || true
-                    docker compose -f docker-compose.test.yml run --build --name angular-test test
+                    # Per-build container name: a static name collides when a concurrent
+                    # build on the shared daemon claims it during the ~80s image-build
+                    # window between `rm` and `run`. Mirror the ${BUILD_NUMBER} pattern
+                    # already used by the Architecture Qube stage.
+                    TEST_CTR="angular-test-${BUILD_NUMBER}"
+                    docker rm -f "$TEST_CTR" 2>/dev/null || true
+                    docker compose -f docker-compose.test.yml run --build --name "$TEST_CTR" test
                     mkdir -p coverage
-                    docker cp angular-test:/app/coverage/. coverage/
-                    docker rm -f angular-test 2>/dev/null || true
+                    docker cp "$TEST_CTR":/app/coverage/. coverage/
+                    docker rm -f "$TEST_CTR" 2>/dev/null || true
                 '''
             }
         }
