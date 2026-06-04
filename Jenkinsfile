@@ -41,7 +41,6 @@ pipeline {
             steps {
                 sh '''
                     # Remove dangling/unused images to free disk space
-                    docker image prune -f || true
                     # Keep only last 3 build-tagged images for this app
                     docker images --format '{{.Repository}}:{{.Tag}}' \
                         | grep "${APP_NAME}.*build-" \
@@ -127,8 +126,8 @@ pipeline {
             // stream and the report copied OUT through anonymous volumes (/src, /output).
             steps {
                 sh '''
-                    docker rm -f arcana-arch-qube 2>/dev/null || true
-                    docker create --name arcana-arch-qube --network devops_default \
+                    docker rm -f arcana-arch-qube-angular-${BUILD_NUMBER} 2>/dev/null || true
+                    docker create --name arcana-arch-qube-angular-${BUILD_NUMBER} --network devops_default \
                         -v /src -v /output \
                         arcana.boo/arcana/arch-qube:latest \
                         scan /src --framework angular --no-ai --ci \
@@ -136,12 +135,12 @@ pipeline {
                     tar --exclude=./.git --exclude=./node_modules --exclude=./dist \
                         --exclude=./.angular --exclude=./coverage --exclude=./.scannerwork \
                         --exclude=./arch-qube-reports -C . -cf - . \
-                        | docker cp - arcana-arch-qube:/src || exit 1
-                    docker start -a arcana-arch-qube
+                        | docker cp - arcana-arch-qube-angular-${BUILD_NUMBER}:/src || exit 1
+                    docker start -a arcana-arch-qube-angular-${BUILD_NUMBER}
                     AQ_RC=$?
                     mkdir -p arch-qube-reports
-                    docker cp arcana-arch-qube:/output/. arch-qube-reports/ 2>/dev/null || true
-                    docker rm -f arcana-arch-qube 2>/dev/null || true
+                    docker cp arcana-arch-qube-angular-${BUILD_NUMBER}:/output/. arch-qube-reports/ 2>/dev/null || true
+                    docker rm -f arcana-arch-qube-angular-${BUILD_NUMBER} 2>/dev/null || true
                     exit $AQ_RC
                 '''
             }
