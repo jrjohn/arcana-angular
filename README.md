@@ -559,7 +559,7 @@ arcana-angular/
 
 - **Node.js**: 18.19+ or 20.11+ or 22.0+
 - **npm**: 9.0+ (comes with Node.js)
-- **Angular CLI**: 20.3+ (optional, can use npx)
+- **Angular CLI**: 21.0+ (optional, can use npx)
 
 ### Installation
 
