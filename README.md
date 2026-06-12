@@ -384,10 +384,10 @@ For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| Angular | 20.3.10 | Web framework with Signals & standalone components |
-| TypeScript | 5.7+ | Type-safe JavaScript with strict mode |
+| Angular | 21.2.17 | Web framework with Signals & standalone components |
+| TypeScript | 5.9+ | Type-safe JavaScript with strict mode |
 | RxJS | 7.8+ | Reactive programming for async operations |
-| Angular Router | 20.3+ | Client-side routing with lazy loading |
+| Angular Router | 21.2+ | Client-side routing with lazy loading |
 
 ### State Management & Reactivity
 
@@ -1132,7 +1132,7 @@ For questions or issues, please:
 
 <div align="center">
 
-**Built with ❤️ using Angular 20 and TypeScript**
+**Built with ❤️ using Angular 21 and TypeScript**
 
 [⬆ Back to Top](#arcana-angular---enterprise-angular-application)
 
