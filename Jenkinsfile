@@ -40,12 +40,12 @@ pipeline {
         stage("Cleanup Old Images") {
             steps {
                 sh '''
-                    # Remove dangling/unused images to free disk space
-                    # Keep only last 3 build-tagged images for this app
+                    # keep only the previous build image (layer cache); the
+                    # registry holds every build-N tag durably
                     docker images --format '{{.Repository}}:{{.Tag}}' \
-                        | grep "${APP_NAME}.*build-" \
-                        | sort -t- -k2 -rn \
-                        | tail -n +4 \
+                        | grep -E "^${IMAGE_TAG}:build-[0-9]+$" \
+                        | sed 's/.*:build-//' | sort -rn | tail -n +2 \
+                        | sed "s|^|${IMAGE_TAG}:build-|" \
                         | xargs -r docker rmi 2>/dev/null || true
                     # Stop leftover test containers
                     docker compose -f docker-compose.test.yml down \
@@ -179,7 +179,17 @@ pipeline {
     }
 
     post {
-        success { echo "Pipeline SUCCESS - ${APP_NAME}:${VERSION} branch=${env.BRANCH_NAME ?: '?'} pr=${env.CHANGE_ID ?: 'no'}" }
+        success {
+            echo "Pipeline SUCCESS - ${APP_NAME}:${VERSION} branch=${env.BRANCH_NAME ?: '?'} pr=${env.CHANGE_ID ?: 'no'}"
+            sh '''
+                # self-clean: keep only THIS build's image locally; previous
+                # build-N tags stay pullable from the registry
+                docker images --format '{{.Repository}}:{{.Tag}}' \
+                    | grep -E "^${IMAGE_TAG}:build-[0-9]+$" \
+                    | grep -v ":build-${BUILD_NUMBER}$" \
+                    | xargs -r docker rmi 2>/dev/null || true
+            '''
+        }
         failure { echo "Pipeline FAILED - branch=${env.BRANCH_NAME ?: '?'} pr=${env.CHANGE_ID ?: 'no'}" }
         always  { echo "Build number ${BUILD_NUMBER} done" }
     }
