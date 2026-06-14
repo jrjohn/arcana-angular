@@ -7,7 +7,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?style=flat-square&logo=typescript)
 ![RxJS](https://img.shields.io/badge/RxJS-7.8-purple?style=flat-square&logo=reactivex)
 ![Tests](https://img.shields.io/badge/Tests-909%20passing-success?style=flat-square)
-![Coverage](https://img.shields.io/badge/Coverage-81.3%25-brightgreen?style=flat-square)
+![Coverage](https://img.shields.io/badge/Coverage-81.1%25-brightgreen?style=flat-square)
 ![E2E Tests](https://img.shields.io/badge/E2E%20Tests-22%20passing-success?style=flat-square)
 ![Documentation](https://img.shields.io/badge/Documentation-10%2F10%20%20High--Res%20Diagrams-brightgreen?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
