@@ -2,7 +2,7 @@
 # Angular Multi-Stage Dockerfile (CI)
 # Angular CLI 20
 # ============================================
-FROM node:22-alpine AS builder
+FROM node:24-alpine AS builder
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
