@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbPaginationModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
@@ -25,6 +25,7 @@ import { UserPanelViewModel } from './user-panel.view-model';
   ],
   providers: [UserPanelViewModel],
   templateUrl: './user-panel.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './user-panel.component.scss',
 })
 export class UserPanelComponent implements OnInit, OnDestroy {
