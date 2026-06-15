@@ -3,11 +3,11 @@
 <div align="center">
 
 [![Architecture Rating](https://img.shields.io/badge/Architecture%20Rating-⭐⭐⭐⭐⭐%209.4%2F10-gold.svg)](#architecture-evaluation)
-![Angular](https://img.shields.io/badge/Angular-21.2-red?style=flat-square&logo=angular)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?style=flat-square&logo=typescript)
+![Angular](https://img.shields.io/badge/Angular-22.0-red?style=flat-square&logo=angular)
+![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue?style=flat-square&logo=typescript)
 ![RxJS](https://img.shields.io/badge/RxJS-7.8-purple?style=flat-square&logo=reactivex)
 ![Tests](https://img.shields.io/badge/Tests-909%20passing-success?style=flat-square)
-![Coverage](https://img.shields.io/badge/Coverage-81.1%25-brightgreen?style=flat-square)
+![Coverage](https://img.shields.io/badge/Coverage-81.3%25-brightgreen?style=flat-square)
 ![E2E Tests](https://img.shields.io/badge/E2E%20Tests-22%20passing-success?style=flat-square)
 ![Documentation](https://img.shields.io/badge/Documentation-10%2F10%20%20High--Res%20Diagrams-brightgreen?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
@@ -384,10 +384,10 @@ For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| Angular | 21.2.17 | Web framework with Signals & standalone components |
-| TypeScript | 5.9+ | Type-safe JavaScript with strict mode |
+| Angular | 22.0.1 | Web framework with Signals & standalone components |
+| TypeScript | 6.0+ | Type-safe JavaScript with strict mode |
 | RxJS | 7.8+ | Reactive programming for async operations |
-| Angular Router | 21.2+ | Client-side routing with lazy loading |
+| Angular Router | 22.0+ | Client-side routing with lazy loading |
 
 ### State Management & Reactivity
 
@@ -559,7 +559,7 @@ arcana-angular/
 
 - **Node.js**: 18.19+ or 20.11+ or 22.0+
 - **npm**: 9.0+ (comes with Node.js)
-- **Angular CLI**: 21.0+ (optional, can use npx)
+- **Angular CLI**: 22.0+ (optional, can use npx)
 
 ### Installation
 
@@ -1132,7 +1132,7 @@ For questions or issues, please:
 
 <div align="center">
 
-**Built with ❤️ using Angular 21 and TypeScript**
+**Built with ❤️ using Angular 22 and TypeScript**
 
 [⬆ Back to Top](#arcana-angular---enterprise-angular-application)
 
