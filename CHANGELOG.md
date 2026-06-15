@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/jrjohn/arcana-angular/compare/v1.2.0...v1.3.0) (2026-06-15)
+
+
+### Features
+
+* **deps:** upgrade Angular 21→22 + TypeScript 6 ([#29](https://github.com/jrjohn/arcana-angular/issues/29)) ([fe089ff](https://github.com/jrjohn/arcana-angular/commit/fe089ffc9591af4e82f1c3ed2dd433fb0bfc6fea))
+
 ## [1.2.0](https://github.com/jrjohn/arcana-angular/compare/v1.1.0...v1.2.0) (2026-06-12)
 
 
