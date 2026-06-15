@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -37,6 +37,7 @@ interface Notification {
   standalone: true,
   imports: [CommonModule, NgbNavModule],
   templateUrl: './right-panel.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './right-panel.component.scss',
 })
 export class RightPanelComponent {

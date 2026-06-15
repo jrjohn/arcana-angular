@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { UserDetailComponent } from './user-detail.component';
 import { UserDetailViewModel } from './user-detail.view-model';
@@ -82,7 +82,7 @@ describe('UserDetailComponent', () => {
     await TestBed.configureTestingModule({
       imports: [UserDetailComponent],
       providers: [
-        provideHttpClient(),
+        provideHttpClient(withXhr()),
         provideHttpClientTesting(),
         { provide: NavGraphService, useValue: mockNavGraph },
         { provide: ActivatedRoute, useValue: mockActivatedRoute }

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { takeUntil } from 'rxjs';
@@ -19,6 +19,7 @@ import { BaseComponent } from '../../../shared/base';
   imports: [CommonModule, FormsModule, NgbAlertModule, LoadingSpinnerComponent, TranslatePipe],
   providers: [UserFormViewModel],
   templateUrl: './user-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './user-form.component.scss',
 })
 export class UserFormComponent extends BaseComponent implements OnInit {

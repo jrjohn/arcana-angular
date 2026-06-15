@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { takeUntil } from 'rxjs';
@@ -18,6 +18,7 @@ import { BaseComponent } from '../../../shared/base';
   imports: [CommonModule, NgbAlertModule, LoadingSpinnerComponent, TranslatePipe],
   providers: [UserDetailViewModel],
   templateUrl: './user-detail.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './user-detail.component.scss',
 })
 export class UserDetailComponent extends BaseComponent implements OnInit {

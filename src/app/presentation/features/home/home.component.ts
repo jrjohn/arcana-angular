@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
@@ -35,6 +35,7 @@ interface QuickAction {
   standalone: true,
   imports: [CommonModule, RouterLink, NgbProgressbarModule],
   templateUrl: './home.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
