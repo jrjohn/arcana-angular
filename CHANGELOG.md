@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/jrjohn/arcana-angular/compare/v1.3.0...v1.3.1) (2026-06-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency uuid to v14 ([#34](https://github.com/jrjohn/arcana-angular/issues/34)) ([0f7f698](https://github.com/jrjohn/arcana-angular/commit/0f7f6988ac60bbd654ee8764f40cfcc191764c61))
+
 ## [1.3.0](https://github.com/jrjohn/arcana-angular/compare/v1.2.0...v1.3.0) (2026-06-15)
 
 
