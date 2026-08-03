@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/jrjohn/arcana-angular/compare/v1.3.1...v1.3.2) (2026-08-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @ng-bootstrap/ng-bootstrap to v21 ([#36](https://github.com/jrjohn/arcana-angular/issues/36)) ([fec38a6](https://github.com/jrjohn/arcana-angular/commit/fec38a688e7b6949d9565c078faa6e85e92afa54))
+
 ## [1.3.1](https://github.com/jrjohn/arcana-angular/compare/v1.3.0...v1.3.1) (2026-06-15)
 
 
