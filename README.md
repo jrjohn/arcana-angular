@@ -3,9 +3,9 @@
 <div align="center">
 
 [![Architecture Rating](https://img.shields.io/badge/Architecture%20Rating-⭐⭐⭐⭐⭐%209.4%2F10-gold.svg)](#architecture-evaluation)
-![Angular](https://img.shields.io/badge/Angular-22.0-red?style=flat-square&logo=angular)
-![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue?style=flat-square&logo=typescript)
-![RxJS](https://img.shields.io/badge/RxJS-7.8-purple?style=flat-square&logo=reactivex)
+![Angular](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fjrjohn%2Farcana-angular%2Fmain%2Fpackage-lock.json&query=%24.packages%5B%27node_modules%2F%40angular%2Fcore%27%5D.version&label=Angular&color=red&logo=angular&style=flat-square)
+![TypeScript](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fjrjohn%2Farcana-angular%2Fmain%2Fpackage-lock.json&query=%24.packages%5B%27node_modules%2Ftypescript%27%5D.version&label=TypeScript&color=blue&logo=typescript&style=flat-square)
+![RxJS](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fjrjohn%2Farcana-angular%2Fmain%2Fpackage-lock.json&query=%24.packages%5B%27node_modules%2Frxjs%27%5D.version&label=RxJS&color=purple&logo=reactivex&style=flat-square)
 ![Tests](https://img.shields.io/badge/Tests-909%20passing-success?style=flat-square)
 ![Coverage](https://img.shields.io/badge/Coverage-81.3%25-brightgreen?style=flat-square)
 ![E2E Tests](https://img.shields.io/badge/E2E%20Tests-22%20passing-success?style=flat-square)
