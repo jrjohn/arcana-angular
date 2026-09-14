@@ -226,7 +226,7 @@ This Angular application demonstrates exceptional architecture with enterprise-g
   - Custom SCSS variables and theming
 
 - **ng-bootstrap Components**
-  - Native Angular Bootstrap widgets (v20.0.0)
+  - Native Angular Bootstrap widgets (v21.0.0)
   - Modal, Datepicker, Pagination, Tooltip, and more
   - Tree-shakeable standalone component imports
   - Full TypeScript support and accessibility
