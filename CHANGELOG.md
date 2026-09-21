@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.9](https://github.com/jrjohn/arcana-angular/compare/v1.3.8...v1.3.9) (2026-09-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency karma-jasmine-html-reporter to ~2.3.0 ([#77](https://github.com/jrjohn/arcana-angular/issues/77)) ([db7362f](https://github.com/jrjohn/arcana-angular/commit/db7362fa837b95ff8818d70c4a16faf19e1da2c3))
+
 ## [1.3.8](https://github.com/jrjohn/arcana-angular/compare/v1.3.7...v1.3.8) (2026-09-21)
 
 
