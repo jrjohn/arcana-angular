@@ -384,7 +384,7 @@ For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| Angular | 22.1.7 | Web framework with Signals & standalone components |
+| Angular | 22.2.0 | Web framework with Signals & standalone components |
 | TypeScript | 6.0+ | Type-safe JavaScript with strict mode |
 | RxJS | 7.8+ | Reactive programming for async operations |
 | Angular Router | 22.0+ | Client-side routing with lazy loading |
