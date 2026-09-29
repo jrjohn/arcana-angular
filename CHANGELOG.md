@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.13](https://github.com/jrjohn/arcana-angular/compare/v1.3.12...v1.3.13) (2026-09-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @types/jasmine to v7 ([#88](https://github.com/jrjohn/arcana-angular/issues/88)) ([89409fa](https://github.com/jrjohn/arcana-angular/commit/89409faf4d64f4218830288d2f3df44be7304cce))
+
 ## [1.3.12](https://github.com/jrjohn/arcana-angular/compare/v1.3.11...v1.3.12) (2026-09-26)
 
 
