@@ -74,7 +74,9 @@ pipeline {
                     # build on the shared daemon claims it during the ~80s image-build
                     # window between `rm` and `run`. Mirror the ${BUILD_NUMBER} pattern
                     # already used by the Architecture Qube stage.
-                    TEST_CTR="angular-test-${BUILD_NUMBER}"
+                    # Branch in the name: BUILD_NUMBER restarts at 1 on every branch, so concurrent builds of
+                    # two branches shared this name and one's `docker rm -f` removed the other's container.
+                    TEST_CTR="angular-test-$(printf '%s' "${BRANCH_NAME}-${BUILD_NUMBER}" | tr -c 'A-Za-z0-9_.-' '-')"
                     docker rm -f "$TEST_CTR" 2>/dev/null || true
                     docker compose -f docker-compose.test.yml run --build --name "$TEST_CTR" test
                     mkdir -p coverage
@@ -131,8 +133,12 @@ pipeline {
             // stream and the report copied OUT through anonymous volumes (/src, /output).
             steps {
                 sh '''
-                    docker rm -f arcana-arch-qube-angular-${BUILD_NUMBER} 2>/dev/null || true
-                    docker create --name arcana-arch-qube-angular-${BUILD_NUMBER} --network devops_default \
+                    # Branch in the name: BUILD_NUMBER restarts at 1 on every branch, so two branches building
+                    # at once used the same name and one's `docker rm -f` deleted the other's container
+                    # (arcana-ios PR-14/PR-15, 2026-09-30: "destination ...:/src must be a directory").
+                    AQ="arcana-arch-qube-angular-$(printf '%s' "${BRANCH_NAME}-${BUILD_NUMBER}" | tr -c 'A-Za-z0-9_.-' '-')"
+                    docker rm -f "$AQ" 2>/dev/null || true
+                    docker create --name "$AQ" --network devops_default \
                         -v /src -v /output \
                         arcana.boo/arcana/arch-qube:latest \
                         scan /src --framework angular --no-ai --ci \
@@ -140,12 +146,12 @@ pipeline {
                     tar --exclude=./.git --exclude=./node_modules --exclude=./dist \
                         --exclude=./.angular --exclude=./coverage --exclude=./.scannerwork \
                         --exclude=./arch-qube-reports -C . -cf - . \
-                        | docker cp - arcana-arch-qube-angular-${BUILD_NUMBER}:/src || exit 1
-                    docker start -a arcana-arch-qube-angular-${BUILD_NUMBER}
+                        | docker cp - "$AQ":/src || exit 1
+                    docker start -a "$AQ"
                     AQ_RC=$?
                     mkdir -p arch-qube-reports
-                    docker cp arcana-arch-qube-angular-${BUILD_NUMBER}:/output/. arch-qube-reports/ 2>/dev/null || true
-                    docker rm -f arcana-arch-qube-angular-${BUILD_NUMBER} 2>/dev/null || true
+                    docker cp "$AQ":/output/. arch-qube-reports/ 2>/dev/null || true
+                    docker rm -f "$AQ" 2>/dev/null || true
                     exit $AQ_RC
                 '''
             }
