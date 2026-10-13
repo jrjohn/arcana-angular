@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.19](https://github.com/jrjohn/arcana-angular/compare/v1.3.18...v1.3.19) (2026-10-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @playwright/test to v1.64.0 ([#105](https://github.com/jrjohn/arcana-angular/issues/105)) ([8de7bf7](https://github.com/jrjohn/arcana-angular/commit/8de7bf7589a0ed042df273993fb83f4e9c5af449))
+* **deps:** update dependency uuid to v14.0.3 ([#104](https://github.com/jrjohn/arcana-angular/issues/104)) ([fa275c3](https://github.com/jrjohn/arcana-angular/commit/fa275c3855492b7d7ec7d4ea9bc74c090e7b5468))
+
 ## [1.3.18](https://github.com/jrjohn/arcana-angular/compare/v1.3.17...v1.3.18) (2026-10-13)
 
 
