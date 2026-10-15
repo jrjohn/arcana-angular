@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.20](https://github.com/jrjohn/arcana-angular/compare/v1.3.19...v1.3.20) (2026-10-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @angular/cdk to v22.2.3 ([#107](https://github.com/jrjohn/arcana-angular/issues/107)) ([f5aff7d](https://github.com/jrjohn/arcana-angular/commit/f5aff7d6818c4fdc70bea0f1aca1c22f84c63c68))
+* **deps:** update dependency @playwright/test to v1.64.1 ([#108](https://github.com/jrjohn/arcana-angular/issues/108)) ([62b0b23](https://github.com/jrjohn/arcana-angular/commit/62b0b23303f954f5e8e0a48677489f5f97ebe554))
+
 ## [1.3.19](https://github.com/jrjohn/arcana-angular/compare/v1.3.18...v1.3.19) (2026-10-13)
 
 
