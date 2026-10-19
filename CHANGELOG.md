@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.22](https://github.com/jrjohn/arcana-angular/compare/v1.3.21...v1.3.22) (2026-10-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency dexie to v4.4.7 ([#113](https://github.com/jrjohn/arcana-angular/issues/113)) ([143387a](https://github.com/jrjohn/arcana-angular/commit/143387aa0b6b033fb61e5148477bc9e8c99ee2d0))
+
 ## [1.3.21](https://github.com/jrjohn/arcana-angular/compare/v1.3.20...v1.3.21) (2026-10-17)
 
 
