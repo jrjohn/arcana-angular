@@ -57,7 +57,7 @@
     "@compodoc/compodoc": "^2.0.0",
     "@playwright/test": "^1.56.1",
     "@types/jasmine": "~7.0.0",
-    "@types/node": "^24.10.1",
+    "@types/node": "^26.0.0",
     "@types/uuid": "^11.0.0",
     "istanbul-lib-instrument": "^6.0.3",
     "jasmine-core": "~6.3.0",
