@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.28](https://github.com/jrjohn/arcana-angular/compare/v1.3.27...v1.3.28) (2026-10-31)
+
+
+### Bug Fixes
+
+* **deps:** update dependency tslib to v2.9.1 ([#127](https://github.com/jrjohn/arcana-angular/issues/127)) ([6441290](https://github.com/jrjohn/arcana-angular/commit/6441290080e643114b2f6432e7bbc8a2ef9bbe0f))
+
 ## [1.3.27](https://github.com/jrjohn/arcana-angular/compare/v1.3.26...v1.3.27) (2026-10-30)
 
 
