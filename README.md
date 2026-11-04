@@ -7,7 +7,7 @@
 ![TypeScript](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fjrjohn%2Farcana-angular%2Fmain%2Fpackage-lock.json&query=%24.packages%5B%27node_modules%2Ftypescript%27%5D.version&label=TypeScript&color=blue&logo=typescript&style=flat-square)
 ![RxJS](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fjrjohn%2Farcana-angular%2Fmain%2Fpackage-lock.json&query=%24.packages%5B%27node_modules%2Frxjs%27%5D.version&label=RxJS&color=purple&logo=reactivex&style=flat-square)
 ![Tests](https://img.shields.io/badge/Tests-909%20passing-success?style=flat-square)
-![Coverage](https://img.shields.io/badge/Coverage-81.1%25-brightgreen?style=flat-square)
+![Coverage](https://img.shields.io/badge/Coverage-81.3%25-brightgreen?style=flat-square)
 ![E2E Tests](https://img.shields.io/badge/E2E%20Tests-22%20passing-success?style=flat-square)
 ![Documentation](https://img.shields.io/badge/Documentation-10%2F10%20%20High--Res%20Diagrams-brightgreen?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
