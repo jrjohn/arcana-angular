@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.30](https://github.com/jrjohn/arcana-angular/compare/v1.3.29...v1.3.30) (2026-11-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @playwright/test to v1.65.0 ([#132](https://github.com/jrjohn/arcana-angular/issues/132)) ([661a432](https://github.com/jrjohn/arcana-angular/commit/661a432d074b95d68508c3efb03e14f96f8246d8))
+
 ## [1.3.29](https://github.com/jrjohn/arcana-angular/compare/v1.3.28...v1.3.29) (2026-11-04)
 
 
