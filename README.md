@@ -3,11 +3,11 @@
 <div align="center">
 
 [![Architecture Rating](https://img.shields.io/badge/Architecture%20Rating-⭐⭐⭐⭐⭐%209.4%2F10-gold.svg)](#architecture-evaluation)
-![Angular](https://img.shields.io/badge/Angular-22.2.5-red?style=flat-square&logo=angular)
+![Angular](https://img.shields.io/badge/Angular-22.2.6-red?style=flat-square&logo=angular)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-blue?style=flat-square&logo=typescript)
 ![RxJS](https://img.shields.io/badge/RxJS-7.8.2-purple?style=flat-square&logo=reactivex)
 ![Tests](https://img.shields.io/badge/Tests-909%20passing-success?style=flat-square)
-![Coverage](https://img.shields.io/badge/Coverage-81.1%25-brightgreen?style=flat-square)
+![Coverage](https://img.shields.io/badge/Coverage-81.3%25-brightgreen?style=flat-square)
 ![E2E Tests](https://img.shields.io/badge/E2E%20Tests-22%20passing-success?style=flat-square)
 ![Documentation](https://img.shields.io/badge/Documentation-10%2F10%20%20High--Res%20Diagrams-brightgreen?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
@@ -384,7 +384,7 @@ For detailed architecture documentation, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| Angular | 22.2.5 | Web framework with Signals & standalone components |
+| Angular | 22.2.6 | Web framework with Signals & standalone components |
 | TypeScript | 6.0+ | Type-safe JavaScript with strict mode |
 | RxJS | 7.8+ | Reactive programming for async operations |
 | Angular Router | 22.0+ | Client-side routing with lazy loading |
