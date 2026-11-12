@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.33](https://github.com/jrjohn/arcana-angular/compare/v1.3.32...v1.3.33) (2026-11-12)
+
+
+### Bug Fixes
+
+* **deps:** update angular monorepo to v22.2.6 ([#140](https://github.com/jrjohn/arcana-angular/issues/140)) ([3297fb3](https://github.com/jrjohn/arcana-angular/commit/3297fb3e6cb053de63d631e9fa0777ee6b937cc3))
+
 ## [1.3.32](https://github.com/jrjohn/arcana-angular/compare/v1.3.31...v1.3.32) (2026-11-11)
 
 
