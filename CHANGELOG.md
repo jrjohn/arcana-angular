@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.36](https://github.com/jrjohn/arcana-angular/compare/v1.3.35...v1.3.36) (2026-11-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @angular/cdk to v22.3.0 ([#147](https://github.com/jrjohn/arcana-angular/issues/147)) ([d1f7ac4](https://github.com/jrjohn/arcana-angular/commit/d1f7ac46365780192a738cfbbf82c7a26d2bb3a7))
+
 ## [1.3.35](https://github.com/jrjohn/arcana-angular/compare/v1.3.34...v1.3.35) (2026-11-13)
 
 
