@@ -128,7 +128,7 @@ pipeline {
         }
 
         stage("Architecture Qube") {
-            // Blocking: arch-qube exits non-zero if score < --threshold 90. DinD-safe:
+            // Blocking: arch-qube exits non-zero if score < --threshold 90 or a critical rule has a violation. DinD-safe:
             // bind mounts resolve on the host daemon, so source is copied IN via a tar
             // stream and the report copied OUT through anonymous volumes (/src, /output).
             steps {
@@ -138,9 +138,18 @@ pipeline {
                     # (arcana-ios PR-14/PR-15, 2026-09-30: "destination ...:/src must be a directory").
                     AQ="arcana-arch-qube-angular-$(printf '%s' "${BRANCH_NAME}-${BUILD_NUMBER}" | tr -c 'A-Za-z0-9_.-' '-')"
                     docker rm -f "$AQ" 2>/dev/null || true
+                    # Version pinned in tools/arch-qube.version (shared with tools/arch-check.sh).
+                    # ghcr.io first (public, multi-arch), then arcana.boo. NO :latest fallback:
+                    # an unpinned image changes the verdict without a commit in this repo.
+                    AQ_VER="$(tr -d '[:space:]' < tools/arch-qube.version)"
+                    AQ_IMG=""
+                    for c in "ghcr.io/jrjohn/arch-qube:$AQ_VER" "arcana.boo/arcana/arch-qube:$AQ_VER"; do
+                        if docker image inspect "$c" >/dev/null 2>&1 || docker pull -q "$c" >/dev/null 2>&1; then AQ_IMG="$c"; break; fi
+                    done
+                    [ -n "$AQ_IMG" ] || { echo "arch-qube $AQ_VER image not pullable from ghcr.io or arcana.boo — NOT a pass"; exit 1; }
                     docker create --name "$AQ" --network devops_default \
                         -v /src -v /output \
-                        arcana.boo/arcana/arch-qube:latest \
+                        "$AQ_IMG" \
                         scan /src --framework angular --no-ai --ci \
                         --format json,markdown -o /output --threshold 90 || exit 1
                     tar --exclude=./.git --exclude=./node_modules --exclude=./dist \

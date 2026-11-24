@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# Fast layering check on every commit (no docker, no npm). The full scan is
+# tools/arch-check.sh and the Jenkins stage "Architecture Qube". Rules: AGENTS.md §3.
+#
+# Regex, not `case` globs: in a case pattern `*` also matches `/`, so `src/app/*.ts` would
+# match every correctly layered file too (this exact bug false-blocked good files in an
+# earlier version of this hook in another template). Only ADDED files / ADDED lines are
+# judged, so editing a legacy file never fails on old code.
+set -euo pipefail
+
+# Directories under src/app/ a NEW file may live in (AGENTS.md §2). src/app/data/repositories/
+# is deliberately absent: it is a legacy duplicate of src/app/repository/ that nothing wires.
+SEG='[a-z0-9][a-z0-9-]*'
+LAYER_RE="^src/app/(core/strategies|dao|dao/impl|repository|repository/impl|data/(api|dto|interceptors|mappers|storage|sync)|domain/(entities|guards|models|services)|presentation/features/${SEG}(/${SEG})?|presentation/layout/${SEG}|presentation/shared/(base|pipes|components/${SEG}))/[^/]+$"
+
+fail=0
+
+# R7 — no NEW file directly under src/app/ or in a directory that is not a layer.
+while IFS= read -r f; do
+    [ -n "$f" ] || continue
+    [[ "$f" =~ ^src/app/ ]] || continue
+    if [[ "$f" =~ ^src/app/[^/]+$ ]]; then
+        echo "pre-commit: $f — new file at the src/app/ root. Put it in a layer directory (AGENTS.md §2) or run tools/new-feature.sh" >&2
+        fail=1
+    elif ! [[ "$f" =~ $LAYER_RE ]]; then
+        echo "pre-commit: $f — not in a layer directory (see AGENTS.md §2 table)" >&2
+        fail=1
+    fi
+done <<< "$(git diff --cached --name-only --diff-filter=AR)"
+
+# R2 — a concrete *Impl class is named only by the DI file src/app/app.config.ts, by impl code
+# itself (which must not import ANOTHER layer's impl/), by `export … from` re-exports in
+# index.ts barrels, and by *.spec.ts tests.
+while IFS= read -r f; do
+    [ -n "$f" ] || continue
+    [[ "$f" =~ ^src/app/.*\.ts$ ]] || continue
+    [[ "$f" =~ ^src/app/app\.config\.ts$ ]] && continue
+    [[ "$f" =~ \.spec\.ts$ ]] && continue
+    added="$(git diff --cached -U0 -- "$f" | grep -E '^\+[^+]' | sed 's/^+//' | grep -vE '^\s*(//|\*|/\*)' || true)"
+    if [[ "$f" =~ /impl/ ]]; then
+        hits="$(printf '%s\n' "$added" | grep -E "from ['\"]\.\./\.\./[^'\"]*/impl/" || true)"
+    else
+        hits="$(printf '%s\n' "$added" | grep -E "\\b[A-Z][A-Za-z0-9]*Impl\\b|from ['\"][^'\"]*/impl/" || true)"
+    fi
+    [ -n "$hits" ] || continue
+    if [[ "$f" =~ (^|/)index\.ts$ ]]; then
+        hits="$(printf '%s\n' "$hits" | grep -vE '^\s*export .* from ' || true)"
+        [ -n "$hits" ] || continue
+    fi
+    echo "pre-commit: $f names a concrete *Impl / imports from impl/ — inject the interface through its InjectionToken; only src/app/app.config.ts binds Impl classes (AGENTS.md R2):" >&2
+    printf '    %s\n' "$hits" >&2
+    fail=1
+done <<< "$(git diff --cached --name-only --diff-filter=ACMR)"
+
+if [ "$fail" -ne 0 ]; then
+    echo "pre-commit: blocked. Full check: tools/arch-check.sh" >&2
+    exit 1
+fi
