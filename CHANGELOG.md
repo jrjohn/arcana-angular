@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/jrjohn/arcana-angular/compare/v1.4.0...v1.4.1) (2026-11-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @types/node to v26.6.7 ([#156](https://github.com/jrjohn/arcana-angular/issues/156)) ([a0b1cbf](https://github.com/jrjohn/arcana-angular/commit/a0b1cbf620de69161f65ffb995291a89f17d8542))
+
 ## [1.4.0](https://github.com/jrjohn/arcana-angular/compare/v1.3.38...v1.4.0) (2026-11-24)
 
 
