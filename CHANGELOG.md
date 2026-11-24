@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/jrjohn/arcana-angular/compare/v1.3.38...v1.4.0) (2026-11-24)
+
+
+### Features
+
+* make the template self-explaining to AI coding agents ([#154](https://github.com/jrjohn/arcana-angular/issues/154)) ([2c83715](https://github.com/jrjohn/arcana-angular/commit/2c837150b05888e5be7cb50b91adab612c1e6710))
+
 ## [1.3.38](https://github.com/jrjohn/arcana-angular/compare/v1.3.37...v1.3.38) (2026-11-19)
 
 
