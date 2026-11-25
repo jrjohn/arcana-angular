@@ -156,8 +156,10 @@ pipeline {
                         --exclude=./.angular --exclude=./coverage --exclude=./.scannerwork \
                         --exclude=./arch-qube-reports -C . -cf - . \
                         | docker cp - "$AQ":/src || exit 1
+                    set +e
                     docker start -a "$AQ"
                     AQ_RC=$?
+                    set -e
                     mkdir -p arch-qube-reports
                     docker cp "$AQ":/output/. arch-qube-reports/ 2>/dev/null || true
                     docker rm -f "$AQ" 2>/dev/null || true
