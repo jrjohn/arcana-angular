@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/jrjohn/arcana-angular/compare/v1.4.1...v1.4.2) (2026-11-25)
+
+
+### Bug Fixes
+
+* **ci:** keep arch-qube reports when the scan fails ([#158](https://github.com/jrjohn/arcana-angular/issues/158)) ([6b81ae3](https://github.com/jrjohn/arcana-angular/commit/6b81ae34ff05162790cf553e9534aa8c759f2b93))
+
 ## [1.4.1](https://github.com/jrjohn/arcana-angular/compare/v1.4.0...v1.4.1) (2026-11-24)
 
 
