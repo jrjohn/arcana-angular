@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/jrjohn/arcana-angular/compare/v1.4.2...v1.5.0) (2026-11-25)
+
+
+### Features
+
+* enforce arch-check locally (Claude Code Stop hook + pre-push) ([#162](https://github.com/jrjohn/arcana-angular/issues/162)) ([009df33](https://github.com/jrjohn/arcana-angular/commit/009df333a576db1c5db8478086770fab0def030b))
+
 ## [1.4.2](https://github.com/jrjohn/arcana-angular/compare/v1.4.1...v1.4.2) (2026-11-25)
 
 
