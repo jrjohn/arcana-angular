@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.2](https://github.com/jrjohn/arcana-angular/compare/v1.5.1...v1.5.2) (2026-11-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @types/node to v26.6.11 ([#166](https://github.com/jrjohn/arcana-angular/issues/166)) ([da33cee](https://github.com/jrjohn/arcana-angular/commit/da33cee7c41dd71cb625d571622ee3e565adb233))
+
 ## [1.5.1](https://github.com/jrjohn/arcana-angular/compare/v1.5.0...v1.5.1) (2026-11-25)
 
 
