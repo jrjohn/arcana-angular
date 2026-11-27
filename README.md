@@ -2,15 +2,15 @@
 
 <div align="center">
 
-[![Architecture Rating](https://img.shields.io/badge/Architecture%20Rating-⭐⭐⭐⭐⭐%209.4%2F10-gold.svg)](#architecture-evaluation)
-![Angular](https://img.shields.io/badge/Angular-22.3.0-red?style=flat-square&logo=angular)
-![TypeScript](https://img.shields.io/badge/TypeScript-6.0.3-blue?style=flat-square&logo=typescript)
-![RxJS](https://img.shields.io/badge/RxJS-7.8.2-purple?style=flat-square&logo=reactivex)
-![Tests](https://img.shields.io/badge/Tests-909%20passing-success?style=flat-square)
-![Coverage](https://img.shields.io/badge/Coverage-81.1%25-brightgreen?style=flat-square)
-![E2E Tests](https://img.shields.io/badge/E2E%20Tests-22%20passing-success?style=flat-square)
-![Documentation](https://img.shields.io/badge/Documentation-10%2F10%20%20High--Res%20Diagrams-brightgreen?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+[![Architecture Rating](.github/badges/architecture-rating-9-4-10-gold-svg-db2efe70.svg)](#architecture-evaluation)
+![Angular](.github/badges/angular-22-3-0-red-9b1e7681.svg)
+![TypeScript](.github/badges/typescript-6-0-3-blue-513125ef.svg)
+![RxJS](.github/badges/rxjs-7-8-2-purple-43b047ea.svg)
+![Tests](.github/badges/tests-909-passing-success-c3620727.svg)
+![Coverage](.github/badges/coverage-81-1-brightgreen-d34515f8.svg)
+![E2E Tests](.github/badges/e2e-tests-22-passing-success-ef2d48c9.svg)
+![Documentation](.github/badges/documentation-10-10-high-res-diagrams-br-d3f22120.svg)
+![License](.github/badges/license-mit-green-14dede9c.svg)
 
 **Production-ready Angular application with Clean Architecture, Offline-First capabilities, and Enterprise Security**
 
@@ -20,15 +20,15 @@
 
 <!-- agent-managed badges START -->
 <p align="center">
-  <a href="https://arcana.boo/sonarqube/dashboard?id=angular-app"><img src="https://img.shields.io/badge/Quality_Gate-OK-brightgreen?style=for-the-badge" alt="Quality Gate"></a>
-  <a href="https://arcana.boo/jenkins/job/angular-app-pipeline-mb/job/main/"><img src="https://img.shields.io/badge/Build-passing-brightgreen?style=for-the-badge" alt="Build"></a>
+  <a href="https://arcana.boo/sonarqube/dashboard?id=angular-app"><img src=".github/badges/quality-gate-ok-brightgreen-7365c32e.svg" alt="Quality Gate"></a>
+  <a href="https://arcana.boo/jenkins/job/angular-app-pipeline-mb/job/main/"><img src=".github/badges/build-passing-brightgreen-f2a434e1.svg" alt="Build"></a>
 </p>
 <!-- agent-managed badges END -->
 <!-- arch-rank START -->
 <p align="center">
-  <img src="https://img.shields.io/badge/arch--qube-100.0%2F100-blue?style=for-the-badge" alt="arch-qube">
-  <img src="https://img.shields.io/badge/Grade-A%2B-brightgreen?style=for-the-badge" alt="Grade">
-  <img src="https://img.shields.io/badge/Arch_Gate-PASS-brightgreen?style=for-the-badge" alt="Architecture Gate">
+  <img src=".github/badges/arch-qube-100-0-100-blue-61d09e06.svg" alt="arch-qube">
+  <img src=".github/badges/grade-a-brightgreen-1f1e6c73.svg" alt="Grade">
+  <img src=".github/badges/arch-gate-pass-brightgreen-887cab17.svg" alt="Architecture Gate">
 </p>
 <!-- arch-rank END -->
 
